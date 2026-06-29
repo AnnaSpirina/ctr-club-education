@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTR CLUB Обучение — Админ-панель</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#111216; --bg2:#15161B; --panel:#1A1B21; --panel2:#202128; --elev:#26272F;
+  --line:#2A2B34; --line2:#363842;
+  --txt:#E9EAEE; --txt2:#A6A8B2; --muted:#74767F;
+  --red:#E2231A; --red-d:#B81C15; --red-soft:rgba(226,35,26,.13);
+  --green:#2BA45A; --green-soft:rgba(43,164,90,.14);
+  --amber:#E0A21A; --amber-soft:rgba(224,162,26,.14);
+  --blue:#5B8CFF; --blue-soft:rgba(91,140,255,.14);
+  --f:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --m:'JetBrains Mono',ui-monospace,monospace;
+  --r:12px; --r-sm:9px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--f);background:var(--bg);color:var(--txt);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit;color:var(--txt);background:var(--bg);border:1px solid var(--line2);border-radius:var(--r-sm);font-size:14px}
+input,select{height:42px;padding:0 14px}
+textarea{padding:12px 14px;resize:vertical;line-height:1.6;width:100%}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px var(--red-soft)}
+input::placeholder,textarea::placeholder{color:var(--muted)}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:var(--line2);border-radius:6px;border:3px solid var(--bg)}
+.mono{font-family:var(--m)}
+.eyebrow{font-family:var(--m);font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
+
+/* ========== LAYOUT ========== */
+.app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+
+/* sidebar */
+.side{background:var(--bg2);border-right:1px solid var(--line);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.side-top{padding:22px 20px 18px;border-bottom:1px solid var(--line)}
+.side-brand{display:flex;align-items:center;gap:10px}
+.side-brand img{height:22px}
+.side-brand .role{font-family:var(--m);font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--red);border:1px solid var(--line2);border-radius:5px;padding:3px 6px}
+.side-nav{padding:14px 12px;flex:1;overflow-y:auto}
+.side-lbl{font-family:var(--m);font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:8px 10px 6px}
+.nav-i{display:flex;align-items:center;gap:11px;padding:10px 11px;border-radius:9px;color:var(--txt2);font-weight:500;font-size:14px;transition:.13s;margin-bottom:1px;cursor:pointer}
+.nav-i svg{width:18px;height:18px;flex-shrink:0;color:var(--muted);transition:.13s}
+.nav-i:hover{background:var(--panel);color:var(--txt)}
+.nav-i:hover svg{color:var(--txt2)}
+.nav-i.active{background:var(--red-soft);color:#fff}
+.nav-i.active svg{color:var(--red)}
+.nav-i .cnt{margin-left:auto;font-family:var(--m);font-size:11px;color:var(--muted)}
+.nav-i.active .cnt{color:var(--red)}
+.side-bot{padding:14px;border-top:1px solid var(--line)}
+.usr{display:flex;align-items:center;gap:11px;padding:8px;border-radius:9px}
+.usr .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--red),#7a1410);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff}
+.usr .nm{font-size:13px;font-weight:600}
+.usr .rl{font-size:11px;color:var(--muted)}
+
+/* main */
+.main{min-width:0;display:flex;flex-direction:column}
+.topbar{height:64px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:18px;padding:0 28px;background:rgba(17,18,22,.8);backdrop-filter:blur(8px);position:sticky;top:0;z-index:30}
+.topbar h1{font-size:17px;font-weight:700;letter-spacing:-.01em}
+.tb-search{flex:1;max-width:380px;position:relative}
+.tb-search input{width:100%;height:38px;padding-left:40px;background:var(--panel);border-color:var(--line)}
+.tb-search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px;border-radius:9px;font-weight:600;font-size:13.5px;transition:.14s;white-space:nowrap}
+.btn-primary{background:var(--red);color:#fff}
+.btn-primary:hover{background:var(--red-d)}
+.btn-ghost{border:1px solid var(--line2);color:var(--txt)}
+.btn-ghost:hover{border-color:var(--muted);background:var(--panel)}
+.btn-sm{height:34px;padding:0 13px;font-size:13px;border-radius:8px}
+.icon-btn{width:38px;height:38px;border-radius:9px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--txt2)}
+.icon-btn:hover{background:var(--panel);color:var(--txt)}
+
+.content{padding:28px;flex:1}
+
+/* ========== DASHBOARD ========== */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.stat .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.stat .ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.stat .ic.red{background:var(--red-soft);color:var(--red)}
+.stat .ic.green{background:var(--green-soft);color:var(--green)}
+.stat .ic.amber{background:var(--amber-soft);color:var(--amber)}
+.stat .ic.blue{background:var(--blue-soft);color:var(--blue)}
+.stat .delta{font-family:var(--m);font-size:11px;font-weight:600}
+.stat .delta.up{color:var(--green)}
+.stat .num{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.stat .lbl{font-size:13px;color:var(--txt2);margin-top:6px}
+
+.panel-row{display:grid;grid-template-columns:1.7fr 1fr;gap:16px;margin-bottom:26px}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.box-h{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.box-h h3{font-size:15px;font-weight:700}
+.box-h a{font-size:12.5px;color:var(--red);font-weight:600}
+.box-b{padding:8px 0}
+.mini-row{display:flex;align-items:center;gap:14px;padding:12px 20px;transition:.12s;cursor:pointer}
+.mini-row:hover{background:var(--panel2)}
+.mini-cov{width:46px;height:32px;border-radius:6px;background:#0c0d10;position:relative;flex-shrink:0;overflow:hidden;border:1px solid var(--line)}
+.mini-cov::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 100% 0%,rgba(226,35,26,.45),transparent 60%)}
+.mini-main{flex:1;min-width:0}
+.mini-main .t{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini-main .m{font-family:var(--m);font-size:11px;color:var(--muted);margin-top:2px}
+
+.seo-q{padding:13px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+.seo-q:last-child{border-bottom:none}
+.seo-q .pos{width:30px;height:30px;border-radius:8px;background:var(--green-soft);color:var(--green);font-family:var(--m);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.seo-q .pos.mid{background:var(--amber-soft);color:var(--amber)}
+.seo-q .q{flex:1;font-size:13px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.seo-q .v{font-family:var(--m);font-size:11px;color:var(--muted)}
+
+.pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--m);font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 9px;border-radius:6px}
+.pill.pub{background:var(--green-soft);color:var(--green)}
+.pill.draft{background:var(--amber-soft);color:var(--amber)}
+.pill.review{background:var(--blue-soft);color:var(--blue)}
+.pill .d{width:6px;height:6px;border-radius:50%;background:currentColor}
+
+.fmt-badge{font-family:var(--m);font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:4px 9px;border-radius:6px;background:var(--elev);color:var(--txt2)}
+
+/* quick create */
+.qc{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.qc-i{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px;cursor:pointer;transition:.14s;text-align:left}
+.qc-i:hover{border-color:var(--red);background:var(--panel2)}
+.qc-i .ic{width:38px;height:38px;border-radius:10px;background:var(--elev);color:var(--red);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.qc-i h4{font-size:14px;font-weight:700}
+.qc-i p{font-size:11.5px;color:var(--muted);margin-top:3px}
+
+/* ========== CONTENT LIST ========== */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:20px}
+.tab{padding:11px 16px;font-size:13.5px;font-weight:600;color:var(--txt2);border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;transition:.13s;display:flex;align-items:center;gap:8px}
+.tab:hover{color:var(--txt)}
+.tab.active{color:#fff;border-bottom-color:var(--red)}
+.tab .cnt{font-family:var(--m);font-size:11px;background:var(--elev);padding:1px 7px;border-radius:20px;color:var(--txt2)}
+.tab.active .cnt{background:var(--red-soft);color:var(--red)}
+
+.toolbar{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.toolbar .sel{height:38px;background:var(--panel);border-color:var(--line);min-width:150px}
+.toolbar .spacer{flex:1}
+
+.tbl{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.tbl-h,.tbl-r{display:grid;grid-template-columns:2.6fr 1fr 1fr 1.1fr .9fr 80px 44px;gap:14px;align-items:center;padding:13px 20px}
+.tbl-h{border-bottom:1px solid var(--line);font-family:var(--m);font-size:10.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.tbl-r{border-bottom:1px solid var(--line);transition:.12s;cursor:pointer}
+.tbl-r:last-child{border-bottom:none}
+.tbl-r:hover{background:var(--panel2)}
+.tr-title{display:flex;align-items:center;gap:13px;min-width:0}
+.tr-title .cov{width:54px;height:36px;border-radius:7px;background:#0c0d10;position:relative;flex-shrink:0;overflow:hidden;border:1px solid var(--line)}
+.tr-title .cov::before{content:"";position:absolute;inset:0;background:radial-gradient(130% 130% at 100% 0%,rgba(226,35,26,.45),transparent 58%)}
+.tr-title .cov .g{position:absolute;right:4px;bottom:1px;font-family:var(--m);font-weight:700;font-size:15px;color:rgba(255,255,255,.13)}
+.tr-title .tt{min-width:0}
+.tr-title .tt .nm{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tr-title .tt .sl{font-family:var(--m);font-size:10.5px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tr-cell{font-size:13px;color:var(--txt2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tr-cell.mono{font-family:var(--m);font-size:11.5px;color:var(--muted)}
+.seo-mini{display:flex;align-items:center;gap:8px}
+.seo-mini .ring{width:30px;height:30px;flex-shrink:0}
+.seo-mini .sc{font-family:var(--m);font-size:12px;font-weight:700}
+.row-act{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.row-act:hover{background:var(--elev);color:var(--txt)}
+
+/* ========== EDITOR ========== */
+.ed-head{position:sticky;top:64px;z-index:20;background:rgba(17,18,22,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:14px 28px;display:flex;align-items:center;gap:16px}
+.ed-head .back{width:36px;height:36px;border-radius:9px;border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;color:var(--txt2)}
+.ed-head .back:hover{background:var(--panel);color:var(--txt)}
+.ed-head .ti{min-width:0}
+.ed-head .ti .nm{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:420px}
+.ed-head .ti .mt{font-family:var(--m);font-size:11px;color:var(--muted);margin-top:1px}
+.ed-head .acts{margin-left:auto;display:flex;align-items:center;gap:10px}
+.saved{font-family:var(--m);font-size:11px;color:var(--green);display:flex;align-items:center;gap:6px}
+
+.ed-tabs{padding:0 28px;border-bottom:1px solid var(--line);display:flex;gap:2px;background:var(--bg)}
+.ed-tab{padding:13px 16px;font-size:13.5px;font-weight:600;color:var(--txt2);border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;display:flex;align-items:center;gap:8px}
+.ed-tab:hover{color:var(--txt)}
+.ed-tab.active{color:#fff;border-bottom-color:var(--red)}
+.ed-tab .warn{width:7px;height:7px;border-radius:50%;background:var(--amber)}
+
+.ed-body{display:grid;grid-template-columns:1fr 312px;gap:28px;padding:26px 28px;align-items:start}
+@media(max-width:1180px){.ed-body{grid-template-columns:1fr}}
+.ed-main{min-width:0;display:flex;flex-direction:column;gap:22px}
+
+.fcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.fcard>h3{font-size:15px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:9px}
+.fcard>.hint{font-size:12.5px;color:var(--muted);margin-bottom:18px}
+.field{margin-bottom:18px}
+.field:last-child{margin-bottom:0}
+.field>label{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:8px}
+.field>label .req{color:var(--red)}
+.field>label .ct{font-family:var(--m);font-size:11px;color:var(--muted);font-weight:500}
+.field .sub{font-size:11.5px;color:var(--muted);margin-top:6px}
+.field input,.field textarea,.field select{width:100%}
+.ai-btn{display:inline-flex;align-items:center;gap:5px;font-family:var(--m);font-size:11px;font-weight:600;color:var(--red);border:1px solid var(--line2);border-radius:6px;padding:3px 8px;transition:.13s}
+.ai-btn:hover{background:var(--red-soft);border-color:var(--red)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.row2{grid-template-columns:1fr}}
+
+.slug-wrap{display:flex;align-items:center;border:1px solid var(--line2);border-radius:var(--r-sm);overflow:hidden;background:var(--bg)}
+.slug-wrap .pre{padding:0 0 0 14px;font-family:var(--m);font-size:13px;color:var(--muted);white-space:nowrap}
+.slug-wrap input{border:none;box-shadow:none;background:transparent;padding-left:2px;font-family:var(--m)}
+
+/* cover uploader */
+.cover-up{display:flex;gap:16px;align-items:center}
+.cover-prev{width:170px;height:96px;border-radius:10px;background:#0c0d10;position:relative;overflow:hidden;border:1px solid var(--line2);flex-shrink:0}
+.cover-prev::before{content:"";position:absolute;inset:0;background:radial-gradient(130% 130% at 100% 0%,rgba(226,35,26,.5),transparent 58%),linear-gradient(120deg,#1a1b21,#26272f)}
+.cover-prev .g{position:absolute;right:10px;top:6px;font-family:var(--m);font-weight:700;font-size:40px;color:rgba(255,255,255,.08)}
+.cover-prev .tag{position:absolute;left:10px;bottom:9px;font-family:var(--m);font-size:9px;font-weight:700;text-transform:uppercase;background:var(--red);color:#fff;padding:3px 7px;border-radius:5px}
+.cover-up .upinfo .b{font-size:13px;font-weight:600}
+.cover-up .upinfo .s{font-size:11.5px;color:var(--muted);margin:4px 0 10px}
+
+/* repeatable blocks */
+.blk{border:1px solid var(--line2);border-radius:10px;padding:15px;margin-bottom:12px;background:var(--bg)}
+.blk-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.blk-h .num{width:24px;height:24px;border-radius:6px;background:var(--elev);color:var(--txt2);font-family:var(--m);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.blk-h .drag{color:var(--muted);cursor:grab}
+.blk-h .lbl{font-family:var(--m);font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.blk-h .rm{margin-left:auto;width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.blk-h .rm:hover{background:var(--red-soft);color:var(--red)}
+.blk .mini-in{margin-bottom:10px}
+.blk .mini-in:last-child{margin-bottom:0}
+.add-blk{width:100%;border:1px dashed var(--line2);border-radius:10px;padding:12px;color:var(--txt2);font-weight:600;font-size:13px;display:flex;align-items:center;justify-content:center;gap:8px;transition:.13s}
+.add-blk:hover{border-color:var(--red);color:var(--red);background:var(--red-soft)}
+
+/* lesson program row */
+.lesson-r{display:flex;align-items:center;gap:12px;border:1px solid var(--line2);border-radius:10px;padding:11px 14px;margin-bottom:10px;background:var(--bg)}
+.lesson-r .drag{color:var(--muted);cursor:grab}
+.lesson-r .num{font-family:var(--m);font-size:12px;font-weight:700;color:var(--muted);width:22px}
+.lesson-r input.lt{flex:1;height:36px;border-color:var(--line)}
+.lesson-r input.ld{width:90px;height:36px;border-color:var(--line);font-family:var(--m);font-size:12px;text-align:center}
+.lesson-r .vid{font-family:var(--m);font-size:11px;color:var(--green);display:flex;align-items:center;gap:5px;white-space:nowrap}
+.lesson-r .rm{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0}
+.lesson-r .rm:hover{background:var(--red-soft);color:var(--red)}
+
+/* chips / tags input */
+.tagbox{border:1px solid var(--line2);border-radius:var(--r-sm);padding:10px;background:var(--bg);display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:46px}
+.tagbox.focus{border-color:var(--red);box-shadow:0 0 0 3px var(--red-soft)}
+.tagc{display:inline-flex;align-items:center;gap:7px;background:var(--elev);border:1px solid var(--line2);border-radius:7px;padding:5px 8px 5px 11px;font-size:13px}
+.tagc .x{color:var(--muted);cursor:pointer;display:flex}
+.tagc .x:hover{color:var(--red)}
+.tagbox input{border:none;box-shadow:none!important;background:transparent;flex:1;min-width:160px;height:30px;padding:0 4px}
+.tagbox input:focus{outline:none}
+
+/* outcomes/list chips */
+.ck-list .ck{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.ck-list .ck .ico{color:var(--red);flex-shrink:0}
+.ck-list .ck input{flex:1;height:38px;border-color:var(--line)}
+.ck-list .ck .rm{color:var(--muted);width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ck-list .ck .rm:hover{background:var(--red-soft);color:var(--red)}
+
+/* SEO serp preview */
+.serp{border:1px solid var(--line2);border-radius:10px;padding:16px 18px;background:#0e0f13}
+.serp .url{font-family:var(--m);font-size:12px;color:#5fae6d;display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.serp .ttl{font-size:18px;color:#7aa7ff;font-weight:500;line-height:1.3;margin-bottom:5px}
+.serp .desc{font-size:13px;color:#b8bac2;line-height:1.5}
+.serp .desc .hl{color:#fff;font-weight:600}
+
+/* SEO checklist */
+.seo-check{display:flex;flex-direction:column;gap:1px}
+.seo-check .c{display:flex;align-items:center;gap:10px;padding:9px 0;font-size:13px;border-bottom:1px solid var(--line);color:var(--txt2)}
+.seo-check .c:last-child{border-bottom:none}
+.seo-check .c .b{width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.seo-check .c.ok .b{background:var(--green-soft);color:var(--green)}
+.seo-check .c.no .b{background:var(--amber-soft);color:var(--amber)}
+.seo-check .c.ok{color:var(--txt)}
+
+.schema-card{display:flex;align-items:center;gap:12px;border:1px solid var(--line2);border-radius:10px;padding:13px 15px;background:var(--bg)}
+.schema-card .ic{width:36px;height:36px;border-radius:9px;background:var(--blue-soft);color:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.schema-card .nm{font-size:13.5px;font-weight:600}
+.schema-card .ds{font-size:11.5px;color:var(--muted)}
+.schema-card .badge{margin-left:auto;font-family:var(--m);font-size:10px;font-weight:700;text-transform:uppercase;color:var(--green);background:var(--green-soft);padding:3px 8px;border-radius:5px}
+
+/* related picker */
+.rel-pick{display:flex;align-items:center;gap:12px;border:1px solid var(--line2);border-radius:10px;padding:10px 12px;margin-bottom:9px;background:var(--bg)}
+.rel-pick .cov{width:48px;height:32px;border-radius:6px;background:#0c0d10;position:relative;overflow:hidden;flex-shrink:0;border:1px solid var(--line)}
+.rel-pick .cov::before{content:"";position:absolute;inset:0;background:radial-gradient(130% 130% at 100% 0%,rgba(226,35,26,.4),transparent 60%)}
+.rel-pick .t{flex:1;font-size:13px;font-weight:600;min-width:0}
+.rel-pick .m{font-family:var(--m);font-size:10.5px;color:var(--muted);margin-top:2px}
+.rel-pick .rm{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.rel-pick .rm:hover{background:var(--red-soft);color:var(--red)}
+
+/* editor right rail */
+.ed-rail{position:sticky;top:182px;display:flex;flex-direction:column;gap:16px}
+.rc{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.rc h4{font-size:13px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.status-sel{display:flex;flex-direction:column;gap:7px}
+.status-opt{display:flex;align-items:center;gap:11px;padding:10px 12px;border:1px solid var(--line2);border-radius:9px;cursor:pointer;transition:.12s}
+.status-opt:hover{border-color:var(--muted)}
+.status-opt.sel{border-color:var(--red);background:var(--red-soft)}
+.status-opt .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.status-opt .dot.draft{background:var(--amber)}
+.status-opt .dot.review{background:var(--blue)}
+.status-opt .dot.pub{background:var(--green)}
+.status-opt .t{font-size:13px;font-weight:600}
+.status-opt .d{font-size:11px;color:var(--muted)}
+.status-opt .ck{margin-left:auto;color:var(--red);opacity:0}
+.status-opt.sel .ck{opacity:1}
+
+.gauge-wrap{display:flex;align-items:center;gap:16px;margin-bottom:6px}
+.gauge{width:72px;height:72px;flex-shrink:0;position:relative}
+.gauge .v{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.gauge .v b{font-size:20px;font-weight:800;line-height:1}
+.gauge .v span{font-size:9px;color:var(--muted);font-family:var(--m)}
+.gscore-txt .lvl{font-size:14px;font-weight:700}
+.gscore-txt .ds{font-size:11.5px;color:var(--muted);margin-top:2px}
+
+.facts .f{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-top:1px solid var(--line);font-size:12.5px}
+.facts .f:first-child{border-top:none}
+.facts .f .k{color:var(--muted)}
+.facts .f .v{font-weight:600;font-family:var(--m);font-size:11.5px}
+
+/* ========== AUTHORS ========== */
+.auth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.acard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.acard .top{display:flex;gap:14px;align-items:center;margin-bottom:14px}
+.acard .av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#34353d,#1a1b21);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;border:1px solid var(--line2)}
+.acard .nm{font-size:15px;font-weight:700}
+.acard .rl{font-size:12.5px;color:var(--red)}
+.acard .bio{font-size:12.5px;color:var(--txt2);line-height:1.5;margin-bottom:14px}
+.acard .ft{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line)}
+.acard .ft .c{font-family:var(--m);font-size:11.5px;color:var(--muted)}
+
+/* ========== MEDIA ========== */
+.media-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.mtile{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;cursor:pointer;transition:.14s}
+.mtile:hover{border-color:var(--line2)}
+.mtile .th{aspect-ratio:16/10;background:#0c0d10;position:relative;overflow:hidden}
+.mtile .th::before{content:"";position:absolute;inset:0;background:radial-gradient(130% 130% at 100% 0%,rgba(226,35,26,.4),transparent 60%),linear-gradient(120deg,#1a1b21,#26272f)}
+.mtile .th .ty{position:absolute;left:8px;top:8px;font-family:var(--m);font-size:9px;font-weight:700;text-transform:uppercase;background:rgba(0,0,0,.55);padding:3px 7px;border-radius:5px;color:#fff}
+.mtile .th .pl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7)}
+.mtile .mi{padding:10px 12px}
+.mtile .mi .n{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mtile .mi .s{font-family:var(--m);font-size:10.5px;color:var(--muted);margin-top:2px}
+.up-tile{border:1px dashed var(--line2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--txt2);font-weight:600;font-size:13px;min-height:150px;border-radius:10px;transition:.14s;cursor:pointer}
+.up-tile:hover{border-color:var(--red);color:var(--red);background:var(--red-soft)}
+
+/* settings */
+.set-row{display:flex;align-items:center;gap:14px;padding:13px 16px;border:1px solid var(--line2);border-radius:10px;margin-bottom:10px;background:var(--bg)}
+.set-row .drag{color:var(--muted);cursor:grab}
+.set-row .nm{flex:1;font-weight:600;font-size:13.5px}
+.set-row .cnt{font-family:var(--m);font-size:11.5px;color:var(--muted)}
+.set-row .rm{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.set-row .rm:hover{background:var(--red-soft);color:var(--red)}
+
+.page-head{margin-bottom:22px}
+.page-head h2{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.page-head p{font-size:13.5px;color:var(--txt2);margin-top:4px}
+
+/* modal */
+.modal-bg{position:fixed;inset:0;background:rgba(8,8,11,.7);backdrop-filter:blur(4px);z-index:100;display:flex;align-items:center;justify-content:center;padding:24px}
+.modal{background:var(--panel);border:1px solid var(--line2);border-radius:16px;width:100%;max-width:680px;padding:28px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.modal h3{font-size:19px;font-weight:800;letter-spacing:-.01em}
+.modal .ms{font-size:13.5px;color:var(--txt2);margin:5px 0 22px}
+.fmt-pick{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.fmt-pick .fp{border:1px solid var(--line2);border-radius:12px;padding:18px 14px;text-align:center;cursor:pointer;transition:.14s}
+.fmt-pick .fp:hover{border-color:var(--red);background:var(--red-soft)}
+.fmt-pick .fp .ic{width:42px;height:42px;border-radius:11px;background:var(--elev);color:var(--red);display:flex;align-items:center;justify-content:center;margin:0 auto 11px}
+.fmt-pick .fp h4{font-size:13.5px;font-weight:700}
+.fmt-pick .fp p{font-size:10.5px;color:var(--muted);margin-top:3px}
+.modal-x{position:absolute;top:18px;right:18px}
+
+@media(max-width:1000px){
+  .app{grid-template-columns:1fr}
+  .side{display:none}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .panel-row{grid-template-columns:1fr}
+  .qc,.fmt-pick{grid-template-columns:1fr 1fr}
+  .auth-grid,.media-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="side-top">
+      <div class="side-brand"><img src="data:image/png;base64,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" alt="CTR CLUB"><span class="role">Админ</span></div>
+    </div>
+    <nav class="side-nav" id="sideNav"></nav>
+    <div class="side-bot">
+      <div class="usr"><div class="av">МК</div><div><div class="nm">Марина К.</div><div class="rl">Редактор контента CTR</div></div></div>
+    </div>
+  </aside>
+  <main class="main">
+    <div id="app"></div>
+  </main>
+</div>
+
+<script>
+/* ===================== DATA ===================== */
+const TOPICS=[
+  {id:'sales',name:'Продажи'},{id:'tech',name:'Техничка'},{id:'process',name:'Процессы'},
+  {id:'finance',name:'Финансы'},{id:'marketing',name:'Маркетинг'},{id:'team',name:'Команда'}
+];
+const TOPIC={};TOPICS.forEach(t=>TOPIC[t.id]=t.name);
+const FORMATS={
+  course:{label:'Курс',plural:'Курсы',schema:'Course',icon:'<path d="M2 5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H2zM22 5a2 2 0 0 0-2-2h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6z"/>'},
+  webinar:{label:'Вебинар',plural:'Вебинары',schema:'VideoObject',icon:'<path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/>'},
+  workshop:{label:'Воркшоп',plural:'Воркшопы',schema:'VideoObject',icon:'<path d="M14.7 6.3a4 4 0 0 0-5.6 5.6L3 18l3 3 6.1-6.1a4 4 0 0 0 5.6-5.6l-2.6 2.6-2.1-2.1z"/>'},
+  article:{label:'Статья',plural:'Статьи',schema:'Article',icon:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/>'},
+  lesson:{label:'Урок',plural:'Уроки',schema:'FAQPage / HowTo',icon:'<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>'}
+};
+const FORDER=['course','webinar','workshop','article','lesson'];
+
+const M=[
+  {id:1,format:'course',topic:'tech',title:'Замена ступичного подшипника: полный цикл',slug:'zamena-stupichnogo-podshipnika',author:'Алексей Громов',status:'published',updated:'2 ч назад',views:4820,seo:92,lessons:6,duration:'48 мин',
+   excerpt:'Диагностика гула, выпрессовка, запрессовка и момент затяжки ступичной гайки без ошибок.',
+   metaDesc:'Как заменить ступичный подшипник: диагностика гула, выпрессовка и запрессовка без перекоса, момент затяжки ступичной гайки. Видеокурс эксперта CTR.',
+   keywords:['замена ступичного подшипника','гудит ступичный подшипник','момент затяжки ступичной гайки','диагностика ступицы']},
+  {id:2,format:'lesson',topic:'tech',title:'Как понять, что гудит ступичный подшипник, а не резина?',slug:'gudit-podshipnik-ili-rezina',author:'Алексей Громов',status:'published',updated:'вчера',views:12940,seo:96,duration:'4 мин',
+   excerpt:'Простой способ отличить гул подшипника от шума шин за одну поездку.',
+   metaDesc:'Гул подшипника или шум резины? Простой тест перестроением и проверка на подъёмнике, чтобы точно определить источник за одну поездку.',
+   keywords:['гудит ступичный подшипник','как определить ступичный подшипник','шум подшипника или резины']},
+  {id:3,format:'course',topic:'tech',title:'Шаровые опоры: износ, диагностика, замена',slug:'sharovye-opory-diagnostika-zamena',author:'Игорь Беляев',status:'review',updated:'3 ч назад',views:0,seo:74,lessons:4,duration:'41 мин',
+   excerpt:'Как поймать стук шаровой, проверить люфт и заменить опору в рычаге.',
+   metaDesc:'Шаровая опора: диагностика стука и люфта, замена опоры в рычаге. Когда менять опору, а когда рычаг целиком — разбор эксперта CTR.',
+   keywords:['замена шаровой опоры','стук шаровой','диагностика шаровой опоры']},
+  {id:4,format:'webinar',topic:'tech',title:'Подбор ходовой по VIN без ошибок',slug:'podbor-hodovoy-po-vin',author:'Денис Карпов',status:'published',updated:'2 дня назад',views:2310,seo:88,duration:'62 мин',
+   excerpt:'Разбор частых ошибок подбора деталей рулевого и подвески.',
+   metaDesc:'Как подбирать детали подвески и рулевого по VIN без ошибок: комплектации, рестайлинг, кросс-номера. Запись вебинара CTR.',
+   keywords:['подбор по vin','подбор запчастей подвески','кросс номера запчастей']},
+  {id:5,format:'article',topic:'sales',title:'Ходовая часть как точка роста среднего чека',slug:'hodovaya-tochka-rosta-cheka',author:'Константин Волков',status:'published',updated:'4 дня назад',views:1670,seo:85,duration:'8 мин',
+   excerpt:'Почему ремонт подвески — недооценённый источник выручки.',
+   metaDesc:'Как системно продавать ремонт ходовой и увеличивать средний чек автосервиса без давления на клиента.',
+   keywords:['средний чек автосервиса','продажа ремонта подвески','выручка автосервиса']},
+  {id:6,format:'workshop',topic:'tech',title:'Разбор реального ремонта: стук в передней подвеске',slug:'razbor-stuk-perednyaya-podveska',author:'Алексей Громов',status:'draft',updated:'1 ч назад',views:0,seo:48,duration:'71 мин',
+   excerpt:'Практический кейс: от жалобы клиента до собранного автомобиля.',
+   metaDesc:'',
+   keywords:['стук в передней подвеске','диагностика стука подвески']},
+  {id:7,format:'lesson',topic:'tech',title:'Нужно ли делать сход-развал после замены шаровой?',slug:'shod-razval-posle-sharovoy',author:'Игорь Беляев',status:'published',updated:'5 дней назад',views:9120,seo:90,duration:'3 мин',
+   excerpt:'В каких случаях замена шаровой требует регулировки углов.',
+   metaDesc:'Нужен ли сход-развал после замены шаровой опоры — разбираем, когда регулировка обязательна, а когда достаточно проверки.',
+   keywords:['сход развал после шаровой','развал после замены шаровой','углы установки колёс']},
+  {id:8,format:'article',topic:'finance',title:'Юнит-экономика участка ремонта ходовой',slug:'unit-ekonomika-remonta-hodovoy',author:'Константин Волков',status:'draft',updated:'6 ч назад',views:0,seo:36,duration:'9 мин',
+   excerpt:'Как посчитать реальную прибыль с нормо-часа.',metaDesc:'',
+   keywords:['юнит экономика автосервиса','стоимость нормо часа']},
+  {id:9,format:'lesson',topic:'tech',title:'Чем запрессовать сайлентблок, если нет пресса?',slug:'zapressovat-sailentblok-bez-pressa',author:'Алексей Громов',status:'published',updated:'неделю назад',views:7450,seo:91,duration:'4 мин',
+   excerpt:'Рабочие способы запрессовки сайлентблока подручным инструментом.',
+   metaDesc:'Как запрессовать сайлентблок без пресса: резьбовая оправка и тиски, чего нельзя делать. Пошагово от эксперта CTR.',
+   keywords:['запрессовать сайлентблок без пресса','как запрессовать сайлентблок','оправка для сайлентблока']},
+  {id:10,format:'webinar',topic:'finance',title:'Гарантия на ходовую: как не терять деньги',slug:'garantiya-na-hodovuyu',author:'Игорь Беляев',status:'review',updated:'2 дня назад',views:0,seo:69,duration:'48 мин',
+   excerpt:'Где проходит граница гарантийного случая.',
+   metaDesc:'Гарантия на ремонт ходовой: где граница гарантийного случая, как фиксировать условия и корректно отказывать.',
+   keywords:['гарантия на ходовую','гарантийный случай подвеска']},
+];
+const BY={};M.forEach(m=>BY[m.id]=m);
+
+const AUTHORS=[
+  {n:'Алексей Громов',r:'Технический эксперт CTR',bio:'15 лет в ремонте подвески и рулевого. Ведёт технические курсы и разборы узлов.',c:8},
+  {n:'Игорь Беляев',r:'Мастер-приёмщик, эксперт CTR',bio:'Специалист по диагностике и приёмке. Отвечает за курсы по шаровым и стабилизаторам.',c:5},
+  {n:'Денис Карпов',r:'Эксперт по aftermarket CTR',bio:'Подбор запчастей по VIN, кросс-номера и работа с каталогом. Вебинары и статьи.',c:4},
+  {n:'Константин Волков',r:'Основатель клуба Автократия',bio:'18 лет в автобизнесе. Материалы по продажам, финансам и управлению сервисом.',c:6},
+];
+const MEDIA=[
+  {n:'cover_podshipnik.jpg',t:'обложка',s:'1280×720 · 184 КБ'},
+  {n:'urok1_diagnostika.mp4',t:'видео',s:'06:12 · 142 МБ'},
+  {n:'cover_sharovaya.jpg',t:'обложка',s:'1280×720 · 201 КБ'},
+  {n:'chek-list-priemka.pdf',t:'документ',s:'PDF · 2 стр · 88 КБ'},
+  {n:'cover_vin_podbor.jpg',t:'обложка',s:'1280×720 · 176 КБ'},
+  {n:'webinar_vin_full.mp4',t:'видео',s:'62:04 · 1.1 ГБ'},
+  {n:'cover_sailentblok.jpg',t:'обложка',s:'1280×720 · 190 КБ'},
+  {n:'skript-priemka.pdf',t:'документ',s:'PDF · 3 стр · 120 КБ'},
+  {n:'cover_stab.jpg',t:'обложка',s:'1280×720 · 168 КБ'},
+];
+
+/* ===================== STATE ===================== */
+let S={view:'dashboard',fmt:'all',edit:null,etab:'main',ek:[],estatus:'draft'};
+
+function go(view,a,b){
+  S.view=view;
+  if(view==='list'&&a)S.fmt=a;
+  if(view==='editor'){const m=BY[a];S.edit=a;S.etab='main';S.ek=m?[...m.keywords]:[];S.estatus=m?m.status:'draft';S.enew=b||null}
+  closeModal();window.scrollTo(0,0);render();
+}
+
+/* ===================== ICONS ===================== */
+const I={
+  dash:'<path d="M3 13h8V3H3zM13 21h8V3h-8zM3 21h8v-6H3z"/>',
+  content:'<path d="M4 4h16v4H4zM4 12h10v8H4zM18 12h2v8h-2z"/>',
+  authors:'<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5a3 3 0 0 1 0 6M21 20a6 6 0 0 0-4-5.7"/>',
+  media:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>',
+  seo:'<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/>',
+  set:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 0 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H1a2 2 0 0 1 0-4h.1A1.6 1.6 0 0 0 2.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H7a1.6 1.6 0 0 0 1-1.5V1a2 2 0 0 1 4 0v.1a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V7a1.6 1.6 0 0 0 1.5 1H23a2 2 0 0 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',
+  edit:'<path d="M11 4H4v16h16v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"/>',
+  dots:'<circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/>',
+  back:'<path d="m15 18-6-6 6-6"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  drag:'<circle cx="9" cy="6" r="1.4"/><circle cx="15" cy="6" r="1.4"/><circle cx="9" cy="12" r="1.4"/><circle cx="15" cy="12" r="1.4"/><circle cx="9" cy="18" r="1.4"/><circle cx="15" cy="18" r="1.4"/>',
+  x:'<path d="M18 6 6 18M6 6l12 12"/>',
+  ai:'<path d="M12 3l1.8 4.5L18 9l-4.2 1.5L12 15l-1.8-4.5L6 9l4.2-1.5z"/><path d="M19 14l.7 1.8L21.5 16l-1.8.7L19 18l-.7-1.3L16.5 16l1.8-.2z"/>',
+  trash:'<path d="M3 6h18M8 6V4h8v2M5 6l1 14h12l1-14"/>',
+  arr:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  play:'<path d="M8 5v14l11-7z"/>',
+  doc:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/>',
+  vid:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="m10 9 5 3-5 3z"/>',
+  code:'<path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/>',
+};
+function svg(p,s){return `<svg width="${s||18}" height="${s||18}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`}
+function inits(n){return n.split(' ').slice(0,2).map(w=>w[0]).join('')}
+function statusPill(s){const map={published:['pub','Опубликовано'],draft:['draft','Черновик'],review:['review','На проверке']};const[c,t]=map[s];return `<span class="pill ${c}"><span class="d"></span>${t}</span>`}
+function ringSVG(score,size){
+  const r=(size-4)/2, c=2*Math.PI*r, off=c*(1-score/100);
+  const col=score>=80?'var(--green)':score>=60?'var(--amber)':'var(--red)';
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="var(--line2)" stroke-width="3"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${col}" stroke-width="3" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${off}" transform="rotate(-90 ${size/2} ${size/2})"/></svg>`;
+}
+
+/* ===================== SIDENAV ===================== */
+function renderNav(){
+  const items=[
+    ['dashboard','Дашборд',I.dash,''],
+    ['list','Материалы',I.content,M.length],
+    ['authors','Авторы',I.authors,AUTHORS.length],
+    ['media','Медиатека',I.media,MEDIA.length],
+    ['seo','Поисковые запросы',I.seo,''],
+    ['settings','Настройки',I.set,''],
+  ];
+  document.getElementById('sideNav').innerHTML=
+    '<div class="side-lbl">Управление</div>'+
+    items.map(([v,t,ic,cnt])=>`<div class="nav-i ${S.view===v||(v==='list'&&S.view==='editor')?'active':''}" onclick="go('${v}')">${svg(ic)}<span>${t}</span>${cnt!==''?`<span class="cnt">${cnt}</span>`:''}</div>`).join('');
+}
+
+/* ===================== TOPBAR ===================== */
+function topbar(title,withCreate){
+  return `<div class="topbar">
+    <h1>${title}</h1>
+    <div class="tb-search">${svg(I.search,16)}<input placeholder="Поиск по материалам…"></div>
+    <div class="tb-right">
+      <button class="icon-btn" title="Открыть портал">${svg(I.eye)}</button>
+      ${withCreate?`<button class="btn btn-primary" onclick="openCreate()">${svg(I.plus,17)} Создать материал</button>`:''}
+    </div>
+  </div>`;
+}
+
+/* ===================== DASHBOARD ===================== */
+function vDashboard(){
+  const pub=M.filter(m=>m.status==='published').length;
+  const draft=M.filter(m=>m.status==='draft').length;
+  const review=M.filter(m=>m.status==='review').length;
+  const views=M.reduce((a,m)=>a+m.views,0);
+  const recent=[...M].sort((a,b)=>0).slice(0,5);
+  const queries=[
+    ['1','замена ступичного подшипника','ok'],['2','как запрессовать сайлентблок','ok'],
+    ['3','сход развал после шаровой','ok'],['7','гудит ступичный подшипник','mid'],['9','подбор подвески по vin','mid']
+  ];
+  return topbar('Дашборд',true)+`<div class="content">
+    <div class="page-head"><h2>Добро пожаловать, Марина</h2><p>Контент-портал CTR CLUB Обучение · обзор материалов и поисковых позиций</p></div>
+    <div class="stat-grid">
+      <div class="stat"><div class="top"><div class="ic red">${svg(I.content)}</div><span class="delta up">+3 за неделю</span></div><div class="num">${M.length}</div><div class="lbl">Всего материалов</div></div>
+      <div class="stat"><div class="top"><div class="ic green">${svg(I.check)}</div></div><div class="num">${pub}</div><div class="lbl">Опубликовано</div></div>
+      <div class="stat"><div class="top"><div class="ic amber">${svg(I.edit)}</div></div><div class="num">${draft+review}</div><div class="lbl">Черновики и на проверке</div></div>
+      <div class="stat"><div class="top"><div class="ic blue">${svg(I.eye)}</div><span class="delta up">+18%</span></div><div class="num">${(views/1000).toFixed(1)}к</div><div class="lbl">Просмотров за месяц</div></div>
+    </div>
+    <div class="panel-row">
+      <div class="box">
+        <div class="box-h"><h3>Недавно изменённые</h3><a onclick="go('list')">Все материалы →</a></div>
+        <div class="box-b">${recent.map(m=>`<div class="mini-row" onclick="go('editor',${m.id})">
+          <div class="mini-cov"></div>
+          <div class="mini-main"><div class="t">${m.title}</div><div class="m">${FORMATS[m.format].label} · ${TOPIC[m.topic]} · ${m.updated}</div></div>
+          ${statusPill(m.status)}
+        </div>`).join('')}</div>
+      </div>
+      <div class="box">
+        <div class="box-h"><h3>Топ запросов в поиске</h3><a onclick="go('seo')">SEO →</a></div>
+        <div>${queries.map(([p,q,c])=>`<div class="seo-q"><div class="pos ${c==='mid'?'mid':''}">${p}</div><div class="q">${q}</div><div class="v">Яндекс</div></div>`).join('')}</div>
+      </div>
+    </div>
+    <div class="page-head" style="margin-bottom:14px"><h2 style="font-size:17px">Создать материал</h2></div>
+    <div class="qc">${FORDER.map(f=>`<button class="qc-i" onclick="go('editor',null,'${f}')"><div class="ic">${svg(FORMATS[f].icon)}</div><h4>${FORMATS[f].label}</h4><p>${f==='lesson'?'Вопрос-ответ для поиска':f==='course'?'Курс из уроков':'Один материал'}</p></button>`).join('')}</div>
+  </div>`;
+}
+
+/* ===================== LIST ===================== */
+function vList(){
+  let items=S.fmt==='all'?M:M.filter(m=>m.format===S.fmt);
+  return topbar('Материалы',true)+`<div class="content">
+    <div class="tabs">
+      <div class="tab ${S.fmt==='all'?'active':''}" onclick="setFmt('all')">Все<span class="cnt">${M.length}</span></div>
+      ${FORDER.map(f=>`<div class="tab ${S.fmt===f?'active':''}" onclick="setFmt('${f}')">${svg(FORMATS[f].icon,15)}${FORMATS[f].plural}<span class="cnt">${M.filter(m=>m.format===f).length}</span></div>`).join('')}
+    </div>
+    <div class="toolbar">
+      <select class="sel"><option>Все рубрики</option>${TOPICS.map(t=>`<option>${t.name}</option>`).join('')}</select>
+      <select class="sel"><option>Любой статус</option><option>Опубликовано</option><option>Черновик</option><option>На проверке</option></select>
+      <select class="sel"><option>По дате изменения</option><option>По просмотрам</option><option>По SEO-оценке</option></select>
+      <div class="spacer"></div>
+      <button class="btn btn-primary btn-sm" onclick="openCreate()">${svg(I.plus,16)} Создать</button>
+    </div>
+    <div class="tbl">
+      <div class="tbl-h"><div>Материал</div><div>Формат</div><div>Рубрика</div><div>Автор</div><div>Статус</div><div>SEO</div><div></div></div>
+      ${items.map(m=>`<div class="tbl-r" onclick="go('editor',${m.id})">
+        <div class="tr-title"><div class="cov"><span class="g">${FORMATS[m.format].label[0]}</span></div><div class="tt"><div class="nm">${m.title}</div><div class="sl">/${m.slug}</div></div></div>
+        <div><span class="fmt-badge">${FORMATS[m.format].label}</span></div>
+        <div class="tr-cell">${TOPIC[m.topic]}</div>
+        <div class="tr-cell">${m.author}</div>
+        <div>${statusPill(m.status)}</div>
+        <div class="seo-mini"><div class="ring">${ringSVG(m.seo,30)}</div><span class="sc" style="color:${m.seo>=80?'var(--green)':m.seo>=60?'var(--amber)':'var(--red)'}">${m.seo}</span></div>
+        <div><button class="row-act" onclick="event.stopPropagation()">${svg(I.dots,16)}</button></div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+function setFmt(f){S.fmt=f;render()}
+
+/* ===================== EDITOR ===================== */
+function blankFor(fmt){return{id:null,format:fmt,topic:'tech',title:'',slug:'',author:'Алексей Громов',status:'draft',views:0,seo:20,duration:'',lessons:fmt==='course'?0:undefined,excerpt:'',metaDesc:'',keywords:[]}}
+function curItem(){return S.edit?BY[S.edit]:(S._blank||(S._blank=blankFor(S.enew||'course')))}
+
+function vEditor(){
+  const m=curItem();
+  const f=FORMATS[m.format];
+  const title=m.title||`Новый материал · ${f.label.toLowerCase()}`;
+  return `<div class="topbar"><h1 style="display:flex;align-items:center;gap:10px">${svg(f.icon,18)} ${f.label}</h1>
+      <div class="tb-right" style="margin-left:auto">
+        <button class="btn btn-ghost btn-sm">${svg(I.eye,16)} Предпросмотр</button>
+      </div></div>
+    <div class="ed-head">
+      <button class="back" onclick="go('list')">${svg(I.back)}</button>
+      <div class="ti"><div class="nm">${title}</div><div class="mt">${f.label} · ${TOPIC[m.topic]} · ${m.id?'/'+m.slug:'черновик не сохранён'}</div></div>
+      <div class="acts">
+        <span class="saved">${svg(I.check,14)} Сохранено</span>
+        <button class="btn btn-ghost btn-sm">Сохранить черновик</button>
+        <button class="btn btn-primary btn-sm">${S.estatus==='published'?'Обновить':'Опубликовать'}</button>
+      </div>
+    </div>
+    <div class="ed-tabs">
+      ${[['main','Основное',false],['content','Контент',false],['seo','SEO',m.seo<70],['rel','Связи',false]].map(([k,t,w])=>`<div class="ed-tab ${S.etab===k?'active':''}" onclick="setEtab('${k}')">${t}${w?'<span class="warn"></span>':''}</div>`).join('')}
+    </div>
+    <div class="ed-body">
+      <div class="ed-main">${editorTab(m)}</div>
+      <aside class="ed-rail">${editorRail(m)}</aside>
+    </div>`;
+}
+function setEtab(t){S.etab=t;render()}
+
+function editorTab(m){
+  if(S.etab==='main')return edMain(m);
+  if(S.etab==='content')return edContent(m);
+  if(S.etab==='seo')return edSeo(m);
+  if(S.etab==='rel')return edRel(m);
+}
+
+function edMain(m){
+  const f=FORMATS[m.format];
+  return `<div class="fcard">
+    <h3>Основная информация</h3><div class="hint">Эти поля видны в карточке материала и в каталоге портала.</div>
+    <div class="field"><label>Заголовок <span class="req">*</span></label>
+      <input value="${m.title.replace(/"/g,'&quot;')}" placeholder="${m.format==='lesson'?'Сформулируйте как вопрос: «Как заменить…?»':'Например: Замена ступичного подшипника'}" oninput="liveTitle(this.value)">
+      <div class="sub">${m.format==='lesson'?'Для уроков заголовок — это поисковый вопрос. Он же станет H1 и заголовком в выдаче.':'До ~70 символов. Заголовок становится H1 страницы.'}</div>
+    </div>
+    <div class="field"><label>Адрес страницы (URL) <span class="req">*</span></label>
+      <div class="slug-wrap"><span class="pre">club.ctr.co.ru/${f.plural.toLowerCase()}/</span><input id="slugIn" value="${m.slug}" placeholder="generiruetsya-iz-zagolovka"></div>
+      <div class="sub">Латиницей, без пробелов. Влияет на SEO — задаётся один раз и не меняется после публикации.</div>
+    </div>
+    <div class="field"><label>Краткое описание <span class="ct"><span id="exC">${m.excerpt.length}</span>/160</span></label>
+      <textarea rows="2" maxlength="200" placeholder="Одно-два предложения для карточки в каталоге" oninput="document.getElementById('exC').textContent=this.value.length">${m.excerpt}</textarea>
+      <div class="sub" style="display:flex;justify-content:space-between"><span>Показывается на карточке материала.</span><button class="ai-btn" onclick="aiFill(this,'excerpt')">${svg(I.ai,12)} Сгенерировать</button></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Рубрика <span class="req">*</span></label>
+        <select ${m.format==='course'?'disabled':''}>${TOPICS.map(t=>`<option ${t.id===m.topic?'selected':''}>${t.name}</option>`).join('')}</select>
+        ${m.format==='course'?'<div class="sub">Курсы — только техническая рубрика.</div>':''}
+      </div>
+      <div class="field"><label>Автор / эксперт <span class="req">*</span></label>
+        <select>${AUTHORS.map(a=>`<option ${a.n===m.author?'selected':''}>${a.n} — ${a.r}</option>`).join('')}</select>
+      </div>
+    </div>
+    ${(m.format==='webinar'||m.format==='workshop')?`<div class="field"><label>Участники</label>
+      <div class="tagbox"><span class="tagc">Алексей Громов <span class="x">${svg(I.x,12)}</span></span><span class="tagc">Игорь Беляев <span class="x">${svg(I.x,12)}</span></span><input placeholder="Добавить участника…"></div></div>`:''}
+  </div>
+
+  <div class="fcard">
+    <h3>Обложка</h3><div class="hint">Тёмная обложка с красным тегом CTR — как в каталоге портала.</div>
+    <div class="cover-up">
+      <div class="cover-prev"><span class="g">${FORMATS[m.format].label[0]}</span><span class="tag">${TOPIC[m.topic]}</span></div>
+      <div class="upinfo"><div class="b">Загрузить обложку</div><div class="s">JPG или PNG, 1280×720. Или выберите из медиатеки.</div>
+        <button class="btn btn-ghost btn-sm">Выбрать файл</button></div>
+    </div>
+    <div class="row2" style="margin-top:18px">
+      <div class="field" style="margin:0"><label>Длительность</label><input value="${m.duration}" placeholder="${m.format==='lesson'?'4 мин чтения':'48 мин'}"><div class="sub">Год выпуска не показываем.</div></div>
+      ${m.format==='course'?`<div class="field" style="margin:0"><label>Уровень</label><select><option>Базовый</option><option>Средний</option><option>Продвинутый</option></select></div>`:''}
+    </div>
+  </div>`;
+}
+
+function edContent(m){
+  if(m.format==='course')return edContentCourse(m);
+  if(m.format==='lesson')return edContentLesson(m);
+  if(m.format==='article')return edContentArticle(m);
+  return edContentMedia(m);
+}
+function edContentCourse(m){
+  const lessons=[['Как звучит изношенный подшипник','6 мин'],['Гул подшипника против резины и ШРУСа','7 мин'],['Снятие узла: инструмент и порядок','9 мин']];
+  return `<div class="fcard"><h3>Вступление</h3><div class="hint">Текст в начале страницы курса. Помогает SEO и объясняет, кому курс полезен.</div>
+    <div class="field" style="margin:0"><textarea rows="4" placeholder="2–3 абзаца: о чём курс, кому полезен, что внутри">Гул ступичного подшипника — одна из самых частых причин обращения в сервис. В этом курсе технический эксперт CTR разбирает полный цикл замены...</textarea>
+    <div class="sub" style="display:flex;justify-content:flex-end"><button class="ai-btn" onclick="aiFill(this,'intro')">${svg(I.ai,12)} Сгенерировать</button></div></div></div>
+
+  <div class="fcard"><h3>Программа курса</h3><div class="hint">Уроки идут по порядку. У каждого — название, длительность и видео. Перетаскивайте, чтобы менять порядок.</div>
+    <div id="lessonList">${lessons.map((l,i)=>lessonRow(l[0],l[1],i)).join('')}</div>
+    <button class="add-blk" onclick="addLesson()">${svg(I.plus,16)} Добавить урок</button>
+  </div>
+
+  <div class="fcard"><h3>Чему научатся</h3><div class="hint">Короткие пункты-результаты. Показываются блоком «Чему вы научитесь».</div>
+    <div class="ck-list" id="ckList">
+      ${ckRow('Локализовать источник гула за одну поездку')}
+      ${ckRow('Запрессовать подшипник без перекоса')}
+      ${ckRow('Соблюсти момент затяжки ступичной гайки')}
+    </div>
+    <button class="add-blk" onclick="addCk()">${svg(I.plus,16)} Добавить пункт</button>
+  </div>`;
+}
+function lessonRow(t,d,i){
+  return `<div class="lesson-r"><span class="drag">${svg(I.drag,16)}</span><span class="num">${String(i+1).padStart(2,'0')}</span>
+    <input class="lt" value="${t}"><input class="ld" value="${d}"><span class="vid">${svg(I.play,12)} видео</span>
+    <button class="rm" onclick="this.parentElement.remove()">${svg(I.trash,15)}</button></div>`;
+}
+function ckRow(v){return `<div class="ck"><span class="ico">${svg(I.check,16)}</span><input value="${v||''}" placeholder="Например: проверить люфт двумя способами"><button class="rm" onclick="this.parentElement.remove()">${svg(I.x,15)}</button></div>`}
+function addLesson(){const l=document.getElementById('lessonList');const n=l.children.length;l.insertAdjacentHTML('beforeend',lessonRow('','',n))}
+function addCk(){document.getElementById('ckList').insertAdjacentHTML('beforeend',ckRow(''))}
+
+function edContentLesson(m){
+  return `<div class="fcard"><h3>Короткий ответ</h3><div class="hint">Главный блок «Коротко» в начале страницы. Из него поисковик собирает быстрый ответ в выдаче — пишите ёмко и по делу.</div>
+    <div class="field" style="margin:0"><textarea rows="3" placeholder="2–3 предложения с прямым ответом на вопрос из заголовка">Гул подшипника меняется при перестроении и не зависит от типа покрытия. Шум резины зависит от асфальта. Лёгкие змейки на ровной дороге быстро покажут сторону.</textarea>
+    <div class="sub" style="display:flex;justify-content:flex-end"><button class="ai-btn" onclick="aiFill(this,'short')">${svg(I.ai,12)} Сгенерировать</button></div></div></div>
+
+  <div class="fcard"><h3>Развёрнутый ответ</h3><div class="hint">Разделы с подзаголовками. Каждый раздел — это шаг или аспект ответа (формирует разметку HowTo и оглавление).</div>
+    <div id="secList">
+      ${secBlock('Тест перестроением','На ровной дороге на скорости 60–80 км/ч сделайте плавные перестроения...',0)}
+      ${secBlock('Чем отличается от шума резины','Шум резины зависит от покрытия, гул подшипника — нет...',1)}
+    </div>
+    <button class="add-blk" onclick="addSec()">${svg(I.plus,16)} Добавить раздел</button>
+  </div>
+
+  <div class="fcard"><h3>Сопутствующие вопросы (FAQ)</h3><div class="hint">Короткие пары «вопрос — ответ» внизу страницы. Раскрываются в блок FAQ и в разметку FAQPage.</div>
+    <div id="faqList">
+      ${faqBlock('Можно ли ездить с гудящим подшипником?','Краткосрочно — да, но износ прогрессирует. Замену лучше не откладывать.')}
+    </div>
+    <button class="add-blk" onclick="addFaq()">${svg(I.plus,16)} Добавить вопрос</button>
+  </div>`;
+}
+function secBlock(h,t,i){return `<div class="blk"><div class="blk-h"><span class="drag">${svg(I.drag,15)}</span><span class="num">${i+1}</span><span class="lbl">Раздел</span><button class="rm" onclick="this.closest('.blk').remove()">${svg(I.trash,14)}</button></div>
+  <input class="mini-in" value="${h||''}" placeholder="Подзаголовок раздела (H2)"><textarea class="mini-in" rows="3" placeholder="Текст раздела">${t||''}</textarea></div>`}
+function faqBlock(q,a){return `<div class="blk"><div class="blk-h"><span class="lbl">Вопрос-ответ</span><button class="rm" onclick="this.closest('.blk').remove()">${svg(I.trash,14)}</button></div>
+  <input class="mini-in" value="${q||''}" placeholder="Вопрос"><textarea class="mini-in" rows="2" placeholder="Ответ">${a||''}</textarea></div>`}
+function addSec(){const l=document.getElementById('secList');l.insertAdjacentHTML('beforeend',secBlock('','',l.children.length))}
+function addFaq(){document.getElementById('faqList').insertAdjacentHTML('beforeend',faqBlock('',''))}
+
+function edContentArticle(m){
+  return `<div class="fcard"><h3>Лид-абзац</h3><div class="hint">Вводный абзац статьи крупным шрифтом. Задаёт тему и важен для поиска.</div>
+    <div class="field" style="margin:0"><textarea rows="3" placeholder="Вводный абзац">Ремонт подвески — недооценённый источник выручки автосервиса...</textarea></div></div>
+  <div class="fcard"><h3>Разделы статьи</h3><div class="hint">Подзаголовки и текст. Из подзаголовков автоматически собирается содержание (оглавление).</div>
+    <div id="secList">${secBlock('Почему ходовая недопродаётся','Механик видит износ нескольких узлов, но в заказ-наряд...',0)}${secBlock('Диагностика как продукт','Когда диагностика оформлена как услуга...',1)}</div>
+    <button class="add-blk" onclick="addSec()">${svg(I.plus,16)} Добавить раздел</button>
+  </div>`;
+}
+function edContentMedia(m){
+  return `<div class="fcard"><h3>Видеозапись</h3><div class="hint">Ссылка на видео или загрузка файла. Обязательна для разметки VideoObject.</div>
+    <div class="field" style="margin-bottom:14px"><label>Ссылка на видео</label><input placeholder="https:// … или выберите файл из медиатеки"></div>
+    <div class="field" style="margin:0"><label>Текстовая расшифровка <span class="ct">для SEO</span></label><textarea rows="3" placeholder="Краткая расшифровка/конспект — помогает индексации видео"></textarea></div>
+  </div>
+  <div class="fcard"><h3>Описание</h3><div class="hint">О чём запись, для кого, что разберём.</div>
+    <div class="field" style="margin:0"><textarea rows="4" placeholder="2–3 абзаца">${m.excerpt}</textarea><div class="sub" style="display:flex;justify-content:flex-end"><button class="ai-btn" onclick="aiFill(this,'intro')">${svg(I.ai,12)} Сгенерировать</button></div></div>
+  </div>
+  <div class="fcard"><h3>Что разберём</h3><div class="hint">Пункты-тезисы записи.</div>
+    <div class="ck-list" id="ckList">${ckRow('Читать комплектации по VIN')}${ckRow('Проверять кросс-номера')}</div>
+    <button class="add-blk" onclick="addCk()">${svg(I.plus,16)} Добавить пункт</button>
+  </div>
+  ${m.format==='workshop'?`<div class="fcard"><h3>Материалы для скачивания</h3><div class="hint">Чек-листы, скрипты, PDF — доступны под видео воркшопа.</div>
+    <div class="blk"><div class="blk-h"><span class="lbl">Файл</span><button class="rm">${svg(I.trash,14)}</button></div><input class="mini-in" value="Чек-лист приёмки.pdf" readonly></div>
+    <button class="add-blk">${svg(I.plus,16)} Добавить файл</button></div>`:''}`;
+}
+
+function edSeo(m){
+  const titlePrev=m.title||'Заголовок материала';
+  const descPrev=m.metaDesc||m.excerpt||'Описание появится в результатах поиска. Заполните поле «Описание для поиска».';
+  const checks=[
+    [m.title.length>0&&m.title.length<=70,'Заголовок заполнен и не длиннее 70 символов'],
+    [(m.metaDesc||'').length>=80,'Описание для поиска от 80 символов'],
+    [m.keywords.length>=3,'Минимум 3 поисковых запроса'],
+    [!!m.slug,'Задан человекочитаемый URL'],
+    [true,'Подключена разметка Schema.org'],
+    [m.format!=='lesson'||true,'Заголовок сформулирован как вопрос'],
+  ];
+  return `<div class="fcard"><h3>${svg(I.search,17)} Сниппет в поиске</h3><div class="hint">Так материал будет выглядеть в Яндексе и Google. Обновляется на лету.</div>
+    <div class="serp"><div class="url">club.ctr.co.ru › ${FORMATS[m.format].plural.toLowerCase()} › <span id="spSlug">${m.slug||'…'}</span></div>
+      <div class="ttl" id="spTitle">${titlePrev}</div><div class="desc" id="spDesc">${descPrev}</div></div>
+  </div>
+
+  <div class="fcard"><h3>Мета-теги</h3>
+    <div class="field"><label>Title для поиска <span class="ct"><span id="mtC">${(m.title||'').length}</span>/70</span></label>
+      <input id="mtIn" value="${(m.title||'').replace(/"/g,'&quot;')}" placeholder="Обычно совпадает с заголовком" oninput="seoLive()">
+      <div class="sub">Оптимально 50–70 символов с ключевым запросом ближе к началу.</div></div>
+    <div class="field" style="margin:0"><label>Описание для поиска (meta description) <span class="ct"><span id="mdC">${(m.metaDesc||'').length}</span>/160</span></label>
+      <textarea id="mdIn" rows="3" maxlength="200" placeholder="1–2 предложения с ключевым запросом — то, что увидят в выдаче" oninput="seoLive()">${m.metaDesc||''}</textarea>
+      <div class="sub" style="display:flex;justify-content:space-between"><span>Оптимально 120–160 символов.</span><button class="ai-btn" onclick="aiMeta()">${svg(I.ai,12)} Сгенерировать из контента</button></div>
+    </div>
+  </div>
+
+  <div class="fcard"><h3>Поисковые запросы</h3><div class="hint">Ключевые фразы, по которым материал должен находиться. Используются для перелинковки и блока «Поисковые запросы» на портале.</div>
+    <div class="tagbox" id="kwBox" onclick="document.getElementById('kwIn').focus()">
+      <span id="kwChips"></span>
+      <input id="kwIn" placeholder="Введите запрос и нажмите Enter" onkeydown="if(event.key==='Enter'){addKw(this.value);this.value=''}">
+    </div>
+    <div class="sub" style="display:flex;justify-content:space-between;margin-top:8px"><span>Например: «замена ступичного подшипника», «гудит подшипник»</span><button class="ai-btn" onclick="aiKw()">${svg(I.ai,12)} Подобрать запросы</button></div>
+  </div>
+
+  <div class="fcard"><h3>Микроразметка Schema.org</h3><div class="hint">Определяется автоматически по формату материала. Передаётся в код как JSON-LD — повышает шанс попасть в расширенную выдачу.</div>
+    <div class="schema-card"><div class="ic">${svg(I.code,18)}</div><div><div class="nm">${FORMATS[m.format].schema}</div><div class="ds">${schemaDesc(m.format)}</div></div><span class="badge">Активна</span></div>
+  </div>`;
+}
+function schemaDesc(f){return{course:'Карточка курса: длительность, количество уроков, автор',webinar:'Видео: превью, длительность, дата в выдаче',workshop:'Видео + материалы для скачивания',article:'Статья: автор, дата, заголовок',lesson:'Вопрос-ответ и пошаговая инструкция в выдаче'}[f]}
+
+function edRel(m){
+  const rel=M.filter(x=>x.id!==m.id&&x.topic===m.topic).slice(0,3);
+  const more=M.filter(x=>x.id!==m.id&&!rel.includes(x)).slice(0,4);
+  return `<div class="fcard"><h3>Похожие материалы</h3><div class="hint">Показываются в сайдбаре материала и усиливают внутреннюю перелинковку — важный фактор SEO.</div>
+    ${rel.map(r=>`<div class="rel-pick"><div class="cov"></div><div><div class="t">${r.title}</div><div class="m">${FORMATS[r.format].label} · ${TOPIC[r.topic]}</div></div><button class="rm">${svg(I.x,15)}</button></div>`).join('')}
+    <button class="add-blk" onclick="this.previousElementSibling&&0;openRelPicker()">${svg(I.plus,16)} Добавить материал</button>
+  </div>
+  <div class="fcard"><h3>Рекомендованный курс</h3><div class="hint">Для уроков и статей — основной курс, на который ведёт кнопка «К курсу».</div>
+    <select><option>Не выбрано</option>${M.filter(x=>x.format==='course').map(c=>`<option ${c.title.includes('подшипник')?'selected':''}>${c.title}</option>`).join('')}</select>
+  </div>`;
+}
+function openRelPicker(){alert('Здесь откроется выбор материала из каталога (поиск по всем форматам).')}
+
+function editorRail(m){
+  return `<div class="rc"><h4>Публикация</h4>
+    <div class="status-sel">
+      ${[['draft','Черновик','Виден только в админке'],['review','На проверке','Готов к ревью'],['published','Опубликовано','Виден на портале']].map(([k,t,d])=>`<div class="status-opt ${S.estatus===k?'sel':''}" onclick="setStatus('${k}')"><span class="dot ${k}"></span><div><div class="t">${t}</div><div class="d">${d}</div></div><span class="ck">${svg(I.check,16)}</span></div>`).join('')}
+    </div>
+    <button class="btn btn-primary" style="width:100%;margin-top:14px;justify-content:center">${S.estatus==='published'?'Обновить на портале':'Опубликовать'}</button>
+  </div>
+
+  <div class="rc"><h4>SEO-оценка</h4>
+    <div class="gauge-wrap"><div class="gauge" id="gauge">${ringSVG(m.seo,72)}<div class="v"><b id="gNum">${m.seo}</b><span>из 100</span></div></div>
+      <div class="gscore-txt"><div class="lvl" style="color:${m.seo>=80?'var(--green)':m.seo>=60?'var(--amber)':'var(--red)'}">${m.seo>=80?'Отлично':m.seo>=60?'Можно лучше':'Требует доработки'}</div><div class="ds">Заполните блок SEO, чтобы поднять оценку</div></div>
+    </div>
+    <div class="seo-check">${seoChecklist(m)}</div>
+  </div>
+
+  <div class="rc"><h4>Сводка</h4>
+    <div class="facts">
+      <div class="f"><span class="k">Формат</span><span class="v">${FORMATS[m.format].label}</span></div>
+      <div class="f"><span class="k">Рубрика</span><span class="v">${TOPIC[m.topic]}</span></div>
+      <div class="f"><span class="k">Автор</span><span class="v" style="font-family:var(--f);font-size:12.5px">${m.author.split(' ')[0]} ${m.author.split(' ')[1]||''}</span></div>
+      ${m.id?`<div class="f"><span class="k">Просмотры</span><span class="v">${m.views.toLocaleString('ru')}</span></div><div class="f"><span class="k">Изменён</span><span class="v" style="font-family:var(--f);font-size:12.5px">${m.updated}</span></div>`:''}
+    </div>
+  </div>`;
+}
+function seoChecklist(m){
+  const checks=[
+    [m.title.length>0&&m.title.length<=70,'Заголовок ≤ 70 символов'],
+    [(m.metaDesc||'').length>=80,'Описание для поиска'],
+    [m.keywords.length>=3,'≥ 3 поисковых запроса'],
+    [!!m.slug,'Человекочитаемый URL'],
+    [true,'Schema.org подключена'],
+  ];
+  return checks.map(([ok,t])=>`<div class="c ${ok?'ok':'no'}"><span class="b">${ok?svg(I.check,13):svg(I.plus,13)}</span>${t}</div>`).join('');
+}
+function setStatus(s){S.estatus=s;render()}
+
+/* live SEO interactions */
+function liveTitle(v){
+  const t=document.getElementById('spTitle');if(t)t.textContent=v||'Заголовок материала';
+  const mt=document.getElementById('mtIn');// not on this tab
+  const sl=document.getElementById('slugIn');
+  if(sl&&!sl.dataset.touched){sl.value=translit(v);const sp=document.getElementById('spSlug');if(sp)sp.textContent=sl.value||'…'}
+}
+function seoLive(){
+  const t=document.getElementById('mtIn'),d=document.getElementById('mdIn');
+  if(t){document.getElementById('mtC').textContent=t.value.length;const sp=document.getElementById('spTitle');if(sp)sp.textContent=t.value||'Заголовок материала'}
+  if(d){document.getElementById('mdC').textContent=d.value.length;const sp=document.getElementById('spDesc');if(sp)sp.textContent=d.value||'Описание появится в результатах поиска.'}
+}
+function translit(s){const map={а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'e',ж:'zh',з:'z',и:'i',й:'y',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'h',ц:'c',ч:'ch',ш:'sh',щ:'sch',ъ:'',ы:'y',ь:'',э:'e',ю:'yu',я:'ya',' ':'-'};return (s||'').toLowerCase().split('').map(c=>map[c]!==undefined?map[c]:/[a-z0-9-]/.test(c)?c:'').join('').replace(/-+/g,'-').replace(/^-|-$/g,'').slice(0,50)}
+
+/* keyword chips */
+function renderKw(){const c=document.getElementById('kwChips');if(!c)return;c.innerHTML=S.ek.map((k,i)=>`<span class="tagc">${k} <span class="x" onclick="rmKw(${i})">${svg(I.x,12)}</span></span>`).join('')}
+function addKw(v){v=(v||'').trim();if(v&&!S.ek.includes(v)){S.ek.push(v);renderKw()}}
+function rmKw(i){S.ek.splice(i,1);renderKw()}
+
+/* AI mock fills */
+function aiFill(btn,kind){btn.disabled=true;const old=btn.innerHTML;btn.innerHTML=svg(I.ai,12)+' Генерирую…';setTimeout(()=>{const ta=btn.closest('.field').querySelector('textarea');const samples={excerpt:'Диагностика гула, выпрессовка и запрессовка без перекоса, момент затяжки ступичной гайки — полный цикл замены на реальном автомобиле.',intro:'Гул ступичного подшипника — частая причина обращения и повторного визита, если работа сделана неаккуратно. В курсе эксперт CTR разбирает полный цикл: от диагностики до контроля момента затяжки.',short:'Гул подшипника усиливается при загрузке колеса и не зависит от покрытия, шум резины — наоборот. Лёгкие змейки на ровной дороге покажут проблемную сторону.'};if(ta){ta.value=samples[kind]||'';ta.dispatchEvent(new Event('input'))}btn.disabled=false;btn.innerHTML=old},700)}
+function aiMeta(){const d=document.getElementById('mdIn');d.value='Как заменить ступичный подшипник: диагностика гула, выпрессовка и запрессовка без перекоса, момент затяжки ступичной гайки. Видеокурс эксперта CTR.';seoLive()}
+function aiKw(){['замена ступичного подшипника','гудит ступичный подшипник','момент затяжки ступичной гайки','диагностика ступицы'].forEach(addKw)}
+
+/* ===================== AUTHORS ===================== */
+function vAuthors(){
+  return topbar('Авторы',false)+`<div class="content">
+    <div class="page-head" style="display:flex;justify-content:space-between;align-items:flex-end"><div><h2>Авторы и эксперты</h2><p>Указываются в каждом материале. Профиль эксперта усиливает доверие и E-E-A-T для поиска.</p></div><button class="btn btn-primary btn-sm">${svg(I.plus,16)} Добавить автора</button></div>
+    <div class="auth-grid">${AUTHORS.map(a=>`<div class="acard"><div class="top"><div class="av">${inits(a.n)}</div><div><div class="nm">${a.n}</div><div class="rl">${a.r}</div></div></div><div class="bio">${a.bio}</div><div class="ft"><span class="c">${a.c} материалов</span><button class="btn btn-ghost btn-sm">${svg(I.edit,14)} Профиль</button></div></div>`).join('')}</div>
+  </div>`;
+}
+
+/* ===================== MEDIA ===================== */
+function vMedia(){
+  const ico={'обложка':I.media,'видео':I.vid,'документ':I.doc};
+  return topbar('Медиатека',false)+`<div class="content">
+    <div class="page-head"><h2>Медиатека</h2><p>Обложки, видео и файлы для скачивания. Используются при заполнении материалов.</p></div>
+    <div class="toolbar"><select class="sel"><option>Все типы</option><option>Обложки</option><option>Видео</option><option>Документы</option></select><div class="spacer"></div><button class="btn btn-primary btn-sm">${svg(I.plus,16)} Загрузить</button></div>
+    <div class="media-grid">
+      <div class="up-tile">${svg(I.plus,22)}<span>Загрузить файл</span></div>
+      ${MEDIA.map(f=>`<div class="mtile"><div class="th"><span class="ty">${f.t}</span><span class="pl">${svg(f.t==='видео'?I.play:f.t==='документ'?I.doc:I.media,26)}</span></div><div class="mi"><div class="n">${f.n}</div><div class="s">${f.s}</div></div></div>`).join('')}
+    </div>
+  </div>`;
+}
+
+/* ===================== SEO PAGE ===================== */
+function vSeo(){
+  const rows=[
+    ['замена ступичного подшипника','1','2 800','↑'],['как запрессовать сайлентблок','2','1 940','↑'],
+    ['сход развал после шаровой','3','1 510','='],['гудит ступичный подшипник','7','3 200','↑'],
+    ['подбор подвески по vin','9','880','↓'],['стук в передней подвеске','12','1 120','↑'],
+    ['замена рулевого наконечника','5','1 350','='],['чем отличается oem от аналога','8','640','↑'],
+  ];
+  return topbar('Поисковые запросы',false)+`<div class="content">
+    <div class="page-head"><h2>Поисковые позиции</h2><p>Данные из Яндекс.Вебмастера и Search Console. Где портал уже находится — и где можно усилиться.</p></div>
+    <div class="stat-grid" style="grid-template-columns:repeat(4,1fr)">
+      <div class="stat"><div class="num">128</div><div class="lbl">Запросов в топ-10</div></div>
+      <div class="stat"><div class="num">5.4</div><div class="lbl">Средняя позиция</div></div>
+      <div class="stat"><div class="num">42</div><div class="lbl">Проиндексировано страниц</div></div>
+      <div class="stat"><div class="num">31.2к</div><div class="lbl">Переходов из поиска / мес</div></div>
+    </div>
+    <div class="tbl" style="margin-top:6px">
+      <div class="tbl-h" style="grid-template-columns:2.5fr 1fr 1fr 1fr 1.2fr"><div>Запрос</div><div>Позиция</div><div>Показы</div><div>Динамика</div><div>Страница</div></div>
+      ${rows.map(([q,p,sh,dyn])=>`<div class="tbl-r" style="grid-template-columns:2.5fr 1fr 1fr 1fr 1.2fr;cursor:default">
+        <div class="tr-cell" style="color:var(--txt);font-weight:600;white-space:normal">${q}</div>
+        <div><span class="seo-q" style="padding:0"><span class="pos ${+p>5?'mid':''}">${p}</span></span></div>
+        <div class="tr-cell mono">${sh}</div>
+        <div class="tr-cell mono" style="color:${dyn==='↑'?'var(--green)':dyn==='↓'?'var(--red)':'var(--muted)'}">${dyn} ${dyn==='↑'?'рост':dyn==='↓'?'спад':'стабильно'}</div>
+        <div class="tr-cell mono" style="color:var(--blue)">/материал</div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+/* ===================== SETTINGS ===================== */
+function vSettings(){
+  return topbar('Настройки',false)+`<div class="content" style="max-width:760px">
+    <div class="page-head"><h2>Настройки портала</h2><p>Базовые параметры. Меняются редко.</p></div>
+    <div class="fcard" style="margin-bottom:20px"><h3>Рубрики</h3><div class="hint">Темы для фильтрации материалов. Порядок задаёт отображение в меню портала.</div>
+      ${TOPICS.map(t=>`<div class="set-row"><span class="drag">${svg(I.drag,16)}</span><span class="nm">${t.name}</span><span class="cnt">${M.filter(m=>m.topic===t.id).length} материалов</span><button class="rm">${svg(I.edit,14)}</button></div>`).join('')}
+      <button class="add-blk">${svg(I.plus,16)} Добавить рубрику</button>
+    </div>
+    <div class="fcard" style="margin-bottom:20px"><h3>Форматы контента</h3><div class="hint">Доступные типы материалов. Соответствуют разделам портала.</div>
+      ${FORDER.map(f=>`<div class="set-row"><span class="drag">${svg(I.drag,16)}</span><span class="nm" style="display:flex;align-items:center;gap:10px">${svg(FORMATS[f].icon,16)} ${FORMATS[f].plural}</span><span class="cnt">${FORMATS[f].schema}</span></div>`).join('')}
+    </div>
+    <div class="fcard"><h3>Название портала</h3>
+      <div class="row2"><div class="field" style="margin:0"><label>Заголовок в шапке</label><input value="CTR CLUB · Обучение"></div><div class="field" style="margin:0"><label>Домен</label><input value="club.ctr.co.ru" class="mono"></div></div>
+    </div>
+  </div>`;
+}
+
+/* ===================== CREATE MODAL ===================== */
+function openCreate(){
+  const m=document.createElement('div');m.className='modal-bg';m.id='modal';m.onclick=e=>{if(e.target===m)closeModal()};
+  m.innerHTML=`<div class="modal" style="position:relative"><button class="modal-x icon-btn" style="border-color:var(--line)" onclick="closeModal()">${svg(I.x,16)}</button>
+    <h3>Новый материал</h3><div class="ms">Выберите формат — дальше откроется редактор с нужными полями.</div>
+    <div class="fmt-pick">${FORDER.map(f=>`<div class="fp" onclick="closeModal();go('editor',null,'${f}')"><div class="ic">${svg(FORMATS[f].icon,20)}</div><h4>${FORMATS[f].label}</h4><p>${f==='lesson'?'Вопрос-ответ':f==='course'?'Из уроков':'Один блок'}</p></div>`).join('')}</div>
+  </div>`;
+  document.body.appendChild(m);
+}
+function closeModal(){const m=document.getElementById('modal');if(m)m.remove()}
+
+/* ===================== RENDER ===================== */
+function render(){
+  S._blank=S.view==='editor'&&!S.edit?S._blank:null;
+  renderNav();
+  let h='';
+  switch(S.view){
+    case 'dashboard':h=vDashboard();break;
+    case 'list':h=vList();break;
+    case 'editor':h=vEditor();break;
+    case 'authors':h=vAuthors();break;
+    case 'media':h=vMedia();break;
+    case 'seo':h=vSeo();break;
+    case 'settings':h=vSettings();break;
+    default:h=vDashboard();
+  }
+  document.getElementById('app').innerHTML=h;
+  if(S.view==='editor'&&S.etab==='seo')renderKw();
+}
+render();
+</script>
+</body>
+</html>
