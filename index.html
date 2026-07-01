@@ -9,40 +9,25 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --red:#E2231A;
-  --red-dark:#B81C15;
-  --red-soft:#FCEBEA;
-  --ink:#1C1D21;
-  --body:#3C3D43;
-  --muted:#8A8C94;
-  --line:#EBEBED;
-  --line-2:#E2E2E5;
-  --bg:#FFFFFF;
-  --soft:#F6F6F7;
-  --cover:#1C1D21;
-  --cover-2:#26272C;
+  --red:#E2231A; --red-dark:#B81C15; --red-soft:#FCEBEA;
+  --ink:#1C1D21; --body:#3C3D43; --muted:#8A8C94;
+  --line:#EBEBED; --line-2:#E2E2E5; --bg:#FFFFFF; --soft:#F6F6F7;
+  --cover:#1C1D21; --cover-2:#26272C;
   --f-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   --f-mono:'JetBrains Mono',ui-monospace,monospace;
-  --radius:14px;
-  --radius-sm:10px;
+  --radius:14px; --radius-sm:10px;
   --shadow:0 1px 2px rgba(20,20,25,.04),0 8px 28px -16px rgba(20,20,25,.18);
   --shadow-hover:0 2px 4px rgba(20,20,25,.06),0 18px 40px -18px rgba(20,20,25,.28);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  font-family:var(--f-sans);color:var(--body);background:var(--bg);
-  font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;
-}
+body{font-family:var(--f-sans);color:var(--body);background:var(--bg);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 img{max-width:100%;display:block}
 :focus-visible{outline:2px solid var(--red);outline-offset:2px;border-radius:4px}
-
 .eyebrow{font-family:var(--f-mono);font-weight:600;text-transform:uppercase;letter-spacing:.09em;font-size:11px;color:var(--muted)}
 .mono{font-family:var(--f-mono)}
-
-/* ============ TOPBAR ============ */
 .topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .topbar-inner{max-width:1340px;margin:0 auto;padding:0 28px;height:72px;display:flex;align-items:center;gap:24px}
 .brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
@@ -60,9 +45,6 @@ img{max-width:100%;display:block}
 .top-links a .ext{color:var(--muted)}
 .top-links .where{display:inline-flex;align-items:center;gap:7px;font-weight:600;color:#fff;background:var(--red);padding:9px 16px;border-radius:999px}
 .top-links .where:hover{background:var(--red-dark);color:#fff}
-.burger{display:none}
-
-/* ============ SHELL ============ */
 .shell{max-width:1340px;margin:0 auto;padding:0 28px;display:grid;grid-template-columns:236px 1fr;gap:40px;align-items:start}
 .sidebar{position:sticky;top:96px;padding:28px 0 40px;align-self:start}
 .side-label{font-family:var(--f-mono);font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:0 12px;margin-bottom:10px}
@@ -74,80 +56,37 @@ img{max-width:100%;display:block}
 .nav-formats a.active{background:var(--red-soft);color:var(--red);font-weight:600}
 .nav-formats a.active svg{color:var(--red)}
 .side-div{height:1px;background:var(--line);margin:0 12px 22px}
-.nav-topics{display:flex;flex-direction:column;gap:1px}
-.nav-topics a{padding:7px 12px;border-radius:8px;font-size:14px;color:var(--body);display:flex;justify-content:space-between;align-items:center;transition:.14s}
-.nav-topics a:hover{background:var(--soft);color:var(--ink)}
-.nav-topics a .cnt{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
-.side-promo{margin-top:26px;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--soft)}
+.side-promo{margin-top:4px;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--soft)}
 .side-promo .t{font-weight:700;font-size:14px;color:var(--ink);margin-bottom:4px}
 .side-promo .d{font-size:12.5px;color:var(--muted);margin-bottom:12px;line-height:1.45}
 .side-promo a{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--red)}
-
 .main{min-width:0;padding:30px 0 70px}
-
-/* ============ BREADCRUMB / HEAD ============ */
 .crumbs{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:22px;flex-wrap:wrap}
 .crumbs a{color:var(--muted);transition:.14s}
 .crumbs a:hover{color:var(--red)}
 .crumbs .cur{color:var(--ink)}
 .crumbs .sl{color:var(--line-2)}
-
 .page-head{margin-bottom:28px}
 .page-head h1{font-size:36px;font-weight:800;letter-spacing:-.02em;color:var(--ink);line-height:1.08}
 .page-head p{margin-top:10px;font-size:16px;color:var(--muted);max-width:680px}
-
-/* ============ TOPIC CHIPS (filter) ============ */
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
-.chip{padding:7px 15px;border:1px solid var(--line-2);border-radius:999px;font-size:13.5px;font-weight:500;color:var(--body);background:#fff;transition:.14s}
-.chip:hover{border-color:#c9c9cd;color:var(--ink)}
-.chip.active{background:var(--ink);border-color:var(--ink);color:#fff}
-
-/* ============ CARD GRID ============ */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.grid.two{grid-template-columns:repeat(2,1fr)}
 @media(max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
-
 .card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;transition:.18s;display:flex;flex-direction:column;cursor:pointer}
 .card:hover{box-shadow:var(--shadow-hover);transform:translateY(-3px);border-color:var(--line-2)}
-.cover{position:relative;aspect-ratio:16/9.2;background:var(--cover);overflow:hidden;display:flex;align-items:flex-end;padding:16px}
-.cover::before{content:"";position:absolute;inset:0;background:
-  radial-gradient(120% 120% at 100% 0%,rgba(226,35,26,.30),transparent 55%),
-  linear-gradient(180deg,var(--cover-2),var(--cover))}
-.cover::after{content:"";position:absolute;right:-1px;bottom:-1px;width:0;height:0;
-  border-style:solid;border-width:0 0 56px 56px;border-color:transparent transparent var(--red) transparent;opacity:.92}
-.cover .ghost{position:absolute;right:14px;top:10px;font-family:var(--f-mono);font-weight:700;font-size:60px;line-height:1;color:rgba(255,255,255,.06);letter-spacing:-.04em}
-.cover-tags{position:relative;z-index:2;display:flex;gap:7px;align-items:center;flex-wrap:wrap}
-.tag{font-family:var(--f-mono);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 9px;border-radius:6px}
-.tag.fmt{background:rgba(255,255,255,.14);color:#fff;backdrop-filter:blur(4px)}
-.tag.topic{background:var(--red);color:#fff}
+.cover{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--cover)}
+.cover-svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .card-body{padding:17px 17px 19px;display:flex;flex-direction:column;flex:1}
 .card-body h3{font-size:17px;font-weight:700;color:var(--ink);line-height:1.28;letter-spacing:-.01em}
-.card .card-q h3{font-size:16px}
 .card-body p{margin-top:8px;font-size:13.5px;color:var(--muted);line-height:1.5;flex:1}
 .card-meta{margin-top:14px;display:flex;align-items:center;gap:7px;font-family:var(--f-mono);font-size:11.5px;font-weight:500;color:var(--muted);flex-wrap:wrap}
 .card-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--line-2)}
 .card-author{margin-top:13px;padding-top:13px;border-top:1px solid var(--line);display:flex;align-items:center;gap:9px}
-.avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#34353b,#1c1d21);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.avatar{width:28px;height:28px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#e9eaed}
+.avatar svg{width:100%;height:100%;display:block}
 .card-author .nm{font-size:12.5px;font-weight:600;color:var(--ink);line-height:1.2}
 .card-author .rl{font-size:11px;color:var(--muted);line-height:1.2}
-
-/* lesson list (FAQ) variant */
-.qlist{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff}
-.qrow{display:flex;align-items:center;gap:16px;padding:18px 22px;border-bottom:1px solid var(--line);cursor:pointer;transition:.14s}
-.qrow:last-child{border-bottom:none}
-.qrow:hover{background:var(--soft)}
-.qrow .qi{width:34px;height:34px;border-radius:9px;background:var(--red-soft);color:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.qrow .qmain{flex:1;min-width:0}
-.qrow .qmain h3{font-size:15.5px;font-weight:600;color:var(--ink);line-height:1.35}
-.qrow .qmain .qm{margin-top:5px;font-family:var(--f-mono);font-size:11px;color:var(--muted);display:flex;gap:7px;align-items:center;flex-wrap:wrap}
-.qrow .qarr{color:var(--line-2);flex-shrink:0}
-.qrow:hover .qarr{color:var(--red)}
-
-/* ============ HOME ============ */
 .hero{position:relative;border-radius:20px;overflow:hidden;background:var(--cover);color:#fff;padding:54px 52px;margin-bottom:44px}
-.hero::before{content:"";position:absolute;inset:0;background:
-  radial-gradient(80% 120% at 100% 0%,rgba(226,35,26,.55),transparent 52%),
-  linear-gradient(120deg,#1c1d21 30%,#26272c)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(80% 120% at 100% 0%,rgba(226,35,26,.55),transparent 52%),linear-gradient(120deg,#1c1d21 30%,#26272c)}
 .hero::after{content:"";position:absolute;right:-60px;bottom:-80px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(226,35,26,.25),transparent 65%)}
 .hero-in{position:relative;z-index:2;max-width:660px}
 .hero .eyebrow{color:rgba(255,255,255,.6)}
@@ -163,46 +102,46 @@ img{max-width:100%;display:block}
 .hero-stats .s{display:flex;flex-direction:column}
 .hero-stats .s b{font-family:var(--f-mono);font-size:24px;font-weight:700;color:#fff}
 .hero-stats .s span{font-size:12.5px;color:rgba(255,255,255,.55)}
-
 .sect{margin-bottom:48px}
 .sect-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px;gap:16px}
 .sect-head h2{font-size:24px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
 .sect-head .sub{font-size:14px;color:var(--muted);margin-top:3px}
 .sect-head a.all{font-size:14px;font-weight:600;color:var(--red);display:inline-flex;align-items:center;gap:5px;flex-shrink:0}
-
-.topic-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.ttile{border:1px solid var(--line);border-radius:14px;padding:22px;transition:.16s;cursor:pointer;position:relative;overflow:hidden;background:#fff}
-.ttile:hover{border-color:var(--red);box-shadow:var(--shadow)}
-.ttile .ic{width:40px;height:40px;border-radius:11px;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--red);margin-bottom:14px}
-.ttile h3{font-size:17px;font-weight:700;color:var(--ink)}
-.ttile p{font-size:13px;color:var(--muted);margin-top:5px;line-height:1.45}
-.ttile .cnt{margin-top:14px;font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
-
-/* ============ DETAIL ============ */
+.feed{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff}
+.feed-row{display:flex;align-items:center;gap:16px;padding:15px 18px;border-bottom:1px solid var(--line);transition:.14s;cursor:pointer}
+.feed-row:last-child{border-bottom:none}
+.feed-row:hover{background:var(--soft)}
+.feed-row.announce{background:linear-gradient(90deg,rgba(226,35,26,.045),transparent 60%)}
+.feed-row.announce:hover{background:linear-gradient(90deg,rgba(226,35,26,.08),var(--soft))}
+.feed-cov{width:96px;height:58px;border-radius:9px;overflow:hidden;flex-shrink:0;position:relative;background:var(--cover);border:1px solid var(--line)}
+.feed-cov svg{position:absolute;inset:0;width:100%;height:100%}
+.feed-main{flex:1;min-width:0}
+.feed-badges{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.feed-badge{font-family:var(--f-mono);font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:5px}
+.feed-badge.fmt{background:var(--soft);color:var(--body);border:1px solid var(--line-2)}
+.feed-badge.an{background:var(--red);color:#fff}
+.feed-badge.new{background:#0f8a3c;color:#fff}
+.feed-title{font-size:15.5px;font-weight:700;color:var(--ink);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.feed-meta{margin-top:4px;font-family:var(--f-mono);font-size:11.5px;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.feed-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--line-2)}
+.feed-date{font-family:var(--f-mono);font-size:12px;color:var(--muted);flex-shrink:0;text-align:right}
+.feed-date .d{color:var(--ink);font-weight:700;font-size:14px}
+@media(max-width:640px){.feed-cov{display:none}.feed-date{display:none}}
 .detail{display:grid;grid-template-columns:1fr 318px;gap:44px;align-items:start}
 @media(max-width:1024px){.detail{grid-template-columns:1fr}}
 .d-main{min-width:0}
-.d-hero-cover{position:relative;aspect-ratio:21/8;border-radius:16px;overflow:hidden;background:var(--cover);margin-bottom:26px;display:flex;align-items:flex-end;padding:24px}
-.d-hero-cover::before{content:"";position:absolute;inset:0;background:radial-gradient(100% 130% at 100% 0%,rgba(226,35,26,.4),transparent 55%),linear-gradient(120deg,#1c1d21,#26272c)}
-.d-hero-cover::after{content:"";position:absolute;right:0;bottom:0;border-style:solid;border-width:0 0 78px 78px;border-color:transparent transparent var(--red) transparent;opacity:.9}
-.d-hero-cover .play{position:relative;z-index:2;width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;border:1px solid rgba(255,255,255,.25)}
-.d-hero-cover .ghost{position:absolute;right:18px;top:14px;font-family:var(--f-mono);font-weight:700;font-size:90px;color:rgba(255,255,255,.06);z-index:1}
+.d-hero-cover{position:relative;aspect-ratio:21/8;border-radius:16px;overflow:hidden;background:var(--cover);margin-bottom:26px}
+.d-hero-cover svg.cover-svg{position:absolute;inset:0;width:100%;height:100%}
+.d-hero-cover .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#fff;border:1px solid rgba(255,255,255,.3)}
 .d-tags{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.tag{font-family:var(--f-mono);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:6px}
+.tag.fmt{background:var(--soft);color:var(--ink)}
 .d-title{font-size:32px;font-weight:800;letter-spacing:-.022em;color:var(--ink);line-height:1.12;margin-bottom:14px}
 .d-metabar{display:flex;align-items:center;gap:9px;font-family:var(--f-mono);font-size:12.5px;color:var(--muted);flex-wrap:wrap;margin-bottom:24px}
 .d-metabar .dot{width:3px;height:3px;border-radius:50%;background:var(--line-2)}
-
-.answer-box{border:1px solid var(--line-2);border-left:3px solid var(--red);border-radius:12px;background:var(--soft);padding:20px 22px;margin-bottom:30px}
-.answer-box .lbl{font-family:var(--f-mono);font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
-.answer-box p{font-size:15.5px;color:var(--ink);font-weight:500;line-height:1.55}
-
 .prose h2{font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.015em;margin:34px 0 14px;scroll-margin-top:90px}
 .prose h2:first-child{margin-top:0}
 .prose p{font-size:15.5px;color:var(--body);margin-bottom:14px;line-height:1.7}
-.prose ul,.prose ol{margin:0 0 16px 4px;padding-left:22px}
-.prose li{font-size:15.5px;color:var(--body);margin-bottom:8px;line-height:1.6}
-.prose strong{color:var(--ink);font-weight:600}
-
 .toc{border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:30px;background:var(--soft)}
 .toc .lbl{font-family:var(--f-mono);font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
 .toc ol{list-style:none;counter-reset:t;display:flex;flex-direction:column;gap:9px}
@@ -210,8 +149,6 @@ img{max-width:100%;display:block}
 .toc li::before{content:counter(t,decimal-leading-zero);font-family:var(--f-mono);font-size:11px;font-weight:700;color:var(--red);flex-shrink:0}
 .toc a{font-size:14.5px;color:var(--ink);font-weight:500;transition:.14s}
 .toc a:hover{color:var(--red)}
-
-/* program (course) */
 .program{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:6px 0 8px}
 .prow{display:flex;align-items:center;gap:15px;padding:15px 20px;border-bottom:1px solid var(--line);transition:.14s}
 .prow:last-child{border-bottom:none}
@@ -220,30 +157,15 @@ img{max-width:100%;display:block}
 .prow .pt{flex:1;font-size:15px;font-weight:500;color:var(--ink)}
 .prow .pd{font-family:var(--f-mono);font-size:12px;color:var(--muted);flex-shrink:0}
 .prow .pl{font-family:var(--f-mono);font-size:10px;font-weight:700;letter-spacing:.05em;color:var(--red);background:var(--red-soft);padding:3px 7px;border-radius:5px;flex-shrink:0}
-
 .outcomes{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:6px 0 10px}
 @media(max-width:560px){.outcomes{grid-template-columns:1fr}}
 .outcomes .o{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;color:var(--body)}
 .outcomes .o svg{color:var(--red);flex-shrink:0;margin-top:3px}
-
-/* expert block */
 .expert{display:flex;gap:16px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:6px 0 8px;background:#fff}
-.expert .av{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#34353b,#1c1d21);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;flex-shrink:0}
+.expert .av{width:56px;height:56px;border-radius:50%;overflow:hidden;flex-shrink:0;background:#e9eaed}
+.expert .av svg{width:100%;height:100%;display:block}
 .expert .en{font-size:16px;font-weight:700;color:var(--ink)}
 .expert .er{font-size:13.5px;color:var(--muted);margin-top:2px}
-
-/* faq accordion */
-.faq{border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.faq-item{border-bottom:1px solid var(--line)}
-.faq-item:last-child{border-bottom:none}
-.faq-q{width:100%;text-align:left;padding:17px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:15px;font-weight:600;color:var(--ink)}
-.faq-q:hover{background:var(--soft)}
-.faq-q svg{color:var(--muted);flex-shrink:0;transition:.2s}
-.faq-item.open .faq-q svg{transform:rotate(45deg);color:var(--red)}
-.faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease}
-.faq-a p{padding:0 20px 17px;font-size:14.5px;color:var(--body);line-height:1.6}
-
-/* SIDEBAR (detail) */
 .d-side{position:sticky;top:96px}
 .d-card{border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px;background:#fff;box-shadow:var(--shadow)}
 .d-card .price-free{font-family:var(--f-mono);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#188a3f;display:flex;align-items:center;gap:7px;margin-bottom:16px}
@@ -252,29 +174,21 @@ img{max-width:100%;display:block}
 .btn-primary:hover{background:var(--red-dark)}
 .btn-ghost{width:100%;height:46px;background:#fff;color:var(--ink);border:1px solid var(--line-2);font-weight:600;font-size:14.5px;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;transition:.15s}
 .btn-ghost:hover{border-color:var(--ink)}
-.d-facts{margin-top:18px;display:flex;flex-direction:column;gap:0}
+.d-facts{margin-top:18px;display:flex;flex-direction:column}
 .d-fact{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-top:1px solid var(--line);font-size:13.5px}
 .d-fact .k{color:var(--muted);display:flex;align-items:center;gap:8px}
 .d-fact .v{font-weight:600;color:var(--ink);font-family:var(--f-mono);font-size:12.5px}
-.share{display:flex;gap:8px;margin-top:6px}
-.share button{flex:1;height:38px;border:1px solid var(--line-2);border-radius:9px;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:.14s}
-.share button:hover{border-color:var(--ink);color:var(--ink)}
-
 .kw{margin-top:6px;display:flex;flex-wrap:wrap;gap:7px}
 .kw a{font-size:12.5px;color:var(--body);background:var(--soft);border:1px solid var(--line);padding:5px 11px;border-radius:7px;transition:.14s}
 .kw a:hover{border-color:var(--red);color:var(--red)}
-
-/* related */
 .rel-list{display:flex;flex-direction:column;gap:14px}
 .rel{display:flex;gap:13px;cursor:pointer;align-items:center}
-.rel .rc{width:74px;height:50px;border-radius:9px;background:var(--cover);position:relative;flex-shrink:0;overflow:hidden}
-.rel .rc::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 120% at 100% 0%,rgba(226,35,26,.4),transparent 60%),var(--cover-2)}
+.rel .rc{width:78px;height:50px;border-radius:9px;position:relative;flex-shrink:0;overflow:hidden;background:var(--cover)}
+.rel .rc svg{position:absolute;inset:0;width:100%;height:100%}
 .rel .rt{font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.35;transition:.14s}
 .rel:hover .rt{color:var(--red)}
 .rel .rm{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);margin-top:4px}
-
-/* ============ PLAYER ============ */
-.player{display:grid;grid-template-columns:300px 1fr;gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;min-height:540px}
+.player{display:grid;grid-template-columns:300px 1fr;border:1px solid var(--line);border-radius:16px;overflow:hidden;min-height:540px}
 @media(max-width:900px){.player{grid-template-columns:1fr}}
 .pl-side{background:var(--soft);border-right:1px solid var(--line);padding:22px 0;overflow-y:auto;max-height:78vh}
 .pl-side .ph{padding:0 22px 16px;border-bottom:1px solid var(--line);margin-bottom:10px}
@@ -287,12 +201,10 @@ img{max-width:100%;display:block}
 .pl-lesson.active .ln{color:var(--red)}
 .pl-lesson .lt{font-size:13.5px;color:var(--ink);line-height:1.35;flex:1}
 .pl-lesson .ld{font-family:var(--f-mono);font-size:11px;color:var(--muted);margin-top:3px}
-.pl-main{padding:0}
-.pl-video{aspect-ratio:16/9;background:var(--cover);position:relative;display:flex;align-items:center;justify-content:center}
-.pl-video::before{content:"";position:absolute;inset:0;background:radial-gradient(80% 120% at 100% 0%,rgba(226,35,26,.3),transparent 55%),linear-gradient(120deg,#1c1d21,#26272c)}
+.pl-video{aspect-ratio:16/9;position:relative;display:flex;align-items:center;justify-content:center;background:var(--cover);overflow:hidden}
+.pl-video svg.cover-svg{position:absolute;inset:0;width:100%;height:100%}
 .pl-video .pbtn{position:relative;z-index:2;width:74px;height:74px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(226,35,26,.4);cursor:pointer;transition:.16s}
 .pl-video .pbtn:hover{transform:scale(1.06)}
-.pl-video .vlbl{position:absolute;left:20px;bottom:18px;z-index:2;font-family:var(--f-mono);font-size:12px;color:rgba(255,255,255,.7)}
 .pl-content{padding:26px 30px 32px}
 .pl-content .pe{font-family:var(--f-mono);font-size:11px;color:var(--red);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
 .pl-content h2{font-size:24px;font-weight:800;color:var(--ink);margin:8px 0 14px;letter-spacing:-.02em}
@@ -303,10 +215,8 @@ img{max-width:100%;display:block}
 .pl-nav button:disabled{opacity:.4;cursor:default}
 .pl-nav button.next{background:var(--ink);color:#fff;border-color:var(--ink)}
 .pl-nav button.next:hover{background:#000}
-
-/* ============ FOOTER ============ */
 footer{background:#232427;color:#fff;margin-top:40px}
-.foot-in{max-width:1340px;margin:0 auto;padding:52px 28px 40px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+.foot-in{max-width:1340px;margin:0 auto;padding:52px 28px 40px;display:grid;grid-template-columns:1.7fr 1fr 1.1fr;gap:40px}
 .foot-brand img{height:30px;filter:brightness(0) invert(1);opacity:.95;margin-bottom:18px}
 .foot-brand .cp{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7}
 .foot-brand .cp a{color:rgba(255,255,255,.78);display:block;margin-top:6px}
@@ -320,48 +230,39 @@ footer{background:#232427;color:#fff;margin-top:40px}
 .foot-write{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:11px 22px;font-weight:600;font-size:14px;color:#fff;transition:.14s}
 .foot-write:hover{background:#fff;color:var(--ink)}
 .foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding:18px 28px;max-width:1340px;margin:0 auto;display:flex;justify-content:space-between;font-size:12.5px;color:rgba(255,255,255,.4);flex-wrap:wrap;gap:10px}
-
-/* empty / search */
 .empty{text-align:center;padding:70px 20px;color:var(--muted)}
 .empty svg{margin:0 auto 16px;color:var(--line-2)}
 .empty h3{font-size:18px;color:var(--ink);font-weight:700;margin-bottom:6px}
-
-/* responsive */
 @media(max-width:960px){
   .shell{grid-template-columns:1fr;gap:0}
   .sidebar{position:static;padding:14px 0;border-bottom:1px solid var(--line);margin-bottom:8px}
   .nav-formats{flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:4px;margin-bottom:0}
   .nav-formats a{white-space:nowrap}
-  .side-label,.side-div,.nav-topics,.side-promo{display:none}
+  .side-label,.side-div,.side-promo{display:none}
   .top-links .where span,.top-links .ctr-link{display:none}
-  .grid,.grid.two,.topic-tiles{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
   .search{display:none}
-  .burger{display:flex}
   .foot-in{grid-template-columns:1fr 1fr;gap:30px}
 }
 @media(max-width:560px){
   .topbar-inner{padding:0 16px;gap:12px}
   .shell{padding:0 16px}
-  .hero{padding:34px 24px}
-  .hero h1{font-size:30px}
-  .page-head h1{font-size:28px}
-  .d-title{font-size:25px}
+  .hero{padding:34px 24px}.hero h1{font-size:30px}
+  .page-head h1{font-size:28px}.d-title{font-size:25px}
   .foot-in{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
-
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="#" onclick="go('home');return false">
       <img src="data:image/png;base64,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" alt="CTR CLUB">
-      <span class="sep"></span>
-      <span class="kicker">Обучение</span>
+      <span class="sep"></span><span class="kicker">Обучение</span>
     </a>
     <div class="search">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-      <input id="topSearch" placeholder="Замена ступичного подшипника, диагностика наконечников…" onkeydown="if(event.key==='Enter')doSearch(this.value)">
+      <input id="topSearch" placeholder="Замена ступичного подшипника, тормозные диски…" onkeydown="if(event.key==='Enter')doSearch(this.value)">
     </div>
     <div class="top-links">
       <a class="ctr-link" href="https://ctr.co.ru" target="_blank" rel="noopener">ctr.co.ru <span class="ext">↗</span></a>
@@ -369,48 +270,34 @@ footer{background:#232427;color:#fff;margin-top:40px}
     </div>
   </div>
 </header>
-
 <div class="shell">
   <aside class="sidebar">
-    <div class="side-label">Форматы</div>
+    <div class="side-label">Разделы</div>
     <nav class="nav-formats" id="navFormats"></nav>
     <div class="side-div"></div>
-    <div class="side-label">Темы</div>
-    <nav class="nav-topics" id="navTopics"></nav>
     <div class="side-promo">
       <div class="t">Запчасти CTR</div>
-      <div class="d">Рулевое и подвеска для большинства марок. Подбор по VIN.</div>
+      <div class="d">Рулевое, подвеска и тормозная система. Подбор по VIN.</div>
       <a href="https://ctr.co.ru" target="_blank" rel="noopener">Открыть каталог ↗</a>
     </div>
   </aside>
   <main class="main" id="main"></main>
 </div>
-
 <footer>
   <div class="foot-in">
     <div class="foot-brand">
       <img src="data:image/png;base64,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" alt="CTR CLUB">
-      <div class="cp">
-        CTR © 2024–2026. Образовательный портал.<br>Все материалы открыты и бесплатны.
+      <div class="cp">CTR © 2024–2026. Образовательный портал.<br>Все материалы открыты и бесплатны.
         <a href="https://ctr.co.ru" target="_blank" rel="noopener">ctr.co.ru</a>
         <a href="https://aftermarket.ctr.co.kr" target="_blank" rel="noopener">aftermarket.ctr.co.kr</a>
       </div>
     </div>
     <div class="foot-col">
-      <h4>Форматы</h4>
+      <h4>Разделы</h4>
       <a href="#" onclick="go('list','course');return false">Курсы</a>
       <a href="#" onclick="go('list','webinar');return false">Вебинары</a>
       <a href="#" onclick="go('list','workshop');return false">Воркшопы</a>
       <a href="#" onclick="go('list','article');return false">Статьи</a>
-      <a href="#" onclick="go('list','lesson');return false">Уроки</a>
-    </div>
-    <div class="foot-col">
-      <h4>Темы</h4>
-      <a href="#" onclick="go('topic','tech');return false">Техничка</a>
-      <a href="#" onclick="go('topic','sales');return false">Продажи</a>
-      <a href="#" onclick="go('topic','process');return false">Процессы</a>
-      <a href="#" onclick="go('topic','finance');return false">Финансы</a>
-      <a href="#" onclick="go('topic','team');return false">Команда</a>
     </div>
     <div class="foot-col">
       <h4>CTR в соцсетях</h4>
@@ -427,355 +314,179 @@ footer{background:#232427;color:#fff;margin-top:40px}
     <span>Политика обработки персональных данных</span>
   </div>
 </footer>
-
 <script>
-/* ====================== DATA ====================== */
-const TOPICS=[
-  {id:'sales',name:'Продажи'},
-  {id:'tech',name:'Техничка'},
-  {id:'process',name:'Процессы'},
-  {id:'finance',name:'Финансы'},
-  {id:'marketing',name:'Маркетинг'},
-  {id:'team',name:'Команда'},
-];
-const TOPIC={};TOPICS.forEach(t=>TOPIC[t.id]=t.name);
-
 const FORMATS={
   course:{label:'Курс',plural:'Курсы',desc:'Пошаговые технические курсы из нескольких уроков. Разбор узла от диагностики до сборки.',icon:'<path d="M2 5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H2zM22 5a2 2 0 0 0-2-2h-6a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h6z"/>'},
   webinar:{label:'Вебинар',plural:'Вебинары',desc:'Записи разборов с экспертами CTR и ответами на вопросы из зала.',icon:'<path d="m23 7-7 5 7 5z"/><rect x="1" y="5" width="15" height="14" rx="2"/>'},
-  workshop:{label:'Воркшоп',plural:'Воркшопы',desc:'Практические разборы реальных кейсов: что делать руками и что говорить клиенту.',icon:'<path d="M14.7 6.3a4 4 0 0 0-5.6 5.6L3 18l3 3 6.1-6.1a4 4 0 0 0 5.6-5.6l-2.6 2.6-2.1-2.1 2.6-2.6z"/>'},
-  article:{label:'Статья',plural:'Статьи',desc:'Развёрнутые материалы по технике, продажам и управлению автосервисом.',icon:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>'},
-  lesson:{label:'Урок',plural:'Уроки',sub:'ответы на частые вопросы',desc:'Короткие ответы на конкретные вопросы из ниши — то, что ищут в поиске.',icon:'<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/>'},
+  workshop:{label:'Воркшоп',plural:'Воркшопы',desc:'Практические разборы реальных ремонтов: что делать руками, шаг за шагом.',icon:'<path d="M14.7 6.3a4 4 0 0 0-5.6 5.6L3 18l3 3 6.1-6.1a4 4 0 0 0 5.6-5.6l-2.6 2.6-2.1-2.1z"/>'},
+  article:{label:'Статья',plural:'Статьи',desc:'Развёрнутые технические материалы по ремонту и диагностике ходовой и тормозов.',icon:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>'},
 };
-const FORDER=['course','webinar','workshop','article','lesson'];
-
+const FORDER=['course','webinar','workshop','article'];
+const EXPERTS={
+  'Алексей Громов':{role:'Технический эксперт CTR',v:0},
+  'Игорь Беляев':{role:'Мастер-приёмщик, эксперт CTR',v:1},
+  'Денис Карпов':{role:'Эксперт по aftermarket CTR',v:2},
+  'Константин Волков':{role:'Основатель клуба Автократия',v:3},
+};
 const ITEMS=[
-  /* ---------- COURSES (только техничка) ---------- */
-  {id:'wheel-bearing',format:'course',topic:'tech',title:'Замена ступичного подшипника: полный цикл',
+  {id:'wheel-bearing',format:'course',part:'bearing',title:'Замена ступичного подшипника: полный цикл',
    excerpt:'Диагностика гула, выпрессовка, запрессовка и момент затяжки ступичной гайки без ошибок.',
-   author:'Алексей Громов',role:'Технический эксперт CTR',duration:'48 мин',lessons:6,level:'Базовый',
-   intro:['Гул ступичного подшипника — одна из самых частых причин обращения в сервис, и одна из самых частых причин повторного визита, если работа сделана неаккуратно. В этом курсе технический эксперт CTR разбирает полный цикл замены: от того, как отличить гул подшипника от шума резины и редуктора, до контроля момента затяжки ступичной гайки.','Курс рассчитан на мастеров и механиков, которые хотят закрывать замену ступичных узлов с первого раза и без рекламаций. Все операции показаны на реальном автомобиле с указанием типичных ошибок.'],
-   outcomes:['Локализовать источник гула за одну поездку','Правильно выпрессовать узел без повреждения поворотного кулака','Запрессовать подшипник без перекоса','Соблюсти момент и не «убить» новый подшипник'],
-   program:[
-     {t:'Как звучит изношенный подшипник: диагностика на ходу',d:'6 мин'},
-     {t:'Чем отличается гул подшипника от резины и ШРУСа',d:'7 мин'},
-     {t:'Снятие узла: инструмент и порядок',d:'9 мин'},
-     {t:'Выпрессовка без повреждения кулака',d:'8 мин'},
-     {t:'Запрессовка нового подшипника CTR',d:'10 мин'},
-     {t:'Сборка и момент затяжки ступичной гайки',d:'8 мин'},
-   ],
-   keywords:['замена ступичного подшипника','гудит ступичный подшипник','как поменять ступичный подшипник','момент затяжки ступичной гайки','диагностика ступицы'],
-   related:['bearing-noise','ball-joint','cv-joint']},
-
-  {id:'tie-rod-course',format:'course',topic:'tech',title:'Диагностика и замена рулевых наконечников',
+   author:'Алексей Громов',duration:'48 мин',lessons:6,level:'Базовый',
+   intro:['Гул ступичного подшипника — одна из самых частых причин обращения в сервис и одна из самых частых причин повторного визита, если работа сделана неаккуратно. Технический эксперт CTR разбирает полный цикл: от того, как отличить гул подшипника от шума резины, до контроля момента затяжки ступичной гайки.','Курс для мастеров и механиков, которые хотят закрывать замену ступичных узлов с первого раза и без рекламаций.'],
+   outcomes:['Локализовать источник гула за одну поездку','Выпрессовать узел без повреждения кулака','Запрессовать подшипник без перекоса','Соблюсти момент затяжки гайки'],
+   program:[{t:'Как звучит изношенный подшипник',d:'6 мин'},{t:'Гул подшипника против резины и ШРУСа',d:'7 мин'},{t:'Снятие узла: инструмент и порядок',d:'9 мин'},{t:'Выпрессовка без повреждения кулака',d:'8 мин'},{t:'Запрессовка нового подшипника CTR',d:'10 мин'},{t:'Сборка и момент затяжки гайки',d:'8 мин'}],
+   keywords:['замена ступичного подшипника','гудит ступичный подшипник','момент затяжки ступичной гайки','диагностика ступицы'],
+   related:['art-bearing','ball-joint','cv-joint']},
+  {id:'tie-rod-course',format:'course',part:'tierod',title:'Диагностика и замена рулевых наконечников',
    excerpt:'Люфт, стук на руле, проверка пыльника и замена наконечника с правильной регулировкой схождения.',
-   author:'Алексей Громов',role:'Технический эксперт CTR',duration:'37 мин',lessons:5,level:'Базовый',
-   intro:['Рулевой наконечник кажется простой деталью, но именно на нём чаще всего ошибаются при диагностике и при сборке. Курс показывает, как проверить наконечник на люфт, не перепутав его с тягой или рейкой, и как заменить деталь так, чтобы машину не «вело» после ремонта.'],
-   outcomes:['Отличить люфт наконечника от люфта рейки','Оценить состояние пыльника и шарнира','Заменить наконечник с сохранением геометрии','Объяснить клиенту необходимость сход-развала'],
-   program:[
-     {t:'Признаки износа наконечника на руле и в движении',d:'7 мин'},
-     {t:'Проверка люфта: руками и на подъёмнике',d:'8 мин'},
-     {t:'Снятие наконечника без съёмника-«вилки»',d:'7 мин'},
-     {t:'Установка и подсчёт оборотов для схождения',d:'8 мин'},
-     {t:'Когда обязателен сход-развал',d:'7 мин'},
-   ],
-   keywords:['замена рулевого наконечника','стук в рулевом','люфт наконечника','рулевой наконечник CTR','диагностика рулевого'],
-   related:['ball-joint','one-tie-rod','alignment-after']},
-
-  {id:'ball-joint',format:'course',topic:'tech',title:'Шаровые опоры: износ, диагностика, замена',
+   author:'Алексей Громов',duration:'37 мин',lessons:5,level:'Базовый',
+   intro:['Рулевой наконечник кажется простой деталью, но именно на нём чаще всего ошибаются при диагностике и сборке. Курс показывает, как проверить наконечник на люфт, не перепутав его с тягой или рейкой, и заменить деталь так, чтобы машину не «вело» после ремонта.'],
+   outcomes:['Отличить люфт наконечника от люфта рейки','Оценить состояние пыльника','Заменить наконечник, сохранив геометрию','Объяснить клиенту необходимость сход-развала'],
+   program:[{t:'Признаки износа наконечника',d:'7 мин'},{t:'Проверка люфта: руками и на подъёмнике',d:'8 мин'},{t:'Снятие без съёмника-вилки',d:'7 мин'},{t:'Установка и подсчёт оборотов',d:'8 мин'},{t:'Когда обязателен сход-развал',d:'7 мин'}],
+   keywords:['замена рулевого наконечника','стук в рулевом','люфт наконечника','диагностика рулевого'],
+   related:['ball-joint','web-steering','stab-link']},
+  {id:'ball-joint',format:'course',part:'balljoint',title:'Шаровые опоры: износ, диагностика, замена',
    excerpt:'Как поймать стук шаровой, проверить осевой и радиальный люфт и заменить опору в рычаге.',
-   author:'Игорь Беляев',role:'Мастер-приёмщик, эксперт CTR',duration:'41 мин',lessons:4,level:'Средний',
+   author:'Игорь Беляев',duration:'41 мин',lessons:4,level:'Средний',
    intro:['Стук на неровностях — самый частый симптом, с которым приезжают на диагностику подвески. В большинстве случаев виновата шаровая опора. Курс учит быстро её вычислять и менять без повторных обращений.'],
-   outcomes:['Проверить шаровую на люфт двумя способами','Отличить стук шаровой от стойки стабилизатора','Выпрессовать опору без повреждения рычага','Понять, когда меняется опора, а когда рычаг целиком'],
-   program:[
-     {t:'Симптомы и быстрая диагностика стука',d:'10 мин'},
-     {t:'Проверка осевого и радиального люфта',d:'11 мин'},
-     {t:'Замена опоры в рычаге',d:'10 мин'},
-     {t:'Опора отдельно или рычаг в сборе',d:'10 мин'},
-   ],
-   keywords:['замена шаровой опоры','стук шаровой','диагностика шаровой опоры','шаровая опора CTR','люфт шаровой'],
-   related:['stab-link','alignment-after','tie-rod-course']},
-
-  {id:'stab-link',format:'course',topic:'tech',title:'Стойки и втулки стабилизатора',
+   outcomes:['Проверить шаровую на люфт двумя способами','Отличить стук шаровой от стойки стабилизатора','Выпрессовать опору без повреждения рычага','Понять, когда меняется опора, а когда рычаг'],
+   program:[{t:'Симптомы и быстрая диагностика',d:'10 мин'},{t:'Проверка осевого и радиального люфта',d:'11 мин'},{t:'Замена опоры в рычаге',d:'10 мин'},{t:'Опора отдельно или рычаг в сборе',d:'10 мин'}],
+   keywords:['замена шаровой опоры','стук шаровой','диагностика шаровой опоры','люфт шаровой'],
+   related:['stab-link','art-balljoint','work-front-knock']},
+  {id:'stab-link',format:'course',part:'stablink',title:'Стойки и втулки стабилизатора',
    excerpt:'Дребезг на мелких неровностях: как найти виновника и заменить стойки и втулки стабилизатора.',
-   author:'Игорь Беляев',role:'Мастер-приёмщик, эксперт CTR',duration:'29 мин',lessons:4,level:'Базовый',
+   author:'Игорь Беляев',duration:'29 мин',lessons:4,level:'Базовый',
    intro:['Стойки стабилизатора — самая дешёвая деталь подвески и самая частая причина «дребезга», который клиенты принимают за серьёзную поломку. Курс показывает, как не перепутать её с другими узлами и заменить за минимальное время.'],
-   outcomes:['Найти источник дребезга на ходу','Проверить стойку и втулки стабилизатора','Заменить стойку без срыва граней','Оценить состояние втулок'],
-   program:[
-     {t:'Откуда дребезг: стойка, втулка или амортизатор',d:'7 мин'},
-     {t:'Проверка стоек стабилизатора',d:'7 мин'},
-     {t:'Замена стоек CTR',d:'8 мин'},
-     {t:'Замена втулок стабилизатора',d:'7 мин'},
-   ],
-   keywords:['замена стойки стабилизатора','дребезг подвески','втулки стабилизатора','стойка стабилизатора CTR'],
-   related:['stab-vs-shock','ball-joint','silentblock']},
-
-  {id:'silentblock',format:'course',topic:'tech',title:'Сайлентблоки рычагов: запрессовка без ошибок',
+   outcomes:['Найти источник дребезга на ходу','Проверить стойку и втулки','Заменить стойку без срыва граней','Оценить состояние втулок'],
+   program:[{t:'Откуда дребезг: стойка, втулка, амортизатор',d:'7 мин'},{t:'Проверка стоек стабилизатора',d:'7 мин'},{t:'Замена стоек CTR',d:'8 мин'},{t:'Замена втулок стабилизатора',d:'7 мин'}],
+   keywords:['замена стойки стабилизатора','дребезг подвески','втулки стабилизатора'],
+   related:['ball-joint','silentblock','work-front-knock']},
+  {id:'silentblock',format:'course',part:'silentblock',title:'Сайлентблоки рычагов: запрессовка без ошибок',
    excerpt:'Износ сайлентблоков, выбор оправок и запрессовка без перекоса — с прессом и без.',
-   author:'Алексей Громов',role:'Технический эксперт CTR',duration:'52 мин',lessons:5,level:'Средний',
+   author:'Алексей Громов',duration:'52 мин',lessons:5,level:'Средний',
    intro:['Сайлентблок запрессован неправильно — и новый рычаг «съедает» резину за несколько тысяч километров. Курс посвящён аккуратной замене сайлентблоков и контролю положения при затяжке.'],
-   outcomes:['Определить износ сайлентблока','Подобрать оправки под размер','Запрессовать без перекоса','Затянуть в правильном положении подвески'],
-   program:[
-     {t:'Признаки износа сайлентблоков',d:'9 мин'},
-     {t:'Выпрессовка старого блока',d:'11 мин'},
-     {t:'Запрессовка прессом',d:'11 мин'},
-     {t:'Запрессовка без пресса',d:'10 мин'},
-     {t:'Затяжка под нагрузкой',d:'11 мин'},
-   ],
-   keywords:['замена сайлентблока','запрессовка сайлентблока','сайлентблок рычага','сайлентблоки CTR','как запрессовать сайлентблок'],
-   related:['silentblock-press','ball-joint','stab-link']},
-
-  {id:'cv-joint',format:'course',topic:'tech',title:'ШРУС и приводные валы',
+   outcomes:['Определить износ сайлентблока','Подобрать оправки под размер','Запрессовать без перекоса','Затянуть в правильном положении'],
+   program:[{t:'Признаки износа сайлентблоков',d:'9 мин'},{t:'Выпрессовка старого блока',d:'11 мин'},{t:'Запрессовка прессом',d:'11 мин'},{t:'Запрессовка без пресса',d:'10 мин'},{t:'Затяжка под нагрузкой',d:'11 мин'}],
+   keywords:['замена сайлентблока','запрессовка сайлентблока','сайлентблок рычага','как запрессовать сайлентблок'],
+   related:['ball-joint','stab-link','art-knock']},
+  {id:'cv-joint',format:'course',part:'cvjoint',title:'ШРУС и приводные валы',
    excerpt:'Хруст в поворотах, проверка пыльника и замена наружного и внутреннего ШРУСа.',
-   author:'Алексей Громов',role:'Технический эксперт CTR',duration:'58 мин',lessons:6,level:'Средний',
+   author:'Алексей Громов',duration:'58 мин',lessons:6,level:'Средний',
    intro:['Хруст в повороте знаком каждому мастеру. Курс разбирает диагностику ШРУСа, замену пыльника и привода, а также частую ошибку — замену ШРУСа, когда виноват подшипник.'],
    outcomes:['Диагностировать ШРУС без снятия привода','Отличить хруст ШРУСа от гула подшипника','Заменить наружный и внутренний ШРУС','Правильно набить смазку и обжать пыльник'],
-   program:[
-     {t:'Симптомы износа ШРУСа',d:'9 мин'},
-     {t:'Проверка без снятия привода',d:'9 мин'},
-     {t:'Снятие приводного вала',d:'10 мин'},
-     {t:'Замена наружного ШРУСа',d:'10 мин'},
-     {t:'Замена внутреннего ШРУСа',d:'10 мин'},
-     {t:'Пыльник, смазка, сборка',d:'10 мин'},
-   ],
-   keywords:['замена шруса','хруст в повороте','диагностика шруса','приводной вал','пыльник шруса'],
-   related:['cv-check','wheel-bearing','silentblock']},
-
-  /* ---------- LESSONS (FAQ — SEO-ядро) ---------- */
-  {id:'bearing-noise',format:'lesson',topic:'tech',title:'Как понять, что гудит ступичный подшипник, а не резина?',
-   excerpt:'Простой способ отличить гул подшипника от шума шин за одну поездку.',
-   author:'Алексей Громов',role:'Технический эксперт CTR',duration:'4 мин',
-   short:'Гул подшипника меняется при перестроении (загрузке колеса) и не зависит от типа покрытия. Шум резины зависит от асфальта и одинаков в поворотах. Лёгкие змейки на ровной дороге быстро покажут, с какой стороны узел.',
-   toc:[{id:'s1',t:'Тест перестроением'},{id:'s2',t:'Чем отличается от резины'},{id:'s3',t:'Проверка на подъёмнике'}],
-   body:[
-     {id:'s1',h:'Тест перестроением',p:['На ровной дороге на скорости 60–80 км/ч сделайте плавные перестроения. При загрузке колеса гул усиливается, при разгрузке — стихает. Если шум растёт при повороте налево — обычно виноват правый подшипник, и наоборот.']},
-     {id:'s2',h:'Чем отличается от шума резины',p:['Шум резины зависит от покрытия: на новом асфальте тише, на крупном зерне громче. Гул подшипника от покрытия не зависит и обычно имеет ровный «вой», нарастающий со скоростью.']},
-     {id:'s3',h:'Проверка на подъёмнике',p:['Вывесите колесо, покачайте его в направлениях «12–6» и «3–9» часов. Люфт и хруст при вращении подтверждают износ. Подробно процесс показан в курсе по замене ступичного подшипника.']},
-   ],
-   faqs:[
-     {q:'Можно ли ездить с гудящим подшипником?',a:'Краткосрочно — да, но износ прогрессирует, растёт люфт и риск клина колеса. Замену лучше не откладывать.'},
-     {q:'Нужно ли менять оба подшипника сразу?',a:'Нет. Меняется тот узел, что вышел из строя. Профилактически второй не меняют без признаков износа.'},
-   ],
-   keywords:['гудит ступичный подшипник','как определить ступичный подшипник','шум подшипника или резины','диагностика ступицы'],
-   related:['wheel-bearing','cv-check','stab-vs-shock']},
-
-  {id:'one-tie-rod',format:'lesson',topic:'tech',title:'Можно ли менять только один рулевой наконечник?',
-   excerpt:'Когда допустима замена одного наконечника, а когда лучше менять пару.',
-   author:'Игорь Беляев',role:'Мастер-приёмщик, эксперт CTR',duration:'3 мин',
-   short:'Да, можно менять один наконечник — это не парная по умолчанию деталь. Но если второй имеет пробег и начальный люфт, разумно предложить замену пары, чтобы клиент не вернулся через месяц.',
-   toc:[{id:'s1',t:'Когда хватит одного'},{id:'s2',t:'Когда менять пару'},{id:'s3',t:'Что сказать клиенту'}],
-   body:[
-     {id:'s1',h:'Когда достаточно одного',p:['Если второй наконечник без люфта, с целым пыльником и небольшим пробегом — менять его нет смысла. Геометрия восстанавливается регулировкой схождения.']},
-     {id:'s2',h:'Когда лучше менять пару',p:['При большом пробеге, начальном люфте или порванном пыльнике второго наконечника логично менять пару — это экономит клиенту повторный визит и время на сход-развал.']},
-     {id:'s3',h:'Как объяснить клиенту',p:['Покажите люфт руками и предложите выбор, а не навязывайте. Прозрачная диагностика повышает доверие и средний чек без давления.']},
-   ],
-   faqs:[
-     {q:'Нужен ли сход-развал после замены одного наконечника?',a:'Да. После любой замены наконечника схождение нарушается и требует регулировки.'},
-   ],
-   keywords:['замена одного рулевого наконечника','менять наконечники парой','рулевой наконечник замена','наконечник руля'],
-   related:['tie-rod-course','alignment-after','bearing-noise']},
-
-  {id:'alignment-after',format:'lesson',topic:'tech',title:'Нужно ли делать сход-развал после замены шаровой?',
-   excerpt:'В каких случаях замена шаровой опоры требует регулировки углов.',
-   author:'Игорь Беляев',role:'Мастер-приёмщик, эксперт CTR',duration:'3 мин',
-   short:'Если шаровая интегрирована в рычаг и менялся рычаг целиком — сход-развал обязателен. Если менялась только запрессованная опора без снятия рычага с регулировочных болтов — углы обычно сохраняются, но проверка рекомендована.',
-   toc:[{id:'s1',t:'Когда обязателен'},{id:'s2',t:'Когда можно без него'}],
-   body:[
-     {id:'s1',h:'Когда сход-развал обязателен',p:['Замена рычага в сборе, разбор регулировочных узлов, любое нарушение заводских меток — всё это требует обязательной регулировки углов установки колёс.']},
-     {id:'s2',h:'Когда можно обойтись проверкой',p:['Если запрессована только опора, а рычаг не снимался с регулировок, геометрия сохраняется. Но контрольный замер стоит сделать — это страховка от неравномерного износа резины.']},
-   ],
-   faqs:[
-     {q:'Что будет, если не сделать развал?',a:'Возможен увод автомобиля и ускоренный неравномерный износ шин. Это частая причина повторных претензий.'},
-   ],
-   keywords:['сход развал после шаровой','развал после замены шаровой опоры','нужен ли развал','углы установки колёс'],
-   related:['ball-joint','tie-rod-course','one-tie-rod']},
-
-  {id:'stab-vs-shock',format:'lesson',topic:'tech',title:'Как отличить стук стойки стабилизатора от стука амортизатора?',
-   excerpt:'Быстрая проверка, чтобы не менять амортизатор там, где виновата стойка.',
-   author:'Алексей Громов',role:'Технический эксперт CTR',duration:'4 мин',
-   short:'Стук стойки стабилизатора — звонкий, на мелких неровностях, проявляется при покачивании кузова. Стук амортизатора — глухой, на крупных ямах, сопровождается раскачкой и потёками на корпусе.',
-   toc:[{id:'s1',t:'Характер звука'},{id:'s2',t:'Проверка руками'},{id:'s3',t:'Тест раскачкой'}],
-   body:[
-     {id:'s1',h:'Характер звука',p:['Стойка стабилизатора стучит звонко и часто на «мелочи» — стыки, гребёнка. Амортизатор отзывается глухим ударом на крупных неровностях.']},
-     {id:'s2',h:'Проверка руками',p:['Возьмитесь за стойку стабилизатора и покачайте — ощутимый люфт подтверждает износ. Осмотрите шток амортизатора на следы масла.']},
-     {id:'s3',h:'Тест раскачкой',p:['Раскачайте угол кузова и отпустите. Больше одного-двух колебаний — внимание к амортизатору. Стук без раскачки — к стойке стабилизатора.']},
-   ],
-   faqs:[
-     {q:'Можно ли ездить со стуком стойки стабилизатора?',a:'Безопасности это почти не угрожает, но дребезг усиливается и со временем разбивает посадочные места. Деталь недорогая — лучше заменить.'},
-   ],
-   keywords:['стук стойки стабилизатора','стук амортизатора','как отличить стук подвески','диагностика стука подвески'],
-   related:['stab-link','ball-joint','bearing-noise']},
-
-  {id:'silentblock-press',format:'lesson',topic:'tech',title:'Чем запрессовать сайлентблок, если нет пресса?',
-   excerpt:'Рабочие способы запрессовки сайлентблока подручным инструментом.',
-   author:'Алексей Громов',role:'Технический эксперт CTR',duration:'4 мин',
-   short:'Без пресса используют резьбовую оправку (шпилька, гайки и подходящие проставки) или большие тиски с оправками нужного диаметра. Главное — равномерное усилие строго по наружной обойме и отсутствие перекоса.',
-   toc:[{id:'s1',t:'Резьбовая оправка'},{id:'s2',t:'Тиски и проставки'},{id:'s3',t:'Чего нельзя делать'}],
-   body:[
-     {id:'s1',h:'Резьбовая оправка',p:['Шпилька с гайками и две проставки — со стороны входа меньшего диаметра, со стороны выхода большего. Затягивая гайку, вы плавно вдавливаете блок без ударов.']},
-     {id:'s2',h:'Тиски и проставки',p:['Большие тиски тоже подходят: подберите оправку по наружной обойме и проставку-приёмник. Контролируйте перпендикулярность на каждом этапе.']},
-     {id:'s3',h:'Чего делать нельзя',p:['Нельзя забивать сайлентблок молотком по резине или внутренней втулке — это рвёт резину и перекашивает блок. Усилие прикладывают только к наружной обойме.']},
-   ],
-   faqs:[
-     {q:'Можно ли смазывать сайлентблок при запрессовке?',a:'Резиновые — только мыльным раствором, без масел и солидола: нефтепродукты разрушают резину.'},
-   ],
-   keywords:['запрессовать сайлентблок без пресса','как запрессовать сайлентблок','замена сайлентблока в тисках','оправка для сайлентблока'],
-   related:['silentblock','ball-joint','stab-link']},
-
-  {id:'cv-check',format:'lesson',topic:'tech',title:'Как проверить ШРУС, не снимая привод?',
-   excerpt:'Диагностика наружного и внутреннего ШРУСа без демонтажа.',
-   author:'Алексей Громов',role:'Технический эксперт CTR',duration:'3 мин',
-   short:'Вывернув руль до упора, тронуться по кругу: хруст в повороте указывает на наружный ШРУС. Вибрация и удары при разгоне — на внутренний. Осмотр пыльника на трещины и потёки смазки — обязательный первый шаг.',
-   toc:[{id:'s1',t:'Тест в повороте'},{id:'s2',t:'Внутренний ШРУС'},{id:'s3',t:'Осмотр пыльника'}],
-   body:[
-     {id:'s1',h:'Тест в повороте',p:['Выверните руль до упора и медленно двигайтесь по кругу в обе стороны. Характерный хруст в крайнем положении — изношен наружный ШРУС со стороны нагруженного колеса.']},
-     {id:'s2',h:'Признаки внутреннего ШРУСа',p:['Вибрация и подёргивания при разгоне по прямой, удары при трогании — типичные симптомы внутреннего шарнира.']},
-     {id:'s3',h:'Осмотр пыльника',p:['Чаще всего ШРУС умирает из-за порванного пыльника. Трещины и разбросанная смазка — повод заменить пыльник до того, как разобьётся сам шарнир.']},
-   ],
-   faqs:[
-     {q:'Можно ли ездить с хрустящим ШРУСом?',a:'Недолго и аккуратно. В крайней стадии износа возможно заклинивание привода, поэтому с заменой не тянут.'},
-   ],
-   keywords:['как проверить шрус','хруст шруса','диагностика шруса без снятия','порван пыльник шруса'],
-   related:['cv-joint','bearing-noise','wheel-bearing']},
-
-  /* ---------- ARTICLES (разные темы) ---------- */
-  {id:'avg-check',format:'article',topic:'sales',title:'Ходовая часть как точка роста среднего чека',
-   excerpt:'Почему ремонт подвески — недооценённый источник выручки и как его системно продавать.',
-   author:'Константин Волков',role:'Основатель клуба Автократия',duration:'8 мин',
-   toc:[{id:'s1',t:'Почему ходовая недопродаётся'},{id:'s2',t:'Диагностика как продукт'},{id:'s3',t:'Комплект вместо детали'}],
-   body:[
-     {id:'s1',h:'Почему ходовая часто недопродаётся',p:['Механик видит износ нескольких узлов, но в заказ-наряд попадает только то, с чем приехал клиент. Причина — не жадность мастера, а отсутствие процесса показа состояния автомобиля. В результате сервис теряет выручку, а клиент через месяц возвращается с новой проблемой.']},
-     {id:'s2',h:'Диагностика как отдельный продукт',p:['Когда диагностика подвески оформлена как услуга с понятным результатом — отчётом о состоянии узлов — клиент платит охотнее и доверяет рекомендациям. Это меняет разговор «впаривают» на разговор «показали и объяснили».']},
-     {id:'s3',h:'Комплект вместо одной детали',p:['Менять стойку стабилизатора и не проверить сопряжённые узлы — упущенная выгода и риск повторного визита. Логика «закрыть узел целиком» выгодна и сервису, и клиенту.']},
-   ],
-   keywords:['средний чек автосервиса','продажа ремонта подвески','как продавать ходовую','выручка автосервиса'],
-   related:['sell-suspension','intake-script','unit-economics']},
-
-  {id:'intake-reg',format:'article',topic:'process',title:'Регламент приёмки автомобиля на ремонт подвески',
-   excerpt:'Чек-лист приёмки, который снижает споры с клиентом и количество переделок.',
-   author:'Игорь Беляев',role:'Мастер-приёмщик, эксперт CTR',duration:'7 мин',
-   toc:[{id:'s1',t:'Зачем нужен регламент'},{id:'s2',t:'Что фиксировать'},{id:'s3',t:'Передача в работу'}],
-   body:[
-     {id:'s1',h:'Зачем нужен регламент приёмки',p:['Большинство конфликтов с клиентами рождается не в ремонте, а на приёмке — из-за несогласованных ожиданий. Единый регламент делает процесс предсказуемым и защищает сервис.']},
-     {id:'s2',h:'Что обязательно фиксировать',p:['Жалобу клиента дословно, результаты тест-драйва и диагностики, согласованный объём работ и состояние сопряжённых узлов. Фотофиксация спорных мест — обязательна.']},
-     {id:'s3',h:'Передача в работу',p:['Механик должен получить не «посмотри стук», а конкретный заказ-наряд с диагнозом. Это снижает количество переделок и ускоряет участок.']},
-   ],
-   keywords:['регламент приёмки автосервис','чек-лист приёмки авто','приёмка на ремонт подвески','процессы автосервиса'],
-   related:['avg-check','intake-script','hire-mechanic']},
-
-  {id:'oem-analog',format:'article',topic:'marketing',title:'Оригинал, OEM и аналог: что объяснять клиенту',
-   excerpt:'Как корректно говорить о категориях запчастей и не терять доверие.',
-   author:'Денис Карпов',role:'Эксперт по аftermarket CTR',duration:'6 мин',
-   toc:[{id:'s1',t:'Три категории простыми словами'},{id:'s2',t:'Где место OEM-бренда'},{id:'s3',t:'Как говорить с клиентом'}],
-   body:[
-     {id:'s1',h:'Три категории простыми словами',p:['Оригинал — деталь в упаковке автопроизводителя. OEM — та же деталь от завода-поставщика под своим брендом. Аналог — деталь стороннего производителя. Клиенту важно понимать разницу в цене и происхождении, а не маркетинговые ярлыки.']},
-     {id:'s2',h:'Где место OEM-бренда',p:['Многие узлы рулевого и подвески на конвейер поставляют именно специализированные производители. OEM-деталь часто идентична оригиналу по качеству при ощутимо меньшей цене — это сильный аргумент в разговоре с клиентом.']},
-     {id:'s3',h:'Как говорить с клиентом',p:['Не обесценивайте оригинал и не давите. Дайте выбор с честным объяснением разницы. Прозрачность здесь конвертируется в доверие и повторные визиты.']},
-   ],
-   keywords:['оригинал oem аналог','чем отличается oem от аналога','как выбрать запчасти','oem запчасти подвеска'],
-   related:['avg-check','sell-suspension','vin-webinar']},
-
-  {id:'unit-economics',format:'article',topic:'finance',title:'Юнит-экономика участка ремонта ходовой',
-   excerpt:'Как посчитать реальную прибыль с нормо-часа и не работать в минус.',
-   author:'Константин Волков',role:'Основатель клуба Автократия',duration:'9 мин',
-   toc:[{id:'s1',t:'Из чего складывается чек'},{id:'s2',t:'Стоимость нормо-часа'},{id:'s3',t:'Где теряется маржа'}],
-   body:[
-     {id:'s1',h:'Из чего складывается чек',p:['Заказ-наряд по ходовой — это работа и запчасти. Прибыль зависит не от оборота, а от того, как посчитаны нормо-час и наценка на детали. Без этой математики сервис может расти в обороте и падать в прибыли.']},
-     {id:'s2',h:'Как считать стоимость нормо-часа',p:['В нормо-час закладывают зарплату, аренду, оборудование, расходники и целевую прибыль. Заниженный нормо-час — самая частая причина того, что загруженный сервис не зарабатывает.']},
-     {id:'s3',h:'Где теряется маржа',p:['Бесплатная диагностика, переделки, простой поста и неучтённый расход — главные точки утечки. Каждую из них можно оцифровать и закрыть.']},
-   ],
-   keywords:['юнит экономика автосервиса','стоимость нормо часа','прибыль автосервиса','как считать чек автосервиса'],
-   related:['avg-check','warranty-webinar','intake-reg']},
-
-  {id:'hire-mechanic',format:'article',topic:'team',title:'Как нанять и удержать механика по ходовой',
-   excerpt:'Что проверять на собеседовании и почему уходят сильные механики.',
-   author:'Константин Волков',role:'Основатель клуба Автократия',duration:'8 мин',
-   toc:[{id:'s1',t:'Что проверять на входе'},{id:'s2',t:'Почему уходят'},{id:'s3',t:'Как удержать'}],
-   body:[
-     {id:'s1',h:'Что проверять на собеседовании',p:['Сильного механика по ходовой видно по логике диагностики, а не по списку марок. Дайте кейс со стуком и послушайте ход мысли — это информативнее любого резюме.']},
-     {id:'s2',h:'Почему уходят сильные',p:['Чаще всего не из-за денег, а из-за хаоса: нет нормального инструмента, нет понятного потока заказов, нет уважения к работе. Деньги удерживают недолго, если вокруг бардак.']},
-     {id:'s3',h:'Как удержать',p:['Прозрачная система оплаты, обучение, нормальные условия и поток работы. Механик, который растёт и зарабатывает предсказуемо, не ищет другое место.']},
-   ],
-   keywords:['нанять механика','удержать механика','собеседование механика','команда автосервиса'],
-   related:['intake-reg','unit-economics','avg-check']},
-
-  /* ---------- WEBINARS ---------- */
-  {id:'vin-webinar',format:'webinar',topic:'tech',title:'Подбор ходовой по VIN без ошибок',
+   program:[{t:'Симптомы износа ШРУСа',d:'9 мин'},{t:'Проверка без снятия привода',d:'9 мин'},{t:'Снятие приводного вала',d:'10 мин'},{t:'Замена наружного ШРУСа',d:'10 мин'},{t:'Замена внутреннего ШРУСа',d:'10 мин'},{t:'Пыльник, смазка, сборка',d:'10 мин'}],
+   keywords:['замена шруса','хруст в повороте','диагностика шруса','пыльник шруса'],
+   related:['wheel-bearing','work-cv','silentblock']},
+  {id:'web-disc',format:'webinar',part:'disc',title:'Тормозные диски: диагностика и замена',
+   excerpt:'Когда точить, когда менять, как подобрать диск и не получить биение после замены.',
+   author:'Алексей Громов',duration:'62 мин',
+   participants:['Алексей Громов — технический эксперт CTR','Денис Карпов — эксперт по aftermarket CTR'],
+   intro:['Биение руля при торможении, борозды и синева на диске — с этим приезжают постоянно. На вебинаре эксперты CTR разбирают, как оценить состояние тормозного диска, когда допустима проточка, а когда только замена, и как избежать биения после установки.','Запись доступна полностью и бесплатно, в конце — ответы на вопросы из зала.'],
+   outcomes:['Измерить износ и биение диска','Решить: точить или менять','Правильно подобрать диск','Избежать биения после замены'],
+   keywords:['тормозные диски','замена тормозных дисков','биение при торможении','проточка тормозных дисков'],
+   related:['art-disc','work-brake','web-vin']},
+  {id:'web-vin',format:'webinar',part:'suspension',title:'Подбор ходовой по VIN без ошибок',
    excerpt:'Разбор частых ошибок подбора деталей рулевого и подвески и как их избежать.',
-   author:'Денис Карпов',role:'Эксперт по аftermarket CTR',duration:'62 мин',
+   author:'Денис Карпов',duration:'54 мин',
    participants:['Денис Карпов — эксперт по aftermarket CTR','Алексей Громов — технический эксперт CTR'],
-   intro:['Неверный подбор детали по VIN — частая причина возвратов и потерянного времени. На вебинаре эксперты CTR разбирают, как читать комплектации, где прячутся «двойники» и как не ошибиться на рестайлинговых кузовах.','Запись доступна полностью и бесплатно. В конце — ответы на вопросы из зала по сложным случаям подбора.'],
+   intro:['Неверный подбор детали по VIN — частая причина возвратов и потерянного времени. Эксперты CTR разбирают, как читать комплектации, где прячутся «двойники» и как не ошибиться на рестайлинговых кузовах.'],
    outcomes:['Читать комплектации по VIN','Не путать детали рестайлинга','Проверять кросс-номера','Снизить процент возвратов'],
    keywords:['подбор по vin','подбор запчастей подвески','подбор ходовой','кросс номера запчастей'],
-   related:['oem-analog','wheel-bearing','sell-suspension']},
-
-  {id:'sell-suspension',format:'webinar',topic:'sales',title:'Как продавать ремонт подвески, а не «запчасть»',
-   excerpt:'Разговор с клиентом, в котором диагностика превращается в согласованный объём работ.',
-   author:'Константин Волков',role:'Основатель клуба Автократия',duration:'54 мин',
-   participants:['Константин Волков — основатель клуба Автократия','Игорь Беляев — мастер-приёмщик'],
-   intro:['Клиенты не покупают «шаровую опору» — они покупают исчезнувший стук и безопасность семьи. На вебинаре разбираем, как перестроить разговор с языка деталей на язык результата.','Много примеров живых диалогов на приёмке и работа с возражениями по цене.'],
-   outcomes:['Перевести разговор на язык результата','Показывать состояние, а не давить','Работать с возражением «дорого»','Закрывать узел целиком'],
-   keywords:['как продавать ремонт подвески','продажи в автосервисе','работа с возражениями автосервис','скрипт приёмки'],
-   related:['avg-check','intake-script','vin-webinar']},
-
-  {id:'warranty-webinar',format:'webinar',topic:'finance',title:'Гарантия на ходовую: как не терять деньги',
-   excerpt:'Где проходит граница гарантийного случая и как оформить её, чтобы избежать споров.',
-   author:'Игорь Беляев',role:'Мастер-приёмщик, эксперт CTR',duration:'48 мин',
-   participants:['Игорь Беляев — мастер-приёмщик','Константин Волков — основатель клуба Автократия'],
-   intro:['Гарантия на ходовую — частый источник убытков и конфликтов. На вебинаре разбираем, что считать гарантийным случаем, как фиксировать условия и как корректно отказывать, когда виноваты дорога или эксплуатация.'],
-   outcomes:['Определять границу гарантийного случая','Фиксировать условия на приёмке','Корректно отказывать без конфликта','Считать стоимость гарантии'],
-   keywords:['гарантия на ходовую','гарантия автосервиса','гарантийный случай подвеска','как оформить гарантию'],
-   related:['unit-economics','intake-reg','warranty-webinar']},
-
-  /* ---------- WORKSHOPS ---------- */
-  {id:'front-knock',format:'workshop',topic:'tech',title:'Разбор реального ремонта: стук в передней подвеске',
+   related:['tie-rod-course','wheel-bearing','web-steering']},
+  {id:'web-steering',format:'webinar',part:'tierod',title:'Диагностика рулевого управления',
+   excerpt:'Стуки, люфты и увод: как системно найти причину в рулевом и не менять лишнее.',
+   author:'Игорь Беляев',duration:'49 мин',
+   participants:['Игорь Беляев — мастер-приёмщик, эксперт CTR'],
+   intro:['Рулевое управление — узел, где симптомы легко перепутать: стук рейки, наконечника, тяги или опоры звучат похоже. На вебинаре разбираем логику диагностики, чтобы находить причину, а не менять всё подряд.'],
+   outcomes:['Разделить стуки рейки и наконечников','Проверить люфты по порядку','Найти причину увода','Составить точный заказ-наряд'],
+   keywords:['диагностика рулевого управления','стук в рулевом','люфт рулевой рейки','увод автомобиля'],
+   related:['tie-rod-course','web-vin','ball-joint']},
+  {id:'work-front-knock',format:'workshop',part:'suspension',title:'Разбор реального ремонта: стук в передней подвеске',
    excerpt:'Практический кейс: от жалобы клиента до собранного автомобиля без стука.',
-   author:'Алексей Громов',role:'Технический эксперт CTR',duration:'71 мин',
+   author:'Алексей Громов',duration:'71 мин',
    participants:['Алексей Громов — технический эксперт CTR','Игорь Беляев — мастер-приёмщик'],
-   intro:['Воркшоп построен вокруг одного реального автомобиля со стуком в передней подвеске. Разбираем весь путь: тест-драйв, диагностика на подъёмнике, поиск виновника среди нескольких подозреваемых узлов, замена и контрольная поездка.','Формат практический — с остановками на типичных ошибках и развилках в диагностике.'],
+   intro:['Воркшоп построен вокруг одного реального автомобиля со стуком в передней подвеске. Разбираем весь путь: тест-драйв, диагностику на подъёмнике, поиск виновника среди нескольких узлов, замену и контрольную поездку.','Формат практический — с остановками на типичных ошибках и развилках в диагностике.'],
    outcomes:['Выстроить логику поиска стука','Не менять лишние детали','Подтвердить диагноз до разборки','Сдать машину без рекламации'],
    keywords:['стук в передней подвеске','диагностика стука подвески','разбор ремонта подвески','поиск стука'],
-   related:['stab-vs-shock','ball-joint','front-knock']},
-
-  {id:'intake-script',format:'workshop',topic:'sales',title:'Скрипт диалога с клиентом при диагностике ходовой',
-   excerpt:'Отрабатываем разговор на приёмке: как показать состояние и согласовать работы.',
-   author:'Константин Волков',role:'Основатель клуба Автократия',duration:'58 мин',
-   participants:['Константин Волков — основатель клуба Автократия','Игорь Беляев — мастер-приёмщик'],
-   intro:['Воркшоп-практикум по разговору на приёмке. Разбираем скрипт по шагам: встреча, уточнение жалобы, показ состояния, согласование объёма и работа с ценой. С разбором живых диалогов.'],
-   outcomes:['Провести приёмку по шагам','Показать состояние наглядно','Согласовать объём без давления','Закрыть возражение по цене'],
-   keywords:['скрипт приёмки автосервис','диалог с клиентом автосервис','как принимать авто на ремонт','продажи диагностики'],
-   related:['sell-suspension','avg-check','intake-reg']},
-
-  {id:'funnel-workshop',format:'workshop',topic:'marketing',title:'Настройка воронки лидов CTR в автосервисе',
-   excerpt:'Практика: как из обращений по ходовой выстроить управляемый поток клиентов.',
-   author:'Денис Карпов',role:'Эксперт по аftermarket CTR',duration:'49 мин',
-   participants:['Денис Карпов — эксперт по aftermarket CTR'],
-   intro:['Воркшоп о том, как превратить разовые обращения по ремонту подвески в системный поток. Разбираем этапы воронки, точки потери клиентов и простые инструменты, которые работают даже в небольшом сервисе.'],
-   outcomes:['Описать воронку обращений','Найти точки потери лидов','Внедрить простые инструменты','Считать конверсию по этапам'],
-   keywords:['воронка лидов автосервис','привлечение клиентов автосервис','маркетинг автосервиса','поток клиентов'],
-   related:['oem-analog','sell-suspension','avg-check']},
+   related:['art-knock','ball-joint','stab-link']},
+  {id:'work-cv',format:'workshop',part:'cvjoint',title:'Замена ШРУСа: практикум на подъёмнике',
+   excerpt:'Пошаговый разбор замены наружного ШРУСа с обжимом пыльника и набивкой смазки.',
+   author:'Алексей Громов',duration:'46 мин',
+   participants:['Алексей Громов — технический эксперт CTR'],
+   intro:['Практикум по замене наружного ШРУСа на реальном автомобиле: снятие привода, разбор, набивка смазки, обжим пыльника и сборка. Показаны частые ошибки, из-за которых новый ШРУС ходит недолго.'],
+   outcomes:['Снять привод без повреждений','Правильно набить смазку','Обжать пыльник герметично','Собрать узел без люфта'],
+   keywords:['замена шруса','практикум замены шруса','обжим пыльника шруса','набивка смазки шрус'],
+   related:['cv-joint','wheel-bearing','work-front-knock']},
+  {id:'work-brake',format:'workshop',part:'disc',title:'Диагностика тормозной системы: практикум',
+   excerpt:'Проверка дисков, колодок и биения на реальном автомобиле, шаг за шагом.',
+   author:'Игорь Беляев',duration:'52 мин',
+   participants:['Игорь Беляев — мастер-приёмщик, эксперт CTR','Алексей Громов — технический эксперт CTR'],
+   intro:['Практикум по диагностике тормозов: замер толщины диска и колодок, проверка биения индикатором, оценка равномерности износа. Разбираем, как отделить проблему диска от проблемы суппорта.'],
+   outcomes:['Замерить толщину и биение диска','Оценить износ колодок','Отличить проблему диска от суппорта','Сформулировать рекомендацию клиенту'],
+   keywords:['диагностика тормозной системы','биение тормозного диска','износ тормозных колодок','проверка тормозов'],
+   related:['art-disc','web-disc','work-front-knock']},
+  {id:'art-disc',format:'article',part:'disc',title:'Тормозные диски: когда точить, а когда менять',
+   excerpt:'Разбираем предельный износ, биение и синеву — по каким признакам принимать решение.',
+   author:'Алексей Громов',duration:'8 мин',
+   toc:[{id:'s1',t:'Что смотреть в первую очередь'},{id:'s2',t:'Когда допустима проточка'},{id:'s3',t:'Когда только замена'}],
+   body:[
+     {id:'s1',h:'Что смотреть в первую очередь',p:['Первое — толщина диска относительно минимальной, выбитой на ступице диска. Второе — биение, которое чувствуется как пульсация педали и руля при торможении. Третье — характер поверхности: борозды, буртик по краю, синева от перегрева.']},
+     {id:'s2',h:'Когда допустима проточка',p:['Проточка оправдана, если после снятия металла толщина остаётся выше минимальной и поверхность выравнивается без глубоких раковин. Это дешевле замены и убирает биение, вызванное неравномерным износом.']},
+     {id:'s3',h:'Когда только замена',p:['Если диск тоньше предельного, есть трещины, глубокие борозды или сильная синева — точить нельзя. Тонкий диск хуже отводит тепло и склонен к короблению. В таких случаях менять диски нужно парой на оси.']}],
+   keywords:['тормозные диски точить или менять','предельный износ тормозного диска','биение тормозного диска','замена тормозных дисков'],
+   related:['web-disc','work-brake','art-knock']},
+  {id:'art-knock',format:'article',part:'suspension',title:'Как системно найти источник стука в подвеске',
+   excerpt:'Логика диагностики, которая экономит время и не приводит к замене лишних деталей.',
+   author:'Игорь Беляев',duration:'7 мин',
+   toc:[{id:'s1',t:'Сначала — тест-драйв'},{id:'s2',t:'Потом — подъёмник'},{id:'s3',t:'Подтверждение до разборки'}],
+   body:[
+     {id:'s1',h:'Сначала — тест-драйв',p:['Стук на мелких неровностях, на крупных ямах или в поворотах указывает на разные узлы. Не игнорируйте тест-драйв: он сужает круг подозреваемых ещё до подъёмника и экономит время.']},
+     {id:'s2',h:'Потом — подъёмник',p:['На подъёмнике проверяют люфты по порядку: шаровая, наконечник, стойка и втулки стабилизатора, сайлентблоки. Монтировка и раскачивание колеса помогают локализовать источник без догадок.']},
+     {id:'s3',h:'Подтверждение до разборки',p:['Прежде чем что-то снимать, диагноз должен подтвердиться двумя независимыми проверками. Это главное правило, которое отличает мастера от «замены всего подряд» и защищает от переделок.']}],
+   keywords:['стук в подвеске','диагностика стука подвески','как найти стук в подвеске','поиск стука ходовой'],
+   related:['work-front-knock','ball-joint','stab-link']},
+  {id:'art-balljoint',format:'article',part:'balljoint',title:'Ресурс шаровой опоры: признаки, что пора менять',
+   excerpt:'По каким симптомам определить износ шаровой до того, как она начнёт стучать.',
+   author:'Игорь Беляев',duration:'6 мин',
+   toc:[{id:'s1',t:'Ранние признаки'},{id:'s2',t:'Проверка люфта'},{id:'s3',t:'Почему нельзя тянуть'}],
+   body:[
+     {id:'s1',h:'Ранние признаки',p:['Изношенная шаровая начинает не со стука, а с едва заметного увода и неравномерного износа шины по краю. Порванный пыльник — прямой путь к быстрому износу: грязь и вода убивают шарнир за считанные недели.']},
+     {id:'s2',h:'Проверка люфта',p:['Осевой люфт проверяют монтировкой снизу, радиальный — покачиванием колеса. Любой ощутимый люфт в шаровой — повод к замене: в отличие от многих узлов, здесь на кону управляемость.']},
+     {id:'s3',h:'Почему нельзя тянуть',p:['Разрушение шаровой опоры на ходу означает потерю контроля над колесом. Это тот случай, когда экономия клиента оборачивается риском, и об этом стоит говорить прямо.']}],
+   keywords:['износ шаровой опоры','признаки износа шаровой','когда менять шаровую','ресурс шаровой опоры'],
+   related:['ball-joint','art-knock','stab-link']},
+  {id:'art-bearing',format:'article',part:'bearing',title:'Почему гудят ступичные подшипники и как это проверить',
+   excerpt:'Причины гула, простой тест на ходу и проверка на подъёмнике за пару минут.',
+   author:'Алексей Громов',duration:'6 мин',
+   toc:[{id:'s1',t:'Почему появляется гул'},{id:'s2',t:'Тест на ходу'},{id:'s3',t:'Проверка на подъёмнике'}],
+   body:[
+     {id:'s1',h:'Почему появляется гул',p:['Ступичный подшипник гудит из-за износа дорожек и тел качения: попадание влаги, перетяжка или недотяжка гайки, удары по ямам. Со временем ровный «вой» переходит в люфт, а люфт — в риск клина колеса.']},
+     {id:'s2',h:'Тест на ходу',p:['На ровной дороге сделайте плавные перестроения. При загрузке колеса гул усиливается, при разгрузке стихает. Так вычисляется сторона: усиление в повороте налево обычно указывает на правый подшипник.']},
+     {id:'s3',h:'Проверка на подъёмнике',p:['Вывешенное колесо покачивают в направлениях «12–6» и «3–9» часов и вращают, слушая хруст. Люфт и хруст подтверждают износ. Полный цикл замены разобран в соответствующем курсе.']}],
+   keywords:['гудит ступичный подшипник','почему гудит подшипник','как проверить ступичный подшипник','шум подшипника или резины'],
+   related:['wheel-bearing','cv-joint','art-knock']},
 ];
-
 const BYID={};ITEMS.forEach(i=>BYID[i.id]=i);
-function topicCount(tid){return ITEMS.filter(i=>i.topic===tid).length}
 function fmtCount(f){return ITEMS.filter(i=>i.format===f).length}
-
-/* ====================== STATE / ROUTER ====================== */
-let state={view:'home',format:null,id:null,topic:null,filter:'all',q:''};
-
+const FEED=[
+  {announce:true,part:'disc',fmt:'Вебинар',title:'Вебинар CTR: Тормозные диски — диагностика и замена',meta:'19 мая 08:00 · 21 мая 10:00 · регистрация открыта',date:'19 мая',link:'web-disc'},
+  {isNew:true,ref:'cv-joint',date:'вчера'},
+  {ref:'art-disc',date:'2 дня'},
+  {ref:'work-brake',date:'3 дня'},
+  {announce:true,part:'suspension',fmt:'Обновление',title:'Раздел «Воркшопы» пополнен практикумом по ШРУСу',meta:'Практика на подъёмнике · Алексей Громов',date:'4 дня',link:'work-cv'},
+  {ref:'web-steering',date:'5 дней'},
+  {ref:'art-bearing',date:'неделю'},
+];
+let state={view:'home',format:null,id:null,q:''};
 function go(view,arg,arg2){
   state.view=view;
-  if(view==='list'){state.format=arg;state.filter='all'}
-  if(view==='detail'){state.id=arg}
+  if(view==='list')state.format=arg;
+  if(view==='detail')state.id=arg;
   if(view==='player'){state.id=arg;state.plLesson=arg2||0}
-  if(view==='topic'){state.topic=arg}
-  if(view==='search'){state.q=arg}
-  window.scrollTo({top:0,behavior:'instant'});
-  render();
+  if(view==='search')state.q=arg;
+  window.scrollTo({top:0,behavior:'instant'});render();
 }
-function doSearch(v){if(v&&v.trim()){go('search',v.trim())}}
-
-/* ====================== HELPERS ====================== */
+function doSearch(v){if(v&&v.trim())go('search',v.trim())}
 const ic={
   clock:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
   list:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>',
@@ -787,348 +498,309 @@ const ic={
   arrL:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>',
   play:'<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
   playS:'<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',
-  q:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.2 9a3 3 0 0 1 5.6 1c0 2-3 2.5-3 4"/><path d="M12 17h.01"/></svg>',
-  plus:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>',
   empty:'<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>',
 };
-function initials(name){return name.split(' ').slice(0,2).map(w=>w[0]).join('')}
+function partArt(part){
+  const S='stroke="#c9ced6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"';
+  const SF='stroke="#c9ced6" stroke-width="2" fill="#2f313a" stroke-linejoin="round"';
+  const DIM='stroke="#7b8089" stroke-width="1.6" fill="none"';
+  switch(part){
+    case 'disc': return `
+      <ellipse cx="50" cy="52" rx="40" ry="31" ${SF}/>
+      <ellipse cx="50" cy="52" rx="31" ry="24" ${DIM}/>
+      <ellipse cx="50" cy="52" rx="15" ry="12" ${SF}/>
+      <ellipse cx="50" cy="52" rx="5" ry="4" stroke="#c9ced6" stroke-width="2" fill="#1c1d21"/>
+      <circle cx="50" cy="42" r="2.4" fill="#c9ced6"/><circle cx="61" cy="49" r="2.4" fill="#c9ced6"/><circle cx="57" cy="61" r="2.4" fill="#c9ced6"/><circle cx="43" cy="61" r="2.4" fill="#c9ced6"/><circle cx="39" cy="49" r="2.4" fill="#c9ced6"/>
+      <path d="M20,60 A40,31 0 0 0 34,74" ${DIM}/>`;
+    case 'balljoint': return `
+      <rect x="45" y="12" width="10" height="7" rx="1.5" ${SF}/>
+      <path d="M45,14 h-4 M55,14 h4" ${S}/>
+      <rect x="47" y="19" width="6" height="12" ${SF}/>
+      <ellipse cx="50" cy="45" rx="17" ry="16" ${SF}/>
+      <path d="M35,52 q15,10 30,0" ${DIM}/><path d="M36,58 q14,9 28,0" ${DIM}/>
+      <path d="M33,64 h34 l-4,12 h-26 z" ${SF}/>
+      <circle cx="41" cy="70" r="2.4" stroke="#c9ced6" stroke-width="1.6" fill="#1c1d21"/><circle cx="59" cy="70" r="2.4" stroke="#c9ced6" stroke-width="1.6" fill="#1c1d21"/>`;
+    case 'bearing': return `
+      <circle cx="50" cy="52" r="38" ${SF}/>
+      <circle cx="50" cy="52" r="29" ${DIM}/>
+      <circle cx="50" cy="52" r="17" ${SF}/>
+      <circle cx="50" cy="52" r="9" stroke="#c9ced6" stroke-width="2" fill="#1c1d21"/>
+      ${Array.from({length:10}).map((_,i)=>{const a=i/10*6.283;return `<circle cx="${(50+23*Math.cos(a)).toFixed(1)}" cy="${(52+23*Math.sin(a)).toFixed(1)}" r="3.6" stroke="#c9ced6" stroke-width="1.6" fill="#2f313a"/>`}).join('')}`;
+    case 'tierod': return `
+      <circle cx="34" cy="52" r="17" ${SF}/>
+      <rect x="30" y="30" width="8" height="6" rx="1.2" ${SF}/><rect x="31" y="36" width="6" height="7" ${SF}/>
+      <ellipse cx="34" cy="52" rx="6" ry="6" ${DIM}/>
+      <rect x="50" y="48" width="14" height="9" ${SF}/>
+      <path d="M64,50 h24 M64,55 h24" ${S}/>
+      ${Array.from({length:7}).map((_,i)=>`<path d="M${66+i*3},48 v11" ${DIM}/>`).join('')}`;
+    case 'stablink': return `
+      <circle cx="22" cy="58" r="11" ${SF}/><circle cx="78" cy="42" r="11" ${SF}/>
+      <rect x="30" y="47" width="42" height="7" rx="3.5" transform="rotate(-11 51 50)" ${SF}/>
+      <rect x="19" y="40" width="6" height="6" rx="1.2" ${SF}/><rect x="75" y="24" width="6" height="6" rx="1.2" ${SF}/>
+      <path d="M22,48 v-8 M78,32 v-8" ${S}/>`;
+    case 'silentblock': return `
+      <circle cx="50" cy="52" r="37" ${SF}/>
+      <circle cx="50" cy="52" r="27" stroke="#c9ced6" stroke-width="2" fill="#26272d"/>
+      <circle cx="50" cy="52" r="14" ${SF}/>
+      <circle cx="50" cy="52" r="6.5" stroke="#c9ced6" stroke-width="2" fill="#1c1d21"/>
+      <path d="M50,38 A14,14 0 0 1 61,58 L57,55 A10,10 0 0 0 50,42 Z" fill="#1c1d21" opacity=".7"/>
+      <path d="M50,66 A14,14 0 0 1 39,46 L43,49 A10,10 0 0 0 50,62 Z" fill="#1c1d21" opacity=".7"/>`;
+    case 'cvjoint': return `
+      <rect x="10" y="48" width="24" height="8" ${SF}/>
+      ${[0,1,2,3,4].map(i=>`<ellipse cx="${38+i*8}" cy="52" rx="4" ry="${9+i*2.4}" ${SF}/>`).join('')}
+      <ellipse cx="72" cy="52" rx="9" ry="15" ${SF}/>
+      <circle cx="72" cy="52" r="5" stroke="#c9ced6" stroke-width="1.6" fill="#1c1d21"/>`;
+    case 'suspension': default: return `
+      <rect x="46" y="20" width="8" height="60" rx="2" ${SF}/>
+      <ellipse cx="50" cy="18" rx="14" ry="5" ${SF}/>
+      <rect x="42" y="76" width="16" height="8" rx="2" ${SF}/>
+      ${Array.from({length:7}).map((_,i)=>`<ellipse cx="50" cy="${30+i*6.5}" rx="${(16-Math.abs(i-3)*0.6).toFixed(1)}" ry="4.4" ${S}/>`).join('')}`;
+  }
+}
+function coverSVG(part,fmt,wide){
+  const label=(FORMATS[fmt]?FORMATS[fmt].label:'').toUpperCase();
+  if(wide){
+    return `<svg class="cover-svg" viewBox="0 0 760 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="cbgW" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26272d"/><stop offset="1" stop-color="#101116"/></linearGradient>
+        <radialGradient id="chiW" cx="35%" cy="30%" r="60%"><stop offset="0" stop-color="#40424c" stop-opacity=".8"/><stop offset="1" stop-color="#40424c" stop-opacity="0"/></radialGradient>
+      </defs>
+      <rect width="760" height="300" fill="url(#cbgW)"/>
+      <rect width="760" height="300" fill="url(#chiW)"/>
+      <g transform="translate(150,20) scale(2.6)">${partArt(part)}</g>
+      <path d="M470,0 C548,110 548,190 470,300 L760,300 L760,0 Z" fill="#E2231A"/>
+      <path d="M470,0 C548,110 548,190 470,300" stroke="#ff5a50" stroke-width="2" fill="none" opacity=".5"/>
+      <text x="620" y="150" fill="#fff" font-family="JetBrains Mono,monospace" font-weight="700" font-size="20" letter-spacing="3" text-anchor="middle" transform="rotate(90 620 150)">${label}</text>
+      <text x="38" y="46" fill="#E2231A" font-family="Inter,sans-serif" font-weight="800" font-style="italic" font-size="30" letter-spacing="-1">CTR</text>
+    </svg>`;
+  }
+  return `<svg class="cover-svg" viewBox="0 0 400 225" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="cbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26272d"/><stop offset="1" stop-color="#101116"/></linearGradient>
+      <radialGradient id="chi" cx="40%" cy="28%" r="62%"><stop offset="0" stop-color="#3f414b" stop-opacity=".85"/><stop offset="1" stop-color="#3f414b" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="400" height="225" fill="url(#cbg)"/>
+    <rect width="400" height="225" fill="url(#chi)"/>
+    <g transform="translate(97,-4) scale(2.05)">${partArt(part)}</g>
+    <path d="M0,168 C120,205 260,148 400,178 L400,225 L0,225 Z" fill="#E2231A"/>
+    <path d="M0,168 C120,205 260,148 400,178" stroke="#ff5a50" stroke-width="2" fill="none" opacity=".45"/>
+    <text x="22" y="36" fill="#E2231A" font-family="Inter,sans-serif" font-weight="800" font-style="italic" font-size="22" letter-spacing="-.5">CTR</text>
+    <text x="22" y="209" fill="#fff" font-family="JetBrains Mono,monospace" font-weight="700" font-size="13" letter-spacing="1.5">${label}</text>
+  </svg>`;
+}
+function avatarSVG(name){
+  const v=(EXPERTS[name]?EXPERTS[name].v:0);
+  const P=[
+    {skin:'#E7B48F',sh:'#5a3f2b',hair:'#6b4a30',beard:'#5a3d27',shirt:'#33414f',glasses:false,grey:false},
+    {skin:'#F0C6A0',sh:'#c99a76',hair:'#2a2a30',beard:null,shirt:'#3c3646',glasses:true,grey:false},
+    {skin:'#EDC099',sh:'#c99a76',hair:'#b3894a',beard:null,shirt:'#4a3b2e',glasses:false,grey:false},
+    {skin:'#E2A87F',sh:'#b98860',hair:'#3a3a40',beard:'#4a4a52',shirt:'#242a33',glasses:false,grey:true}
+  ][v];
+  const beard=P.beard?`<path d="M31,52 C31,68 40,78 50,78 C60,78 69,68 69,52 C69,60 62,64 50,64 C38,64 31,60 31,52 Z" fill="${P.beard}"/>`:'';
+  const grey=P.grey?`<path d="M28,40 C29,30 34,24 40,23 C33,27 30,33 30,42 Z" fill="#b9bcc4" opacity=".55"/><path d="M72,40 C71,30 66,24 60,23 C67,27 70,33 70,42 Z" fill="#b9bcc4" opacity=".55"/>`:'';
+  const glasses=P.glasses?`<g stroke="#2a2b31" stroke-width="2" fill="none"><circle cx="41" cy="45" r="7"/><circle cx="59" cy="45" r="7"/><path d="M48,45 h4"/><path d="M34,44 l-4,-1 M66,44 l4,-1"/></g>`:'';
+  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="ab${v}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eceef1"/><stop offset="1" stop-color="#d9dbe0"/></linearGradient>
+      <clipPath id="ac${v}"><circle cx="50" cy="50" r="50"/></clipPath></defs>
+    <g clip-path="url(#ac${v})">
+      <rect width="100" height="100" fill="url(#ab${v})"/>
+      <path d="M14,100 C14,76 30,68 50,68 C70,68 86,76 86,100 Z" fill="${P.shirt}"/>
+      <path d="M42,60 h16 v10 c0,4 -16,4 -16,0 Z" fill="${P.sh}"/>
+      <ellipse cx="50" cy="44" rx="19" ry="22" fill="${P.skin}"/>
+      <ellipse cx="31" cy="46" rx="3.4" ry="4.4" fill="${P.skin}"/><ellipse cx="69" cy="46" rx="3.4" ry="4.4" fill="${P.skin}"/>
+      ${beard}
+      <path d="M29,42 C28,26 38,19 50,19 C62,19 72,26 71,42 C71,34 64,30 50,30 C36,30 29,34 29,42 Z" fill="${P.hair}"/>
+      ${grey}
+      <path d="M37,40 q4,-3 8,0" stroke="#3b2f28" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <path d="M55,40 q4,-3 8,0" stroke="#3b2f28" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <ellipse cx="41" cy="45" rx="2.2" ry="2.6" fill="#2a2b31"/><ellipse cx="59" cy="45" rx="2.2" ry="2.6" fill="#2a2b31"/>
+      <path d="M50,47 v6 l-2,2" stroke="#c98f6a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path d="M44,58 q6,4 12,0" stroke="#a35c47" stroke-width="2" fill="none" stroke-linecap="round"/>
+      ${glasses}
+    </g></svg>`;
+}
+function avatarEl(name){return `<div class="avatar">${avatarSVG(name)}</div>`}
 function metaStrip(it){
   let p=[`${ic.clock} ${it.duration}`];
   if(it.format==='course')p.push(`<span class="dot"></span>${ic.list} ${it.lessons} уроков`);
   if(it.level&&it.format==='course')p.push(`<span class="dot"></span>${ic.level} ${it.level}`);
   return p.join(' ');
 }
-
 function card(it){
-  const f=FORMATS[it.format];
   return `<article class="card" onclick="go('detail','${it.id}')">
-    <div class="cover">
-      <span class="ghost">${f.label[0]}</span>
-      <div class="cover-tags">
-        <span class="tag fmt">${f.label}</span>
-        <span class="tag topic">${TOPIC[it.topic]}</span>
-      </div>
-    </div>
+    <div class="cover">${coverSVG(it.part,it.format)}</div>
     <div class="card-body">
-      <h3>${it.title}</h3>
-      <p>${it.excerpt}</p>
+      <h3>${it.title}</h3><p>${it.excerpt}</p>
       <div class="card-meta">${metaStrip(it)}</div>
-      <div class="card-author">
-        <div class="avatar">${initials(it.author)}</div>
-        <div><div class="nm">${it.author}</div><div class="rl">${it.role}</div></div>
-      </div>
+      <div class="card-author">${avatarEl(it.author)}<div><div class="nm">${it.author}</div><div class="rl">${EXPERTS[it.author].role}</div></div></div>
     </div>
   </article>`;
 }
-function qrow(it){
-  return `<div class="qrow" onclick="go('detail','${it.id}')">
-    <div class="qi">${ic.q}</div>
-    <div class="qmain">
-      <h3>${it.title}</h3>
-      <div class="qm"><span>${TOPIC[it.topic]}</span><span class="dot"></span><span>${it.duration} чтения</span><span class="dot"></span><span>${it.author}</span></div>
-    </div>
-    <span class="qarr">${ic.arrR}</span>
-  </div>`;
-}
-
-/* ====================== NAV ====================== */
 function renderNav(){
   document.getElementById('navFormats').innerHTML=
-    `<a href="#" onclick="go('home');return false" class="${state.view==='home'?'active':''}">
-       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8v9a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z"/></svg>Главная</a>`+
-    FORDER.map(f=>`<a href="#" onclick="go('list','${f}');return false" class="${(state.view==='list'&&state.format===f)?'active':''}">
-       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${FORMATS[f].icon}</svg>${FORMATS[f].plural}</a>`).join('');
-  document.getElementById('navTopics').innerHTML=
-    TOPICS.map(t=>`<a href="#" onclick="go('topic','${t.id}');return false" class="${(state.view==='topic'&&state.topic===t.id)?'active':''}">${t.name}<span class="cnt">${topicCount(t.id)}</span></a>`).join('');
+    `<a href="#" onclick="go('home');return false" class="${state.view==='home'?'active':''}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8v9a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z"/></svg>Главная</a>`+
+    FORDER.map(f=>`<a href="#" onclick="go('list','${f}');return false" class="${(state.view==='list'&&state.format===f)?'active':''}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${FORMATS[f].icon}</svg>${FORMATS[f].plural}</a>`).join('');
 }
-
-/* ====================== VIEWS ====================== */
+function feedRow(f){
+  const it=f.ref?BYID[f.ref]:null;
+  const part=it?it.part:f.part;
+  const fmt=it?FORMATS[it.format].label:f.fmt;
+  const title=it?it.title:f.title;
+  const meta=it?`${it.author} · ${it.duration}`:f.meta;
+  const cls=f.announce?'feed-row announce':'feed-row';
+  const onclick=it?`go('detail','${it.id}')`:(f.link?`go('detail','${f.link}')`:'return false');
+  const badges=(f.announce?`<span class="feed-badge an">Анонс</span>`:'')+(f.isNew?`<span class="feed-badge new">Новое</span>`:'')+`<span class="feed-badge fmt">${fmt}</span>`;
+  return `<div class="${cls}" onclick="${onclick}">
+    <div class="feed-cov">${coverSVG(part,it?it.format:'webinar')}</div>
+    <div class="feed-main"><div class="feed-badges">${badges}</div><div class="feed-title">${title}</div><div class="feed-meta">${meta}</div></div>
+    <div class="feed-date"><div class="d">${f.date}</div>назад</div>
+  </div>`;
+}
 function viewHome(){
   const courses=ITEMS.filter(i=>i.format==='course').slice(0,3);
-  const lessons=ITEMS.filter(i=>i.format==='lesson').slice(0,6);
-  const fresh=[BYID['vin-webinar'],BYID['avg-check'],BYID['front-knock']];
+  const fresh=[BYID['web-vin'],BYID['art-knock'],BYID['work-cv']];
   return `
-  <section class="hero">
-    <div class="hero-in">
-      <div class="eyebrow">CTR CLUB · Образовательный портал</div>
-      <h1>Как чинить <b>ходовую</b> — от диагностики до сборки</h1>
-      <p>Открытая база знаний от экспертов CTR: курсы, разборы и ответы на частые вопросы по рулевому управлению и подвеске. Без регистрации, бесплатно.</p>
-      <div class="hero-search">
-        <input placeholder="Например: замена ступичного подшипника" onkeydown="if(event.key==='Enter')doSearch(this.value)">
-        <button onclick="doSearch(this.previousElementSibling.value)">Найти</button>
-      </div>
-      <div class="hero-stats">
-        <div class="s"><b>${ITEMS.length}</b><span>материалов в базе</span></div>
-        <div class="s"><b>${fmtCount('lesson')}+</b><span>ответов на вопросы</span></div>
-        <div class="s"><b>6</b><span>тем по автобизнесу</span></div>
-      </div>
+  <section class="hero"><div class="hero-in">
+    <div class="eyebrow">CTR CLUB · Образовательный портал</div>
+    <h1>Как чинить <b>ходовую и тормоза</b> — от диагностики до сборки</h1>
+    <p>Открытая техническая база от экспертов CTR: курсы, вебинары, воркшопы и статьи по рулевому, подвеске и тормозной системе. Без регистрации, бесплатно.</p>
+    <div class="hero-search"><input placeholder="Например: замена ступичного подшипника" onkeydown="if(event.key==='Enter')doSearch(this.value)"><button onclick="doSearch(this.previousElementSibling.value)">Найти</button></div>
+    <div class="hero-stats">
+      <div class="s"><b>${ITEMS.length}</b><span>материалов в базе</span></div>
+      <div class="s"><b>${fmtCount('course')}</b><span>технических курсов</span></div>
+      <div class="s"><b>${fmtCount('webinar')+fmtCount('workshop')}</b><span>вебинаров и воркшопов</span></div>
     </div>
-  </section>
-
+  </div></section>
   <section class="sect">
-    <div class="sect-head"><div><h2>Темы портала</h2><div class="sub">Выберите направление — внутри собраны материалы всех форматов</div></div></div>
-    <div class="topic-tiles">
-      ${TOPICS.map(t=>`<div class="ttile" onclick="go('topic','${t.id}')">
-        <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${topicIcon(t.id)}</svg></div>
-        <h3>${t.name}</h3><p>${topicDesc(t.id)}</p>
-        <div class="cnt">${topicCount(t.id)} материалов →</div>
-      </div>`).join('')}
-    </div>
+    <div class="sect-head"><div><h2>Лента</h2><div class="sub">Последние публикации и анонсы — всё новое в одном месте</div></div></div>
+    <div class="feed">${FEED.map(feedRow).join('')}</div>
   </section>
-
   <section class="sect">
-    <div class="sect-head"><div><h2>Технические курсы</h2><div class="sub">Пошаговый разбор узлов рулевого и подвески</div></div><a class="all" href="#" onclick="go('list','course');return false">Все курсы ${ic.arr}</a></div>
+    <div class="sect-head"><div><h2>Технические курсы</h2><div class="sub">Пошаговый разбор узлов рулевого, подвески и тормозов</div></div><a class="all" href="#" onclick="go('list','course');return false">Все курсы ${ic.arr}</a></div>
     <div class="grid">${courses.map(card).join('')}</div>
   </section>
-
   <section class="sect">
-    <div class="sect-head"><div><h2>Частые вопросы из ниши</h2><div class="sub">Короткие ответы — то, что чаще всего ищут в поиске</div></div><a class="all" href="#" onclick="go('list','lesson');return false">Все уроки ${ic.arr}</a></div>
-    <div class="qlist">${lessons.map(qrow).join('')}</div>
-  </section>
-
-  <section class="sect">
-    <div class="sect-head"><div><h2>Новое на портале</h2><div class="sub">Свежие вебинары, статьи и разборы</div></div></div>
+    <div class="sect-head"><div><h2>Свежие материалы</h2><div class="sub">Вебинары, статьи и разборы</div></div></div>
     <div class="grid">${fresh.map(card).join('')}</div>
   </section>`;
 }
-function topicIcon(id){return{
-  sales:'<path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>',
-  tech:'<path d="M14.7 6.3a4 4 0 0 0-5.6 5.6L3 18l3 3 6.1-6.1a4 4 0 0 0 5.6-5.6l-2.6 2.6-2.1-2.1z"/>',
-  process:'<path d="M21 12a9 9 0 1 1-9-9"/><path d="M21 3v6h-6"/>',
-  finance:'<circle cx="12" cy="12" r="9"/><path d="M14.5 9a2.5 2.5 0 0 0-2.5-1.5c-1.5 0-2.5 1-2.5 2s1 1.8 2.5 2 2.5.8 2.5 2-1 2-2.5 2A2.5 2.5 0 0 1 9.5 16M12 6v1.5M12 16.5V18"/>',
-  marketing:'<path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>',
-  team:'<circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><path d="M16 5a3 3 0 0 1 0 6M21 20a6 6 0 0 0-4-5.7"/>',
-}[id]}
-function topicDesc(id){return{
-  sales:'Продажи ремонта и работа с клиентом',
-  tech:'Диагностика и ремонт узлов',
-  process:'Регламенты и приёмка',
-  finance:'Экономика сервиса и гарантия',
-  marketing:'Привлечение и удержание клиентов',
-  team:'Найм и управление механиками',
-}[id]}
-
 function viewList(){
   const f=FORMATS[state.format];
-  let items=ITEMS.filter(i=>i.format===state.format);
-  if(state.filter!=='all')items=items.filter(i=>i.topic===state.filter);
-  const isLesson=state.format==='lesson';
-  const showFilter=state.format!=='course';// курсы только техника, но фильтр оставим скрытым? показываем для остальных
-  const topicsUsed=[...new Set(ITEMS.filter(i=>i.format===state.format).map(i=>i.topic))];
+  const items=ITEMS.filter(i=>i.format===state.format);
   return `
   <div class="crumbs"><a href="#" onclick="go('home');return false">Главная</a><span class="sl">/</span><span class="cur">${f.plural}</span></div>
   <div class="page-head"><h1>${f.plural}</h1><p>${f.desc}</p></div>
-  ${topicsUsed.length>1?`<div class="chips">
-    <button class="chip ${state.filter==='all'?'active':''}" onclick="setFilter('all')">Все темы</button>
-    ${topicsUsed.map(t=>`<button class="chip ${state.filter===t?'active':''}" onclick="setFilter('${t}')">${TOPIC[t]}</button>`).join('')}
-  </div>`:''}
-  ${items.length? (isLesson?`<div class="qlist">${items.map(qrow).join('')}</div>`:`<div class="grid">${items.map(card).join('')}</div>`)
-    :`<div class="empty">${ic.empty}<h3>Пока пусто</h3><p>В этой теме материалы появятся позже</p></div>`}`;
+  ${items.length?`<div class="grid">${items.map(card).join('')}</div>`:`<div class="empty">${ic.empty}<h3>Пока пусто</h3></div>`}`;
 }
-function setFilter(t){state.filter=t;render()}
-
-function viewTopic(){
-  const tname=TOPIC[state.topic];
-  const items=ITEMS.filter(i=>i.topic===state.topic);
-  let html=`<div class="crumbs"><a href="#" onclick="go('home');return false">Главная</a><span class="sl">/</span><span class="cur">${tname}</span></div>
-  <div class="page-head"><h1>${tname}</h1><p>Все материалы по теме «${tname}» — курсы, вебинары, воркшопы, статьи и ответы на вопросы в одном месте.</p></div>`;
-  FORDER.forEach(f=>{
-    const sub=items.filter(i=>i.format===f);
-    if(!sub.length)return;
-    const isLesson=f==='lesson';
-    html+=`<section class="sect"><div class="sect-head"><div><h2>${FORMATS[f].plural}</h2></div><a class="all" href="#" onclick="go('list','${f}');return false">Все ${ic.arr}</a></div>
-      ${isLesson?`<div class="qlist">${sub.map(qrow).join('')}</div>`:`<div class="grid">${sub.map(card).join('')}</div>`}</section>`;
-  });
-  return html;
+function crumbDetail(it){
+  return `<div class="crumbs"><a href="#" onclick="go('home');return false">Главная</a><span class="sl">/</span><a href="#" onclick="go('list','${it.format}');return false">${FORMATS[it.format].plural}</a></div>`;
 }
-
 function sideRelated(it){
   if(!it.related)return '';
   const rel=it.related.map(r=>BYID[r]).filter(Boolean).slice(0,3);
   if(!rel.length)return '';
   return `<div class="d-card"><div class="eyebrow" style="margin-bottom:14px">Похожие материалы</div><div class="rel-list">
-    ${rel.map(r=>`<div class="rel" onclick="go('detail','${r.id}')"><div class="rc"></div><div><div class="rt">${r.title}</div><div class="rm">${FORMATS[r.format].label} · ${r.duration}</div></div></div>`).join('')}
+    ${rel.map(r=>`<div class="rel" onclick="go('detail','${r.id}')"><div class="rc">${coverSVG(r.part,r.format)}</div><div><div class="rt">${r.title}</div><div class="rm">${FORMATS[r.format].label} · ${r.duration}</div></div></div>`).join('')}
   </div></div>`;
 }
 function sideKeywords(it){
-  return `<div class="d-card"><div class="eyebrow" style="margin-bottom:14px">Поисковые запросы</div><div class="kw">
-    ${it.keywords.map(k=>`<a href="#" onclick="doSearch('${k}');return false">${k}</a>`).join('')}</div></div>`;
+  return `<div class="d-card"><div class="eyebrow" style="margin-bottom:14px">Поисковые запросы</div><div class="kw">${it.keywords.map(k=>`<a href="#" onclick="doSearch('${k}');return false">${k}</a>`).join('')}</div></div>`;
 }
-
 function viewDetail(){
-  const it=BYID[state.id];
-  if(!it)return viewHome();
+  const it=BYID[state.id];if(!it)return viewHome();
   if(it.format==='course')return detailCourse(it);
-  if(it.format==='lesson')return detailLesson(it);
   if(it.format==='article')return detailArticle(it);
-  return detailMedia(it); // webinar / workshop
+  return detailMedia(it);
 }
-
-function crumbDetail(it){
-  return `<div class="crumbs">
-    <a href="#" onclick="go('home');return false">Главная</a><span class="sl">/</span>
-    <a href="#" onclick="go('list','${it.format}');return false">${FORMATS[it.format].plural}</a><span class="sl">/</span>
-    <a href="#" onclick="go('topic','${it.topic}');return false">${TOPIC[it.topic]}</a>
-  </div>`;
-}
-
 function detailCourse(it){
   return `${crumbDetail(it)}
   <div class="detail"><div class="d-main">
-    <div class="d-hero-cover"><span class="ghost">${FORMATS[it.format].label[0]}</span><div class="play">${ic.play}</div></div>
-    <div class="d-tags"><span class="tag fmt" style="background:var(--soft);color:var(--ink)">${FORMATS[it.format].label}</span><span class="tag topic">${TOPIC[it.topic]}</span></div>
+    <div class="d-hero-cover">${coverSVG(it.part,it.format,true)}<div class="play">${ic.play}</div></div>
+    <div class="d-tags"><span class="tag fmt">${FORMATS[it.format].label}</span></div>
     <h1 class="d-title">${it.title}</h1>
     <div class="d-metabar">${metaStrip(it)} <span class="dot"></span> ${ic.user} ${it.author}</div>
     <div class="prose">${it.intro.map(p=>`<p>${p}</p>`).join('')}
-      <h2>Чему вы научитесь</h2>
-      <div class="outcomes">${it.outcomes.map(o=>`<div class="o">${ic.check}<span>${o}</span></div>`).join('')}</div>
-      <h2>Программа курса</h2>
-      <div class="program">${it.program.map((p,i)=>`<div class="prow"><span class="num">${String(i+1).padStart(2,'0')}</span><span class="pt">${p.t}</span>${i===0?'<span class="pl">Открыт</span>':''}<span class="pd">${p.d}</span></div>`).join('')}</div>
-      <h2>Эксперт курса</h2>
-      <div class="expert"><div class="av">${initials(it.author)}</div><div><div class="en">${it.author}</div><div class="er">${it.role}</div></div></div>
+      <h2>Чему вы научитесь</h2><div class="outcomes">${it.outcomes.map(o=>`<div class="o">${ic.check}<span>${o}</span></div>`).join('')}</div>
+      <h2>Программа курса</h2><div class="program">${it.program.map((p,i)=>`<div class="prow"><span class="num">${String(i+1).padStart(2,'0')}</span><span class="pt">${p.t}</span>${i===0?'<span class="pl">Открыт</span>':''}<span class="pd">${p.d}</span></div>`).join('')}</div>
+      <h2>Эксперт курса</h2><div class="expert"><div class="av">${avatarSVG(it.author)}</div><div><div class="en">${it.author}</div><div class="er">${EXPERTS[it.author].role}</div></div></div>
     </div>
   </div>
   <aside class="d-side">
-    <div class="d-card">
-      <div class="price-free"><span class="pulse"></span>Бесплатно · без регистрации</div>
+    <div class="d-card"><div class="price-free"><span class="pulse"></span>Бесплатно · без регистрации</div>
       <button class="btn-primary" onclick="go('player','${it.id}',0)">${ic.play} Начать курс</button>
       <button class="btn-ghost" onclick="go('player','${it.id}',0)">Программа курса</button>
-      <div class="d-facts">
-        <div class="d-fact"><span class="k">${ic.clock} Длительность</span><span class="v">${it.duration}</span></div>
-        <div class="d-fact"><span class="k">${ic.list} Уроков</span><span class="v">${it.lessons}</span></div>
-        <div class="d-fact"><span class="k">${ic.level} Уровень</span><span class="v">${it.level}</span></div>
-      </div>
-    </div>
-    ${sideKeywords(it)}
-    ${sideRelated(it)}
+      <div class="d-facts"><div class="d-fact"><span class="k">${ic.clock} Длительность</span><span class="v">${it.duration}</span></div><div class="d-fact"><span class="k">${ic.list} Уроков</span><span class="v">${it.lessons}</span></div><div class="d-fact"><span class="k">${ic.level} Уровень</span><span class="v">${it.level}</span></div></div>
+    </div>${sideKeywords(it)}${sideRelated(it)}
   </aside></div>`;
 }
-
-function detailLesson(it){
-  return `${crumbDetail(it)}
-  <div class="detail"><div class="d-main">
-    <div class="d-tags"><span class="tag fmt" style="background:var(--red-soft);color:var(--red)">Ответ на вопрос</span><span class="tag topic">${TOPIC[it.topic]}</span></div>
-    <h1 class="d-title">${it.title}</h1>
-    <div class="d-metabar">${ic.user} ${it.author} <span class="dot"></span> ${it.role} <span class="dot"></span> ${it.duration} чтения</div>
-    <div class="answer-box"><div class="lbl">Коротко</div><p>${it.short}</p></div>
-    ${it.toc?`<div class="toc"><div class="lbl">В этом ответе</div><ol>${it.toc.map(t=>`<li><a href="#${t.id}" onclick="scrollTo2('${t.id}');return false">${t.t}</a></li>`).join('')}</ol></div>`:''}
-    <div class="prose">${it.body.map(b=>`<h2 id="${b.id}">${b.h}</h2>${b.p.map(p=>`<p>${p}</p>`).join('')}`).join('')}</div>
-    ${it.faqs?`<h2 style="font-size:22px;font-weight:700;color:var(--ink);margin:34px 0 16px">Ещё по теме</h2><div class="faq">${it.faqs.map((f,i)=>`<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">${f.q} ${ic.plus}</button><div class="faq-a"><p>${f.a}</p></div></div>`).join('')}</div>`:''}
-  </div>
-  <aside class="d-side">
-    <div class="d-card">
-      <div class="price-free"><span class="pulse"></span>Открытый ответ</div>
-      <div style="font-size:14px;color:var(--body);line-height:1.55;margin-bottom:14px">Хотите разобраться глубже? Посмотрите полный курс по этому узлу.</div>
-      ${it.related&&BYID[it.related[0]]&&BYID[it.related[0]].format==='course'?`<button class="btn-primary" onclick="go('detail','${it.related[0]}')">${ic.arr} К курсу</button>`:''}
-    </div>
-    ${sideKeywords(it)}
-    ${sideRelated(it)}
-  </aside></div>`;
-}
-
 function detailArticle(it){
   return `${crumbDetail(it)}
   <div class="detail"><div class="d-main">
-    <div class="d-tags"><span class="tag fmt" style="background:var(--soft);color:var(--ink)">Статья</span><span class="tag topic">${TOPIC[it.topic]}</span></div>
+    <div class="d-hero-cover">${coverSVG(it.part,it.format,true)}</div>
+    <div class="d-tags"><span class="tag fmt">Статья</span></div>
     <h1 class="d-title">${it.title}</h1>
-    <div class="d-metabar">${ic.user} ${it.author} <span class="dot"></span> ${it.role} <span class="dot"></span> ${it.duration} чтения</div>
+    <div class="d-metabar">${ic.user} ${it.author} <span class="dot"></span> ${EXPERTS[it.author].role} <span class="dot"></span> ${it.duration} чтения</div>
     ${it.toc?`<div class="toc"><div class="lbl">Содержание</div><ol>${it.toc.map(t=>`<li><a href="#${t.id}" onclick="scrollTo2('${t.id}');return false">${t.t}</a></li>`).join('')}</ol></div>`:''}
     <div class="prose"><p style="font-size:17px;color:var(--ink)">${it.excerpt}</p>${it.body.map(b=>`<h2 id="${b.id}">${b.h}</h2>${b.p.map(p=>`<p>${p}</p>`).join('')}`).join('')}</div>
-    <div class="expert" style="margin-top:30px"><div class="av">${initials(it.author)}</div><div><div class="en">${it.author}</div><div class="er">${it.role}</div></div></div>
+    <div class="expert" style="margin-top:30px"><div class="av">${avatarSVG(it.author)}</div><div><div class="en">${it.author}</div><div class="er">${EXPERTS[it.author].role}</div></div></div>
   </div>
-  <aside class="d-side">
-    ${sideKeywords(it)}
-    ${sideRelated(it)}
-  </aside></div>`;
+  <aside class="d-side">${sideKeywords(it)}${sideRelated(it)}</aside></div>`;
 }
-
-function detailMedia(it){ // webinar / workshop
+function detailMedia(it){
   const f=FORMATS[it.format];
   return `${crumbDetail(it)}
   <div class="detail"><div class="d-main">
-    <div class="d-hero-cover"><span class="ghost">${f.label[0]}</span><div class="play">${ic.play}</div></div>
-    <div class="d-tags"><span class="tag fmt" style="background:var(--soft);color:var(--ink)">${f.label}</span><span class="tag topic">${TOPIC[it.topic]}</span></div>
+    <div class="d-hero-cover">${coverSVG(it.part,it.format,true)}<div class="play">${ic.play}</div></div>
+    <div class="d-tags"><span class="tag fmt">${f.label}</span></div>
     <h1 class="d-title">${it.title}</h1>
     <div class="d-metabar">${ic.clock} ${it.duration} <span class="dot"></span> ${ic.user} ${it.author}</div>
     <div class="prose">${it.intro.map(p=>`<p>${p}</p>`).join('')}
-      <h2>Что разберём</h2>
-      <div class="outcomes">${it.outcomes.map(o=>`<div class="o">${ic.check}<span>${o}</span></div>`).join('')}</div>
-      <h2>Участники</h2>
-      <div class="program">${it.participants.map(p=>`<div class="prow"><div class="avatar" style="width:30px;height:30px">${initials(p)}</div><span class="pt">${p}</span></div>`).join('')}</div>
+      <h2>Что разберём</h2><div class="outcomes">${it.outcomes.map(o=>`<div class="o">${ic.check}<span>${o}</span></div>`).join('')}</div>
+      <h2>Участники</h2><div class="program">${it.participants.map(p=>{const nm=p.split(' — ')[0];return `<div class="prow"><div class="av" style="width:32px;height:32px;border-radius:50%;overflow:hidden;flex-shrink:0">${avatarSVG(nm)}</div><span class="pt">${p}</span></div>`}).join('')}</div>
     </div>
   </div>
   <aside class="d-side">
-    <div class="d-card">
-      <div class="price-free"><span class="pulse"></span>Бесплатно · без регистрации</div>
+    <div class="d-card"><div class="price-free"><span class="pulse"></span>Бесплатно · без регистрации</div>
       <button class="btn-primary" onclick="go('player','${it.id}',0)">${ic.play} Смотреть запись</button>
-      <div class="d-facts">
-        <div class="d-fact"><span class="k">${ic.clock} Длительность</span><span class="v">${it.duration}</span></div>
-        <div class="d-fact"><span class="k">${ic.user} Спикеров</span><span class="v">${it.participants.length}</span></div>
-        <div class="d-fact"><span class="k">${ic.level} Тема</span><span class="v">${TOPIC[it.topic]}</span></div>
-      </div>
-    </div>
-    ${sideKeywords(it)}
-    ${sideRelated(it)}
+      <div class="d-facts"><div class="d-fact"><span class="k">${ic.clock} Длительность</span><span class="v">${it.duration}</span></div><div class="d-fact"><span class="k">${ic.user} Спикеров</span><span class="v">${it.participants.length}</span></div></div>
+    </div>${sideKeywords(it)}${sideRelated(it)}
   </aside></div>`;
 }
-
 function viewPlayer(){
   const it=BYID[state.id];if(!it)return viewHome();
   const isCourse=it.format==='course';
   const lessons=isCourse?it.program:[{t:it.title,d:it.duration}];
   const cur=Math.min(state.plLesson||0,lessons.length-1);
   const L=lessons[cur];
-  const lessonDesc=isCourse
-    ? `Это урок ${cur+1} из ${lessons.length} курса «${it.title}». Эксперт ${it.author} показывает операцию пошагово на реальном автомобиле и отмечает типичные ошибки.`
-    : it.intro[0];
+  const desc=isCourse?`Это урок ${cur+1} из ${lessons.length} курса «${it.title}». Эксперт ${it.author} показывает операцию пошагово на реальном автомобиле и отмечает типичные ошибки.`:it.intro[0];
   return `
-  <div class="crumbs"><a href="#" onclick="go('home');return false">Главная</a><span class="sl">/</span>
-    <a href="#" onclick="go('list','${it.format}');return false">${FORMATS[it.format].plural}</a><span class="sl">/</span>
-    <a href="#" onclick="go('detail','${it.id}')">${it.title}</a><span class="sl">/</span><span class="cur">${isCourse?'Урок '+(cur+1):'Просмотр'}</span></div>
+  <div class="crumbs"><a href="#" onclick="go('home');return false">Главная</a><span class="sl">/</span><a href="#" onclick="go('list','${it.format}');return false">${FORMATS[it.format].plural}</a><span class="sl">/</span><a href="#" onclick="go('detail','${it.id}')">${it.title}</a><span class="sl">/</span><span class="cur">${isCourse?'Урок '+(cur+1):'Просмотр'}</span></div>
   <div class="player">
-    <div class="pl-side">
-      <div class="ph"><div class="b">${FORMATS[it.format].label}</div><h3>${it.title}</h3></div>
-      ${lessons.map((l,i)=>`<div class="pl-lesson ${i===cur?'active':''}" onclick="go('player','${it.id}',${i})">
-        <span class="ln">${String(i+1).padStart(2,'0')}</span>
-        <div><div class="lt">${l.t}</div><div class="ld">${l.d}</div></div></div>`).join('')}
+    <div class="pl-side"><div class="ph"><div class="b">${FORMATS[it.format].label}</div><h3>${it.title}</h3></div>
+      ${lessons.map((l,i)=>`<div class="pl-lesson ${i===cur?'active':''}" onclick="go('player','${it.id}',${i})"><span class="ln">${String(i+1).padStart(2,'0')}</span><div><div class="lt">${l.t}</div><div class="ld">${l.d}</div></div></div>`).join('')}
     </div>
     <div class="pl-main">
-      <div class="pl-video"><div class="pbtn">${ic.playS}</div><span class="vlbl">${L.d} · ${it.author}</span></div>
-      <div class="pl-content">
-        <div class="pe">${isCourse?'Урок '+(cur+1)+' из '+lessons.length:FORMATS[it.format].label}</div>
-        <h2>${L.t}</h2>
-        <p>${lessonDesc}</p>
+      <div class="pl-video">${coverSVG(it.part,it.format,true)}<div class="pbtn">${ic.playS}</div></div>
+      <div class="pl-content"><div class="pe">${isCourse?'Урок '+(cur+1)+' из '+lessons.length:FORMATS[it.format].label}</div><h2>${L.t}</h2><p>${desc}</p>
         ${isCourse?'<p>Материалы открыты полностью и бесплатно. Прогресс не сохраняется — портал не требует регистрации, можно вернуться к любому уроку в любой момент.</p>':''}
-        <div class="pl-nav">
-          <button class="prev" ${cur===0?'disabled':''} onclick="go('player','${it.id}',${cur-1})">${ic.arrL} Назад</button>
-          ${cur<lessons.length-1?`<button class="next" onclick="go('player','${it.id}',${cur+1})">Следующий урок ${ic.arrR}</button>`:`<button class="next" onclick="go('detail','${it.id}')">Завершить ${ic.check}</button>`}
-        </div>
+        <div class="pl-nav"><button class="prev" ${cur===0?'disabled':''} onclick="go('player','${it.id}',${cur-1})">${ic.arrL} Назад</button>${cur<lessons.length-1?`<button class="next" onclick="go('player','${it.id}',${cur+1})">Следующий урок ${ic.arrR}</button>`:`<button class="next" onclick="go('detail','${it.id}')">Завершить ${ic.check}</button>`}</div>
       </div>
     </div>
   </div>`;
 }
-
 function viewSearch(){
   const q=state.q.toLowerCase();
   const res=ITEMS.filter(i=>(i.title+' '+i.excerpt+' '+(i.keywords||[]).join(' ')).toLowerCase().includes(q));
-  let html=`<div class="crumbs"><a href="#" onclick="go('home');return false">Главная</a><span class="sl">/</span><span class="cur">Поиск</span></div>
-  <div class="page-head"><h1>Результаты поиска</h1><p>По запросу «${state.q}» — найдено ${res.length}</p></div>`;
-  if(!res.length)return html+`<div class="empty">${ic.empty}<h3>Ничего не найдено</h3><p>Попробуйте переформулировать запрос — например, «ступичный подшипник» или «шаровая»</p></div>`;
-  const lessons=res.filter(i=>i.format==='lesson');
-  const cards=res.filter(i=>i.format!=='lesson');
-  if(lessons.length)html+=`<section class="sect"><div class="sect-head"><div><h2>Ответы на вопросы</h2></div></div><div class="qlist">${lessons.map(qrow).join('')}</div></section>`;
-  if(cards.length)html+=`<section class="sect"><div class="sect-head"><div><h2>Курсы и материалы</h2></div></div><div class="grid">${cards.map(card).join('')}</div></section>`;
-  return html;
+  let html=`<div class="crumbs"><a href="#" onclick="go('home');return false">Главная</a><span class="sl">/</span><span class="cur">Поиск</span></div><div class="page-head"><h1>Результаты поиска</h1><p>По запросу «${state.q}» — найдено ${res.length}</p></div>`;
+  if(!res.length)return html+`<div class="empty">${ic.empty}<h3>Ничего не найдено</h3><p>Попробуйте «ступичный подшипник», «тормозные диски» или «шаровая»</p></div>`;
+  return html+`<div class="grid">${res.map(card).join('')}</div>`;
 }
-
-/* ====================== RENDER ====================== */
 function render(){
   renderNav();
   let html='';
   switch(state.view){
     case 'home':html=viewHome();break;
     case 'list':html=viewList();break;
-    case 'topic':html=viewTopic();break;
     case 'detail':html=viewDetail();break;
     case 'player':html=viewPlayer();break;
     case 'search':html=viewSearch();break;
@@ -1136,7 +808,6 @@ function render(){
   }
   document.getElementById('main').innerHTML=html;
 }
-function toggleFaq(btn){const it=btn.parentElement;it.classList.toggle('open');const a=it.querySelector('.faq-a');a.style.maxHeight=it.classList.contains('open')?a.scrollHeight+'px':'0'}
 function scrollTo2(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
 render();
 </script>
