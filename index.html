@@ -149,6 +149,20 @@ img{max-width:100%;display:block}
 .toc li::before{content:counter(t,decimal-leading-zero);font-family:var(--f-mono);font-size:11px;font-weight:700;color:var(--red);flex-shrink:0}
 .toc a{font-size:14.5px;color:var(--ink);font-weight:500;transition:.14s}
 .toc a:hover{color:var(--red)}
+.answer-box{border:1px solid var(--line-2);border-left:3px solid var(--red);border-radius:12px;background:var(--soft);padding:20px 22px;margin-bottom:30px}
+.answer-box .lbl{font-family:var(--f-mono);font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.answer-box p{font-size:15.5px;color:var(--ink);font-weight:500;line-height:1.55}
+.faqwrap{margin:34px 0 8px}
+.faqwrap h2{font-size:22px;font-weight:700;color:var(--ink);letter-spacing:-.015em;margin:0 0 16px}
+.faq{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{width:100%;text-align:left;padding:17px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:15px;font-weight:600;color:var(--ink)}
+.faq-q:hover{background:var(--soft)}
+.faq-q svg{color:var(--muted);flex-shrink:0;transition:.2s}
+.faq-item.open .faq-q svg{transform:rotate(45deg);color:var(--red)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .25s ease}
+.faq-a p{padding:0 20px 17px;font-size:14.5px;color:var(--body);line-height:1.6}
 .program{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:6px 0 8px}
 .prow{display:flex;align-items:center;gap:15px;padding:15px 20px;border-bottom:1px solid var(--line);transition:.14s}
 .prow:last-child{border-bottom:none}
@@ -467,6 +481,27 @@ const ITEMS=[
    related:['wheel-bearing','cv-joint','art-knock']},
 ];
 const BYID={};ITEMS.forEach(i=>BYID[i.id]=i);
+/* SEO-костяк: блок «Коротко» (featured snippet) + частые вопросы (разметка FAQPage) */
+BYID['art-disc'].short='Точить диск можно, если после проточки толщина остаётся выше минимальной, выбитой на ступице, а поверхность выравнивается без глубоких раковин. Менять — если диск тоньше предельного, есть трещины, глубокие борозды или сильная синева от перегрева.';
+BYID['art-disc'].faqs=[{q:'Нужно ли менять тормозные диски парой?',a:'Да, диски меняют парой на одной оси — иначе торможение будет неравномерным, а руль может уводить.'},{q:'Сколько раз можно точить диск?',a:'Пока толщина после проточки не опускается ниже минимальной, указанной на самом диске. Обычно это одна, реже две проточки.'}];
+BYID['art-knock'].short='Источник стука ищут по порядку: сначала тест-драйв (мелкие неровности, крупные ямы или повороты указывают на разные узлы), затем проверка люфтов на подъёмнике — шаровая, наконечник, стойка стабилизатора, сайлентблоки. Диагноз подтверждают двумя проверками до разборки.';
+BYID['art-knock'].faqs=[{q:'Можно ли определить стук без подъёмника?',a:'Тест-драйв сужает круг, но точную локализацию даёт только проверка люфтов на подъёмнике.'},{q:'Почему нельзя менять детали «на всякий случай»?',a:'Замена без подтверждённого диагноза — это расходы клиента и риск, что стук останется. Диагноз подтверждают до разборки.'}];
+BYID['art-balljoint'].short='Менять шаровую пора при любом ощутимом люфте — осевом или радиальном — а также при порванном пыльнике. Ранние признаки: лёгкий увод и неравномерный износ шины по краю ещё до появления стука.';
+BYID['art-balljoint'].faqs=[{q:'Можно ли ездить с люфтом в шаровой?',a:'Нет. В отличие от многих узлов, здесь на кону управляемость: разрушение шаровой на ходу означает потерю контроля над колесом.'},{q:'Что убивает шаровую быстрее всего?',a:'Порванный пыльник: грязь и вода вымывают смазку и разбивают шарнир за считанные недели.'}];
+BYID['art-bearing'].short='Гул подшипника усиливается при загрузке колеса и не зависит от типа покрытия, а шум резины — наоборот. Лёгкие змейки на ровной дороге на 60–80 км/ч покажут проблемную сторону: усиление в повороте налево обычно указывает на правый подшипник.';
+BYID['art-bearing'].faqs=[{q:'Можно ли ездить с гудящим подшипником?',a:'Краткосрочно — да, но износ прогрессирует, растёт люфт и риск клина колеса. С заменой лучше не тянуть.'},{q:'Нужно ли менять оба подшипника сразу?',a:'Нет, меняется только вышедший из строя. Профилактически второй не меняют без признаков износа.'}];
+BYID['wheel-bearing'].faqs=[{q:'Нужен ли сход-развал после замены ступичного подшипника?',a:'Нет, замена подшипника не влияет на углы установки колёс.'},{q:'Как понять, что подшипник изношен?',a:'Ровный гул, нарастающий со скоростью и меняющийся при перестроении, плюс люфт колеса на подъёмнике.'}];
+BYID['ball-joint'].faqs=[{q:'Менять опору отдельно или рычаг целиком?',a:'Зависит от конструкции: где опора запрессована — меняют отдельно, где интегрирована в рычаг — рычаг в сборе.'},{q:'Нужен ли сход-развал после замены шаровой?',a:'При замене рычага в сборе — обязателен. При замене только запрессованной опоры — рекомендована проверка.'}];
+BYID['tie-rod-course'].faqs=[{q:'Можно ли менять один наконечник?',a:'Да, это не парная деталь. Но при большом пробеге второго логично предложить замену пары.'},{q:'Обязателен ли сход-развал?',a:'Да, после замены наконечника схождение всегда нарушается и требует регулировки.'}];
+BYID['silentblock'].faqs=[{q:'Можно ли запрессовать сайлентблок без пресса?',a:'Да — резьбовой оправкой или тисками с проставками. Усилие прикладывают только к наружной обойме.'},{q:'Чем смазывать сайлентблок?',a:'Только мыльным раствором. Масло и солидол разрушают резину.'}];
+BYID['cv-joint'].faqs=[{q:'Почему хрустит ШРУС в повороте?',a:'Изношены дорожки наружного шарнира — чаще всего из-за порванного пыльника и потери смазки.'},{q:'Можно ли заменить только пыльник?',a:'Да, если шарнир ещё не разбит. Порванный пыльник меняют сразу, пока грязь не убила ШРУС.'}];
+BYID['stab-link'].faqs=[{q:'Опасен ли стук стойки стабилизатора?',a:'Для безопасности почти нет, но дребезг усиливается и разбивает посадочные места. Деталь недорогая — лучше заменить.'}];
+BYID['web-disc'].faqs=[{q:'Как измерить биение диска?',a:'Индикатором часового типа на снятом или установленном диске — сравнивают с допуском производителя.'},{q:'Почему появляется биение после замены?',a:'Чаще из-за грязи на посадочной поверхности ступицы или неравномерной затяжки — обе причины разбираем на вебинаре.'}];
+BYID['web-vin'].faqs=[{q:'Почему деталь по VIN не подходит?',a:'Чаще всего из-за рестайлинга кузова или разных комплектаций — на вебинаре показываем, как это отследить.'}];
+BYID['web-steering'].faqs=[{q:'Как отличить стук рейки от наконечника?',a:'Проверкой люфтов по порядку и локализацией на ходу — методику разбираем на вебинаре.'}];
+BYID['work-front-knock'].faqs=[{q:'С чего начинать поиск стука?',a:'С тест-драйва: характер стука сужает круг узлов ещё до подъёмника.'}];
+BYID['work-cv'].faqs=[{q:'Сколько смазки набивать в ШРУС?',a:'Столько, сколько идёт в комплекте пыльника — обычно один пакет на шарнир.'}];
+BYID['work-brake'].faqs=[{q:'Как отличить проблему диска от суппорта?',a:'По характеру биения и равномерности износа — на практикуме показываем оба случая.'}];
 function fmtCount(f){return ITEMS.filter(i=>i.format===f).length}
 const FEED=[
   {announce:true,part:'disc',fmt:'Вебинар',title:'Вебинар CTR: Тормозные диски — диагностика и замена',meta:'19 мая 08:00 · 21 мая 10:00 · регистрация открыта',date:'19 мая',link:'web-disc'},
@@ -706,6 +741,15 @@ function sideRelated(it){
 function sideKeywords(it){
   return `<div class="d-card"><div class="eyebrow" style="margin-bottom:14px">Поисковые запросы</div><div class="kw">${it.keywords.map(k=>`<a href="#" onclick="doSearch('${k}');return false">${k}</a>`).join('')}</div></div>`;
 }
+function shortBox(it){
+  if(!it.short)return '';
+  return `<div class="answer-box"><div class="lbl">Коротко</div><p>${it.short}</p></div>`;
+}
+function faqBlock(it){
+  if(!it.faqs||!it.faqs.length)return '';
+  return `<div class="faqwrap"><h2>Частые вопросы</h2><div class="faq">${it.faqs.map(f=>`<div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">${f.q} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button><div class="faq-a"><p>${f.a}</p></div></div>`).join('')}</div></div>`;
+}
+function toggleFaq(btn){const it=btn.parentElement;it.classList.toggle('open');const a=it.querySelector('.faq-a');a.style.maxHeight=it.classList.contains('open')?a.scrollHeight+'px':'0'}
 function viewDetail(){
   const it=BYID[state.id];if(!it)return viewHome();
   if(it.format==='course')return detailCourse(it);
@@ -724,6 +768,7 @@ function detailCourse(it){
       <h2>Программа курса</h2><div class="program">${it.program.map((p,i)=>`<div class="prow"><span class="num">${String(i+1).padStart(2,'0')}</span><span class="pt">${p.t}</span>${i===0?'<span class="pl">Открыт</span>':''}<span class="pd">${p.d}</span></div>`).join('')}</div>
       <h2>Эксперт курса</h2><div class="expert"><div class="av">${avatarSVG(it.author)}</div><div><div class="en">${it.author}</div><div class="er">${EXPERTS[it.author].role}</div></div></div>
     </div>
+    ${faqBlock(it)}
   </div>
   <aside class="d-side">
     <div class="d-card"><div class="price-free"><span class="pulse"></span>Бесплатно · без регистрации</div>
@@ -740,8 +785,10 @@ function detailArticle(it){
     <div class="d-tags"><span class="tag fmt">Статья</span></div>
     <h1 class="d-title">${it.title}</h1>
     <div class="d-metabar">${ic.user} ${it.author} <span class="dot"></span> ${EXPERTS[it.author].role} <span class="dot"></span> ${it.duration} чтения</div>
+    ${shortBox(it)}
     ${it.toc?`<div class="toc"><div class="lbl">Содержание</div><ol>${it.toc.map(t=>`<li><a href="#${t.id}" onclick="scrollTo2('${t.id}');return false">${t.t}</a></li>`).join('')}</ol></div>`:''}
     <div class="prose"><p style="font-size:17px;color:var(--ink)">${it.excerpt}</p>${it.body.map(b=>`<h2 id="${b.id}">${b.h}</h2>${b.p.map(p=>`<p>${p}</p>`).join('')}`).join('')}</div>
+    ${faqBlock(it)}
     <div class="expert" style="margin-top:30px"><div class="av">${avatarSVG(it.author)}</div><div><div class="en">${it.author}</div><div class="er">${EXPERTS[it.author].role}</div></div></div>
   </div>
   <aside class="d-side">${sideKeywords(it)}${sideRelated(it)}</aside></div>`;
@@ -758,6 +805,7 @@ function detailMedia(it){
       <h2>Что разберём</h2><div class="outcomes">${it.outcomes.map(o=>`<div class="o">${ic.check}<span>${o}</span></div>`).join('')}</div>
       <h2>Участники</h2><div class="program">${it.participants.map(p=>{const nm=p.split(' — ')[0];return `<div class="prow"><div class="av" style="width:32px;height:32px;border-radius:50%;overflow:hidden;flex-shrink:0">${avatarSVG(nm)}</div><span class="pt">${p}</span></div>`}).join('')}</div>
     </div>
+    ${faqBlock(it)}
   </div>
   <aside class="d-side">
     <div class="d-card"><div class="price-free"><span class="pulse"></span>Бесплатно · без регистрации</div>
